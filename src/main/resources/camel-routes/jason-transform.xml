@@ -1,0 +1,42 @@
+<routes xmlns="http://camel.apache.org/schema/spring">
+    <route id="json-transform">
+        <from uri="file:./data/transform/xml"/>
+        <unmarshal>
+            <json library="Jackson" unmarshalType="com.divigraph.camel.routes.models.Customer"/>
+        </unmarshal>
+        <setBody>
+            <simple>
+                {
+                    "firstName": "${body.name}",
+                    "lastName": "${body.surname}",
+                    "age": ${body.age},
+                    "physical-address": {
+                        "line-1": "${body.address.street}",
+                        "city": "${body.address.city}",
+                        "province": "${body.address.state}",
+                        "postal-code": "${body.address.zip}"
+                    }
+                }
+            </simple>
+        </setBody>
+        <!--
+        <setHeader name="name"><jsonpath>$.name</jsonpath></setHeader>
+        <setHeader name="surname"><jsonpath>$.surname</jsonpath></setHeader>
+        <setBody>
+            <simple>
+                {
+                    "firstName": ${header.name}
+                    "lastName": ${header.surname}
+                }
+            </simple>
+        </setBody>
+        -->
+        <unmarshal>
+            <json />
+        </unmarshal>
+        <marshal>
+            <json library="Jackson" prettyPrint="true"/>
+        </marshal>
+        <to uri="file:./data/transform/xml/processed"/>
+    </route>
+</routes>
