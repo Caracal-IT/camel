@@ -2,7 +2,7 @@
     <route id="json-transform">
         <from uri="file:./data/transform/xml"/>
         <unmarshal>
-            <json library="Jackson" unmarshalType="com.divigraph.camel.routes.models.Customer"/>
+            <json library="Jackson" unmarshalType="com.caracal.camel.routes.models.Customer"/>
         </unmarshal>
         <setBody>
             <simple>

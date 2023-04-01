@@ -1,4 +1,4 @@
-package com.divigraph.camel.routes;
+package com.caracal.camel.routes;
 
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.jackson.JacksonDataFormat;
