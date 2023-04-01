@@ -1,0 +1,38 @@
+<routes xmlns="http://camel.apache.org/schema/spring">
+    <route id="json-transform2">
+        <from uri="file:./data/transform/xml2"/>
+        <unmarshal>
+            <json />
+        </unmarshal>
+        <setHeader name="name"   ><jsonpath suppressExceptions="true">$.name</jsonpath></setHeader>
+        <setHeader name="surname"><jsonpath suppressExceptions="true">$.surname</jsonpath></setHeader>
+        <setHeader name="age"    ><jsonpath suppressExceptions="true">$.age</jsonpath></setHeader>
+
+        <setHeader name="address_street"><jsonpath suppressExceptions="true">$.address.street</jsonpath></setHeader>
+        <setHeader name="address_city"  ><jsonpath suppressExceptions="true">$.address.city</jsonpath></setHeader>
+        <setHeader name="address_state" ><jsonpath suppressExceptions="true">$.address.state</jsonpath></setHeader>
+        <setHeader name="address_zip"   ><jsonpath suppressExceptions="true">$.address.zip</jsonpath></setHeader>
+        <setBody>
+            <simple>
+                {
+                    "firstName": "${header.name}",
+                    "lastName": "${header.surname}",
+                    "age": ${header.age},
+                    "physical-address": {
+                        "line-1": "${header.address_street}",
+                        "city": "${header.address_city}",
+                        "province": "${header.address_state}",
+                        "postal-code": "${header.address_zip}"
+                    }
+                }
+            </simple>
+        </setBody>
+        <unmarshal>
+            <json />
+        </unmarshal>
+        <marshal>
+            <json library="Jackson" prettyPrint="true"/>
+        </marshal>
+        <to uri="file:./data/transform/xml2/processed"/>
+    </route>
+</routes>
