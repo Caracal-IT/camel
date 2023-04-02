@@ -2,10 +2,7 @@ package com.caracal.camel.routes;
 
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.jackson.JacksonDataFormat;
-import org.apache.camel.model.DataFormatDefinition;
 import org.apache.camel.model.dataformat.JsonLibrary;
-
-
 import org.apache.camel.util.json.JsonObject;
 import org.springframework.stereotype.Component;
 
