@@ -16,6 +16,7 @@
 	<properties>
 		<java.version>19</java.version>
         <kotlin.version>1.8.20</kotlin.version>
+		<spring.version>4.0.0-M2</spring.version>
     </properties>
 
 	<repositories>
@@ -41,7 +42,7 @@
 		<dependency>
 			<groupId>org.apache.camel.springboot</groupId>
 			<artifactId>camel-spring-boot-starter</artifactId>
-			<version>4.0.0-M2</version>
+			<version>${spring.version}</version>
 		</dependency>
 
 		<dependency>
@@ -55,7 +56,7 @@
 		<dependency>
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-paho</artifactId>
-			<version>4.0.0-M2</version>
+			<version>${spring.version}</version>
 		</dependency>
 
 		<dependency>
@@ -69,13 +70,13 @@
 		<dependency>
 			<groupId>org.apache.camel.springboot</groupId>
 			<artifactId>camel-jackson-starter</artifactId>
-			<version>4.0.0-M2</version>
+			<version>${spring.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-jackson</artifactId>
-			<version>4.0.0-M2</version>
+			<version>${spring.version}</version>
 		</dependency>
 
 		<dependency>
@@ -93,7 +94,7 @@
 		<dependency>
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-jsonpath</artifactId>
-			<version>4.0.0-M2</version>
+			<version>${spring.version}</version>
 		</dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
