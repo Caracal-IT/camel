@@ -19,18 +19,6 @@
                 }
             </simple>
         </setBody>
-        <!--
-        <setHeader name="name"><jsonpath>$.name</jsonpath></setHeader>
-        <setHeader name="surname"><jsonpath>$.surname</jsonpath></setHeader>
-        <setBody>
-            <simple>
-                {
-                    "firstName": ${header.name}
-                    "lastName": ${header.surname}
-                }
-            </simple>
-        </setBody>
-        -->
         <unmarshal>
             <json />
         </unmarshal>
