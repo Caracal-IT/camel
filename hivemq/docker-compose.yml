@@ -1,0 +1,28 @@
+version: "2.4"
+name: caracal-hivemq
+services:
+  hivemq-server:
+    image: hivemq/hivemq-ce:latest
+    mem_limit: 800M
+    mem_reservation: 800M
+    ports:
+      - 1883:1883
+      - 8081:8080
+      - 8883:8883
+    volumes:
+      - ./server/conf:/opt/hivemq/conf
+    environment:
+      JAVA_OPTS: "-XX:+UnlockExperimentalVMOptions -XX:InitialRAMPercentage=30 -XX:MaxRAMPercentage=80 -XX:MinRAMPercentage=30"
+  
+  hivemq-cloud:
+    image: hivemq/hivemq-ce:latest
+    mem_limit: 800M
+    mem_reservation: 800M
+    ports:
+      - 1884:1883
+      - 8084:8080
+      - 2884:8883
+    volumes:
+      - ./cloud/conf:/opt/hivemq/conf
+    environment:
+      JAVA_OPTS: "-XX:+UnlockExperimentalVMOptions -XX:InitialRAMPercentage=30 -XX:MaxRAMPercentage=80 -XX:MinRAMPercentage=30"
