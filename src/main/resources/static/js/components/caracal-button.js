@@ -9,9 +9,9 @@ class CaracalButton extends LitElement {
             min-width: 100px;
             color: #ffffff;
             text-align: center;
-            border: 1px solid #cccccc; /* add this line */
-            border-radius: 10px; /* add this line */
-            font-size: 1rem; /* add this line */
+            border: 1px solid #cccccc; 
+            border-radius: 10px; 
+            font-size: 1rem; 
             margin: .5rem;
           }
     

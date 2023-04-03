@@ -1,6 +1,6 @@
-package com.caracal.camel.web.models;
+package com.caracal.camel.web.models.mqtt;
 
-public class SettingsResponse {
+public class MqttSettingsResponse {
     private String cloudBrokerUrl;
     private String serverBrokerUrl;
 

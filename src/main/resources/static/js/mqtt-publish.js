@@ -1,22 +1,28 @@
 import {LitElement, html, css} from './lit.js';
+import {post} from './components/caracal-utilities.js';
 
 class MqttPublish extends LitElement {
-    static styles = css``;
+    static styles = css`
+      #response {
+        height: 1.2rem;
+      }
+    `;
 
     static properties = {
-        cloudBrokerUrl: {type: String},
-        serverBrokerUrl: {type: String}
+        response: {type: String}
     };
 
-    connectedCallback() {
-        super.connectedCallback()
+    async _clickHandler(){
+        this.response = "Loading...";
 
-        //const publishButton = document.getElementById("publishButton");
-        //publishButton.addEventListener('click', this.publish)
-    }
+        const payload = {
+            "topic": "Topic",
+            "message": "Message"
+        }
 
-    _clickHandler(){
-        alert("zzzz");
+        const response = await post("/api/mqtt/publish", payload);
+
+        this.response = response.message;
     }
 
     render() {
@@ -25,6 +31,7 @@ class MqttPublish extends LitElement {
                 <h1 slot="header">Mqtt Publish</h1>                
                 <caracal-input caption="Topic" value="CUSTOMERS"></caracal-input>
                 <caracal-input caption="Message" value="Message1"></caracal-input>
+                <div id="response">${this.response}</div>
                 <div slot="buttons">
                     <caracal-button id="publishButton" @click=${this._clickHandler}>Publish</caracal-button>
                 </div>

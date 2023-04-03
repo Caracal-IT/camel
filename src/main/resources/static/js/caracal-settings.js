@@ -1,5 +1,7 @@
 import {LitElement, html, css} from './lit.js';
 
+import { get } from './components/caracal-utilities.js';
+
 class CaracalSettings extends LitElement {
     static styles = css``;
 
@@ -8,15 +10,13 @@ class CaracalSettings extends LitElement {
         serverBrokerUrl: {type: String}
     };
 
-    connectedCallback() {
+    async connectedCallback() {
         super.connectedCallback()
 
-        fetch("/api/settings")
-            .then(data => data.json())
-            .then(settings => {
-                this.cloudBrokerUrl = settings.cloudBrokerUrl;
-                this.serverBrokerUrl = settings.serverBrokerUrl;
-            });
+        const settings = await get("/api/mqtt/settings")
+
+        this.cloudBrokerUrl = settings.cloudBrokerUrl;
+        this.serverBrokerUrl = settings.serverBrokerUrl;
     }
 
     render() {
