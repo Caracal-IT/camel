@@ -11,9 +11,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/main.css">
 
-    <script type="module" src="/js/caracal-card.js"></script>
+    <script type="module" src="/js/components/caracal-card.js"></script>
+    <script type="module" src="/js/components/caracal-input.js"></script>
+    <script type="module" src="/js/components/caracal-button.js"></script>
+
     <script type="module" src="/js/caracal-settings.js"></script>
-    <script type="module" src="/js/caracal-input.js"></script>
+    <script type="module" src="/js/mqtt-publish.js"></script>
 </head>
 <body>
 <header>
@@ -21,13 +24,8 @@
 </header>
 <main>
     <div>
-        <caracal-settings></caracal-settings>
-
-        <caracal-card>
-            <h1 slot="header">Card 2</h1>
-            Testing
-            <div slot="buttons">Buttons</div>
-        </caracal-card>
+        <caracal-settings class="action"></caracal-settings>
+        <mqtt-publish class="action"></mqtt-publish>
 
         <caracal-card>
             <h1 slot="header">Card 3</h1>

@@ -45,7 +45,8 @@ main div {
 }
 
 caracal-card,
-caracal-settings{
+caracal-settings,
+.action{
     width: 25rem;
 }
 

@@ -1,4 +1,4 @@
-import {LitElement, html, css} from './lit.js';
+import {LitElement, html, css} from '../lit.js';
 
 class CaracalCard extends LitElement {
     static styles = css`
