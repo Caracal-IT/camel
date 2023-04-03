@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Caracal Demo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+    <script type="module" src="/js/lit-all.min.js"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100vh;
+        }
+
+        body {
+            display: flex;
+            flex-flow: column;
+            justify-content: space-between;
+            margin: 0;
+            padding: 0;
+            background-image: linear-gradient(to right, #00b4db, #0083b0);
+            user-select: none;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        h1, h2, h3 {
+            margin: .3rem 0;
+        }
+
+        header {
+            text-align: center;
+            color: #444;
+            font-size: 1.5rem;
+            text-shadow: 8px 8px 5px rgba(0,0,0,.3);
+        }
+
+        main {
+            height: 100%;
+            margin: 0 auto;
+        }
+
+        main div {
+            display: flex;
+            margin: 0 20px;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            align-items: flex-start;
+            gap: 1rem;
+            max-width: 51rem;
+        }
+
+        section {
+            background: aqua;
+            width: 25rem;
+            height: 7rem;
+        }
+
+        .card {
+            display: flex;
+            flex-flow: column;
+            justify-content: space-between;
+            padding: .2rem .05rem;
+            width: 25rem;
+            border: 1px solid black;
+            border-radius: 5px;
+            box-shadow: 10px 10px 5px rgba(0,0,0,.3);
+            min-height: 11rem;
+            background: whitesmoke;
+        }
+
+        .card div:first-of-type {
+            height: 100%;
+        }
+        .card div:last-of-type {
+            align-self: flex-end;
+        }
+
+        footer {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1 th:text="${appName}"></h1>
+</header>
+<main>
+    <div>
+        <section class="card">
+            <h1>Card 1</h1>
+            <div>
+                wer
+                <simple-greeting name="World">aaaa</simple-greeting>
+            </div>
+            <div>Buttons</div>
+        </section>
+        <section class="card">
+            <h1>Card 1</h1>
+            <div>
+                wer
+            </div>
+            <div>Buttons</div>
+        </section>
+        <section class="card">
+            <h1>Card 1</h1>
+            <div>
+                wer
+            </div>
+            <div>Buttons</div>
+        </section>
+    </div>
+</main>
+<footer>Caracal &copy;2023</footer>
+</body>
+</html>

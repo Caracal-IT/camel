@@ -1,3 +1,15 @@
+server:
+  port: 8070
+
+spring:
+  application:
+    name: Caracal Demo
+  thymeleaf:
+    cache: false
+    enabled: true
+    prefix: classpath:/templates/
+    suffix: .html
+
 camel:
   springboot:
     routes-reload-enabled: true

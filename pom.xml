@@ -20,17 +20,7 @@
     </properties>
 
 	<repositories>
-		<repository>
-			<id>org.apache.camel</id>
-			<name>Apache Camel</name>
-			<url>https://mvnrepository.com/artifact/org.apache.camel/camel-paho</url>
-		</repository>
 
-		<repository>
-			<id>org.springframework.integration</id>
-			<name>MQTT</name>
-			<url>https://mvnrepository.com/artifact/org.springframework.integration/spring-integration-mqtt</url>
-		</repository>
 	</repositories>
 
 	<dependencies>
@@ -85,6 +75,26 @@
 			<artifactId>camel-jsonpath</artifactId>
 			<version>${camel.version}</version>
 		</dependency>
+		<!-- End Json -->
+
+		<!-- The Web UI -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<!-- End Web UI -->
+
+		<!-- Kotlin -->
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib-jdk8</artifactId>
@@ -96,8 +106,7 @@
             <version>${kotlin.version}</version>
             <scope>test</scope>
         </dependency>
-		<!-- End Json -->
-
+		<!-- End Kotlin -->
 	</dependencies>
 
 	<build>
