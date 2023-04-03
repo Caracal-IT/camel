@@ -25,23 +25,11 @@ class MqttPublish extends LitElement {
     }
 
     render() {
-        const customer = `{
-            "name": "John",
-            "surname": "Doe",
-            "age": 30,
-            "address": {
-                "street": "123 Main St",
-                "city": "Anytown",
-                "state": "CA",
-                "zip": "12345"
-            }
-        }`
-
         return html`
             <caracal-card>
                 <h1 slot="header">Mqtt Publish</h1>                
                 <caracal-input id="topic" caption="Topic" value="CUSTOMERS/5B4D8764-3EB1-4C65-A34B-00CFDCE6D77D"></caracal-input>
-                <caracal-input id="message" caption="Message" value=${customer.replace(/ /g, '')}></caracal-input>
+                <caracal-input id="message" caption="Message" value="Custom Message"></caracal-input>
                 <div id="response">${this.response}</div>
                 <div slot="buttons">
                     <caracal-button id="publishButton" @click=${this._clickHandler}>Publish</caracal-button>
