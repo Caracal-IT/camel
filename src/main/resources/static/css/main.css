@@ -1,0 +1,58 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100vh;
+}
+
+body {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+    background-image: linear-gradient(to right, #00b4db, #0083b0);
+    user-select: none;
+    font-family: 'Roboto', sans-serif;
+    user-select: none;
+}
+
+h1, h2, h3 {
+    margin: .3rem 0;
+}
+
+header {
+    text-align: center;
+    color: #444;
+    font-size: 1.5rem;
+    text-shadow: 8px 8px 5px rgba(0,0,0,.3);
+}
+
+main {
+    height: 100%;
+    margin: 0 auto;
+}
+
+main div {
+    display: flex;
+    margin: 0 20px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 1rem;
+    max-width: 51rem;
+}
+
+caracal-card,
+caracal-settings{
+    width: 25rem;
+}
+
+.content {
+    min-height: 6rem;
+}
+
+footer {
+    text-align: center;
+}

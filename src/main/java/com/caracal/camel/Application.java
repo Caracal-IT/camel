@@ -14,7 +14,8 @@ import org.springframework.context.annotation.Import;
 		DataSourceTransactionManagerAutoConfiguration.class,
 		HibernateJpaAutoConfiguration.class})
 @Import({
-		com.caracal.camel.web.controllers.HomeController.class})
+		com.caracal.camel.web.controllers.HomeController.class,
+		com.caracal.camel.web.controllers.SettingsController.class})
 public class Application {
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
