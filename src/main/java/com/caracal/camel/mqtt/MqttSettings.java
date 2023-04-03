@@ -1,4 +1,4 @@
-package com.caracal.camel.utils;
+package com.caracal.camel.mqtt;
 
 import java.util.Properties;
 

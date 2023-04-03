@@ -20,7 +20,23 @@
     </properties>
 
 	<repositories>
+		<repository>
+			<id>org.apache.camel</id>
+			<name>Apache Camel Paho</name>
+			<url>https://mvnrepository.com/artifact/org.apache.camel/camel-paho</url>
+		</repository>
 
+		<repository>
+			<id>org.apache.camel.mqtt-5</id>
+			<name>Apache Camel Paho MQTT-5</name>
+			<url>https://mvnrepository.com/artifact/org.apache.camel/camel-paho-mqtt5</url>
+		</repository>
+
+		<repository>
+			<id>org.eclipse.paho</id>
+			<name>Eclipse MQTT-5</name>
+			<url>https://mvnrepository.com/artifact/org.eclipse.paho/org.eclipse.paho.mqttv5.client</url>
+		</repository>
 	</repositories>
 
 	<dependencies>
@@ -44,6 +60,26 @@
 			<version>${camel.version}</version>
 		</dependency>
 		<!-- End Camel -->
+
+		<!-- Mqtt -->
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-paho</artifactId>
+			<version>${camel.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-paho-mqtt5</artifactId>
+			<version>${camel.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.paho</groupId>
+			<artifactId>org.eclipse.paho.mqttv5.client</artifactId>
+			<version>1.2.5</version>
+		</dependency>
+		<!-- End Mqtt -->
 
 		<!-- Json -->
 		<dependency>
