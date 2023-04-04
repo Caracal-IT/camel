@@ -3,6 +3,9 @@ import {post} from "./components/caracal-utilities.js";
 
 class MqttRequestResponse extends LitElement {
     static styles = css`
+      #response {
+        height: 1.2rem;
+      }
     `;
 
     static properties = {

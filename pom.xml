@@ -81,6 +81,26 @@
 		</dependency>
 		<!-- End Mqtt -->
 
+		<!-- Rest -->
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-http</artifactId>
+			<version>${camel.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.camel.springboot</groupId>
+			<artifactId>camel-http-starter</artifactId>
+			<version>${camel.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.camel.springboot</groupId>
+			<artifactId>camel-servlet-starter</artifactId>
+			<version>${camel.version}</version>
+		</dependency>
+		<!-- Rest -->
+
 		<!-- Json -->
 		<dependency>
 			<groupId>org.apache.camel.springboot</groupId>

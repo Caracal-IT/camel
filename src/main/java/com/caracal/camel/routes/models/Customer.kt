@@ -1,6 +1,7 @@
 package com.caracal.camel.routes.models
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import java.util.UUID
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class Customer(
@@ -14,3 +15,11 @@ data class Address(
     val city: String = "",
     val state: String = "",
     val zip: String = "")
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+data class CustomerResponse(
+    val id: UUID = UUID.randomUUID(),
+    val name: String = "",
+    val surname: String = "",
+    val message: String = ""
+)

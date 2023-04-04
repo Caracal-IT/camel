@@ -1,0 +1,7 @@
+<routes xmlns="http://camel.apache.org/schema/spring">
+    <!--
+    <route id="http-rest">
+
+    </route>
+    -->
+</routes>

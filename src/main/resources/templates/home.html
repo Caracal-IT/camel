@@ -19,6 +19,8 @@
     <script type="module" src="/js/caracal-settings.js"></script>
     <script type="module" src="/js/mqtt-publish.js"></script>
     <script type="module" src="/js/mqtt-request-response.js"></script>
+    <script type="module" src="/js/mqtt-request-response.js"></script>
+    <script type="module" src="/js/http-rest.js"></script>
 </head>
 <body>
 <header>
@@ -26,12 +28,14 @@
     <a href="#settings" class="active" data-elm="caracal-settings">Settings</a>
     |<a href="#publish" data-elm="mqtt-publish">Publish</a>
     |<a href="#req-resp" data-elm="mqtt-request-response">Request-Response</a>
+    |<a href="#rest" data-elm="http-rest">Rest</a>
 </header>
 <main>
     <div>
         <caracal-settings class="action active"></caracal-settings>
         <mqtt-publish class="action"></mqtt-publish>
         <mqtt-request-response class="action"></mqtt-request-response>
+        <http-rest class="action"></http-rest>
     </div>
 </main>
 <footer>Caracal &copy;2023</footer>
