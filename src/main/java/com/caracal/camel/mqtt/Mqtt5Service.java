@@ -2,15 +2,12 @@ package com.caracal.camel.mqtt;
 
 import org.eclipse.paho.mqttv5.common.MqttMessage;
 import org.eclipse.paho.mqttv5.common.packet.MqttProperties;
-
-import java.util.UUID;
+import org.eclipse.paho.mqttv5.common.packet.UserProperty;
 
 public class Mqtt5Service {
     public static Mqtt5Service Instance = new Mqtt5Service();
     private Mqtt5Client client;
     private MqttSettings settings;
-
-    private boolean isAutoResponseEnabled;
 
     private Mqtt5Service(){
         try {
@@ -27,13 +24,14 @@ public class Mqtt5Service {
         publish(topic, new MqttMessage(message.getBytes()));
     }
 
-    public void publishRequest(String topic, String responseTopic, String message) throws Exception {
-        var command = String.format("{\"command\": \"%s\"}", message);
+    public String lastMessage;
 
+    public void publishRequest(String topic, String responseTopic, String message, String responseMessage) throws Exception {
         MqttProperties props = new MqttProperties();
         props.setResponseTopic(responseTopic);
+        props.getUserProperties().add(new UserProperty("responseMsg", responseMessage));
 
-        var mqttMsg = new MqttMessage(command.getBytes());
+        var mqttMsg = new MqttMessage(message.getBytes());
         mqttMsg.setProperties(props);
 
         var requestClient = createClient(MqttSettings.cloud);
@@ -42,26 +40,12 @@ public class Mqtt5Service {
         requestClient.disConnectAndClose();
     }
 
-    public void publishResponse(String topic, String message) throws Exception {
-        var response = String.format("{\"command\": \"%s\", \"respId\": \"%s\"}", message, UUID.randomUUID());
-
-        publish(topic, new MqttMessage(response.getBytes()));
-    }
-
     public void subscribe(String topic) {
         client.subscribe(removePrefix(topic));
     }
 
     public void unSubscribe(String topic){
         client.unSubscribe(removePrefix(topic));
-    }
-
-    public boolean getIsAutoResponseEnabled() {
-        return isAutoResponseEnabled;
-    }
-
-    public void setAutoResponseEnabled(boolean autoResponseEnabled) {
-        isAutoResponseEnabled = autoResponseEnabled;
     }
 
     private TlsConfig getTlsConfig(String key) {
@@ -88,7 +72,7 @@ public class Mqtt5Service {
         client.publish(topic, message);
     }
 
-    private String removePrefix(String topic) {
+    public String removePrefix(String topic) {
         var suffix = settings.getValue("cloud.rootTopicPrefix").length();
         return topic.substring(suffix);
     }

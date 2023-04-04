@@ -1,0 +1,1 @@
+class=com.caracal.camel.endpoints.mqtt5.CaracalMqtt5Component

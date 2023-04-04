@@ -48,11 +48,10 @@ public class Mqtt5Callback implements MqttCallback {
 
     private void respondWithDummy(String s, MqttMessage mqttMessage) throws Exception {
         var topic = mqttMessage.getProperties().getResponseTopic();
-        var response = String.format("{\"command\": \"%s\", \"autoResp\": true, \"respId\": \"%s\"}",
-                new String(mqttMessage.getPayload(), StandardCharsets.UTF_8), UUID.randomUUID());
+        var message = mqttMessage.getProperties().getUserProperties().get(0).getValue();
 
         if (topic != null) {
-            service.publish(topic, response);
+            service.publish(topic, message);
         }
     }
 }

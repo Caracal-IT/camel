@@ -1,6 +1,5 @@
 package com.caracal.camel;
 
-import com.caracal.camel.web.controllers.MqttController;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -16,7 +15,8 @@ import org.springframework.context.annotation.Import;
 		HibernateJpaAutoConfiguration.class})
 @Import({
 		com.caracal.camel.web.controllers.HomeController.class,
-		MqttController.class})
+		com.caracal.camel.web.controllers.MqttController.class,
+		ApplicationConfig.class})
 public class Application {
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
