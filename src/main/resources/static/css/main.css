@@ -29,9 +29,27 @@ header {
     text-shadow: 8px 8px 5px rgba(0,0,0,.3);
 }
 
+header a {
+    display: inline-block;
+    text-decoration: none;
+    color: whitesmoke;
+    font-size: 1rem;
+    padding: .5rem;
+}
+
+header a.active {
+    text-decoration: underline;
+    color: greenyellow;
+}
+
+header a:hover {
+    text-decoration: underline;
+}
+
 main {
     height: 100%;
     margin: 0 auto;
+    overflow-y: auto;
 }
 
 main div {
@@ -41,13 +59,16 @@ main div {
     justify-content: flex-start;
     align-items: flex-start;
     gap: 1rem;
-    max-width: 51rem;
+    max-width: 61rem;
 }
 
-caracal-card,
-caracal-settings,
 .action{
-    width: 25rem;
+    width: 30rem;
+    display: none;
+}
+
+.action.active {
+    display: inline-block;
 }
 
 .content {

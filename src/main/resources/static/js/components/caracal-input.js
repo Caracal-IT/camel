@@ -37,12 +37,21 @@ class CaracalInput extends LitElement {
     `;
 
     render() {
-        return html`
-            <div class="form-data">
-                <label for="serverBrokerUrl">${this.caption}</label>
-                <input id="serverBrokerUrl" value="${this.value}" readonly="${this.readonly}"  />
-            </div
-        `;
+        if(this.readonly && this.readonly.length > 0)
+            return html`
+                <div class="form-data">
+                    <label for="serverBrokerUrl">${this.caption}</label>
+                    <input id="serverBrokerUrl" value="${this.value}" readonly="${this.readonly}"  />
+                </div
+            `;
+        else {
+            return html`
+                <div class="form-data">
+                    <label for="serverBrokerUrl">${this.caption}</label>
+                    <input id="serverBrokerUrl" value="${this.value}" />
+                </div
+            `;
+        }
     }
 }
 

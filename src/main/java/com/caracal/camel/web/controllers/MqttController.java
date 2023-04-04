@@ -39,4 +39,13 @@ public class MqttController {
 
         return response;
     }
+
+    @PostMapping("/command")
+    @ResponseStatus(HttpStatus.OK)
+    public Response exeCommand(@RequestBody MqttPublishRequest request) {
+        var response = new Response();
+        response.setMessage("Successful");
+
+        return response;
+    }
 }
