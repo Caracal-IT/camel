@@ -51,7 +51,6 @@ public class CaracalMqtt5Producer extends DefaultProducer {
         tls.getTrustStore().setPassword(endpoint.getTrustStorePassword());
 
         client = new Mqtt5Client(endpoint.getBrokerUrl(), tls);
-        client.setAutomaticReconnect(endpoint.isAutomaticReconnect());
         client.setUserName(endpoint.getUserName());
         client.setPassword(endpoint.getPassword());
 

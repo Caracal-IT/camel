@@ -13,7 +13,6 @@ public class Mqtt5Service {
         try {
             settings = new MqttSettings();
             client = createClient(MqttSettings.server);
-            client.setAutomaticReconnect(true);
             client.connect();
         } catch (Exception ex) {
             System.out.println(ex.getMessage());

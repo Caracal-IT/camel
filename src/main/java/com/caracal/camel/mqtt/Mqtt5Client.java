@@ -9,7 +9,6 @@ import java.util.UUID;
 
 public class Mqtt5Client {
     private MqttAsyncClient client;
-    private boolean automaticReconnect;
     private TlsConfig tlsConfig;
     private String userName;
     private String password;
@@ -41,7 +40,6 @@ public class Mqtt5Client {
         properties.setProperty("com.ibm.ssl.trustStorePassword", this.tlsConfig.getTrustStore().getPassword());
 
         connOpts.setSSLProperties(properties);
-        connOpts.setCleanStart(false);
 
         if(getUserName() != null)
             connOpts.setUserName(getUserName());
@@ -67,8 +65,10 @@ public class Mqtt5Client {
             return;
         }
 
-        if(!client.isConnected() && isAutomaticReconnect())
-            client.connect();
+        if(!client.isConnected()) {
+            System.out.println("Reconnect");
+            this.connect();
+        }
 
         IMqttToken token = client.publish(topic, message);
         token.waitForCompletion();
@@ -78,28 +78,22 @@ public class Mqtt5Client {
         try {
             client.unsubscribe(topic);
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+            System.out.println("unSubscribe - " + ex.getMessage());
         }
     }
 
     public void subscribe(String topic) {
         try {
-            if(!client.isConnected() && isAutomaticReconnect())
-                client.connect();
+            if(!client.isConnected()) {
+                System.out.println("Reconnect");
+                this.connect();
+            }
 
             client.subscribe(topic, 1);
         }
         catch (Exception ex) {
-            System.out.println(ex.getMessage());
+            System.out.println("subscribe - " + ex.getMessage());
         }
-    }
-
-    public boolean isAutomaticReconnect() {
-        return automaticReconnect;
-    }
-
-    public void setAutomaticReconnect(boolean automaticReconnect) {
-        this.automaticReconnect = automaticReconnect;
     }
 
     public String getUserName() {

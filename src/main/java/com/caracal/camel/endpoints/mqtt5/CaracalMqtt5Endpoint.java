@@ -18,8 +18,6 @@ public class CaracalMqtt5Endpoint extends DefaultEndpoint {
     private String userName;
     private String password;
     private int qos;
-    private boolean automaticReconnect;
-
     private String  keyStore;
     private String keyStorePassword;
     private String trustStore;
@@ -88,14 +86,6 @@ public class CaracalMqtt5Endpoint extends DefaultEndpoint {
 
     public void setTopic(String topic) {
         this.topic = topic;
-    }
-
-    public boolean isAutomaticReconnect() {
-        return automaticReconnect;
-    }
-
-    public void setAutomaticReconnect(boolean automaticReconnect) {
-        this.automaticReconnect = automaticReconnect;
     }
 
     public String getKeyStore() {
