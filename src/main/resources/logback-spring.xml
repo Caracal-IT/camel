@@ -4,7 +4,7 @@
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <pattern>%logger{0} - %msg%n</pattern>
         </encoder>
     </appender>
 
@@ -19,10 +19,29 @@
         </encoder>
     </appender>
 
-    <logger name="org.apache.camel" level="DEBUG"/>
-    <logger name="com.mycompany" level="INFO"/>
+    <appender name="HTTP_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/http_calls.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/myapp-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--
+    <logger name="org.apache.camel" level="INFO">
+    </logger>
+    -->
+
+    <logger name="com.caracal.camel.http.logger" level="INFO">
+        <appender-ref ref="HTTP_FILE"/>
+    </logger>
+
+
     <root level="INFO">
         <appender-ref ref="STDOUT"/>
-        <appender-ref ref="FILE"/>
     </root>
+
 </configuration>

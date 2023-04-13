@@ -33,3 +33,4 @@ build/
 ### VS Code ###
 .vscode/
 /data/http/processed/
+/data/logs/http_calls.log
