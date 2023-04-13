@@ -30,5 +30,7 @@
         <removeHeaders pattern="*" excludePattern="CamelHttpMethod|content-type"/>
         <to uri="{{http.employee.url}}?bridgeEndpoint=true" />
         <to uri="file:./data/http/processed?fileExist=Append&amp;fileName=employee.log&amp;appendChars=\n" />
+        <log message="Debug message"/>
+
     </route>
 </routes>
