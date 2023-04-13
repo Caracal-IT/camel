@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: Caracal_Demo
+    name: Caracal Demo
   main:
      allow-bean-definition-overriding: true
   thymeleaf:

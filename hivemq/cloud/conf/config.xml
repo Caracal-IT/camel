@@ -18,17 +18,17 @@
         </websocket-listener>
         <tls-tcp-listener>
             <port>8883</port>
-            <bind-address>0.0.0.0</bind-address>            
+            <bind-address>0.0.0.0</bind-address>
             <tls>
                 <keystore>
                     <path>/opt/hivemq/conf/certs/cloud.hivemq.jks</path>
-                    <password>HufHHd4N64XZSB5D</password>
-                    <private-key-password>HufHHd4N64XZSB5D</private-key-password>
+                    <password>E9uH8R48vrqZdCaf</password>
+                    <private-key-password>E9uH8R48vrqZdCaf</private-key-password>
                 </keystore>
                 <client-authentication-mode>REQUIRED</client-authentication-mode>
                 <truststore>
                     <path>/opt/hivemq/conf/certs/cloud.hivemq-trust-store.jks</path>
-                    <password>rwuPQqX8ZGqWqmG4</password>
+                    <password>hgcmgThgYhVGz5bW</password>
                 </truststore>
             </tls>
         </tls-tcp-listener>
