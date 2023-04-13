@@ -1,7 +1,6 @@
 <routes xmlns="http://camel.apache.org/schema/spring">
     <route id="api-get-employee">
         <from uri="rest:get:employee/{id}"/>
-        <log message="{{http.employee.url}}" />
         <transform>
             <simple>{"id": "${header.id}","firstName": "Johnny", "lastName": "Thunder"}</simple>
         </transform>
@@ -30,5 +29,6 @@
         </setHeader>
         <removeHeaders pattern="*" excludePattern="CamelHttpMethod|content-type"/>
         <to uri="{{http.employee.url}}?bridgeEndpoint=true" />
+        <to uri="file:./data/http/processed?fileExist=Append&amp;fileName=employee.log&amp;appendChars=\n" />
     </route>
 </routes>
