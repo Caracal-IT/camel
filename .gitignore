@@ -34,3 +34,4 @@ build/
 .vscode/
 /data/http/processed/
 /data/logs/http_calls.log
+/data/logs/myapp.log
