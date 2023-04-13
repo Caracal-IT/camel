@@ -139,11 +139,13 @@
 		</dependency>
 		<!-- End Json -->
 
+		<!-- Scripts -->
 		<dependency>
 			<groupId>org.apache.camel.springboot</groupId>
 			<artifactId>camel-groovy-starter</artifactId>
 			<version>${camel.version}</version>
 		</dependency>
+		<!-- End Scripts -->
 
 		<!-- The Web UI -->
 		<dependency>
