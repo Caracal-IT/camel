@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+	   http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+    <camelContext xmlns="http://camel.apache.org/schema/spring">
+        <restConfiguration inlineRoutes="true"/>
+
+        <rest path="/say">
+            <get path="/hello">
+                <to uri="direct:hello"/>
+            </get>
+        </rest>
+
+        <route customId="true" id="api-greet">
+            <from uri="direct:hello"/>
+            <transform>
+                <constant>Hello World</constant>
+            </transform>
+        </route>
+    </camelContext>
+
+</beans>

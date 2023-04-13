@@ -1,7 +1,11 @@
 <routes xmlns="http://camel.apache.org/schema/spring">
-    <!--
-    <route id="http-rest">
-
+    <route id="api-greet">
+        <from uri="rest:get:hello"/>
+        <transform>
+            <constant>{"firstName": "Joe", "lastName": "Soap"}</constant>
+        </transform>
+        <setHeader name="content-type">
+            <simple>application/json</simple>
+        </setHeader>
     </route>
-    -->
 </routes>

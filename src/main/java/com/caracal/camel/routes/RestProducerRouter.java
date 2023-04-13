@@ -30,45 +30,17 @@ public class RestProducerRouter extends RouteBuilder {
                     var mapper = new ObjectMapper();
                     var customer = mapper.readValue(stream.readAllBytes(), Customer.class);
                     var id = exchange.getIn().getHeader("id").toString();
+                    var message = "From Processor";
 
-                    var response = new CustomerResponse(UUID.fromString(id), customer.getName(), customer.getSurname(), "From Processor");
+                    var response = new CustomerResponse(
+                            UUID.fromString(id),
+                            customer.getName(),
+                            customer.getSurname(),
+                            message);
+
                     var json = mapper.writeValueAsString(response);
 
                     exchange.getIn().setBody(json.getBytes());
                 });
     }
 }
-
-
-/*
-@Component
-public class RestProducerRouter extends RouteBuilder {
-    @Override
-    public void configure() {
-        restConfiguration().component("servlet");
-
-        rest("/device/{id}")
-            .get()
-            .to("direct:get-device");
-
-        from("direct:get-device")
-            .setHeader("content-type", constant("application/json"))
-                .process(exchange -> {
-                    var id = exchange.getIn().getHeader("id");
-                    var deviceId = UUID.fromString(id.toString());
-
-                    exchange.getIn().setBody(getDevice(deviceId));
-                });
-    }
-
-    private String getDevice(UUID id) throws Exception {
-            var device = new DeviceResponse();
-            device.setName("Device " + id);
-            device.setSerial("7F7UP2awmnGi" + id);
-            device.setMessage("[Camel] OK");
-
-            var objMapper = new ObjectMapper();
-            return objMapper.writeValueAsString(device);
-    }
-}
- */
