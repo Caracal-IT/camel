@@ -48,7 +48,7 @@ class CaracalInput extends LitElement {
             return html`
                 <div class="form-data">
                     <label for="serverBrokerUrl">${this.caption}</label>
-                    <input id="serverBrokerUrl" value="${this.value}" />
+                    <input id="serverBrokerUrl" @input=${event => this.value = event.target.value} value="${this.value}" />
                 </div
             `;
         }
