@@ -28,8 +28,8 @@ class HttpRest extends LitElement {
         return html`
             <caracal-card>
                 <h1 slot="header">Rest Client</h1>
-                <caracal-input id="customerName" caption="Customer Id" value="Joe"></caracal-input>
-                <caracal-input id="customerSurname" caption="Customer Name" value="Soap"></caracal-input>
+                <caracal-input id="customerName" caption="Customer Name" value="Joe"></caracal-input>
+                <caracal-input id="customerSurname" caption="Customer Surname" value="Soap"></caracal-input>
                 <div id="response">${this.response}</div>
                 <div slot="buttons">
                     <caracal-button id="processButton" @click=${this._clickHandler}>Process</caracal-button>

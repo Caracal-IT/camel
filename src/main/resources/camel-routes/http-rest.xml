@@ -1,11 +1,34 @@
 <routes xmlns="http://camel.apache.org/schema/spring">
-    <route id="api-greet">
-        <from uri="rest:get:hello"/>
+    <route id="api-get-employee">
+        <from uri="rest:get:employee/{id}"/>
+        <log message="{{http.employee.url}}" />
         <transform>
-            <constant>{"firstName": "Joe", "lastName": "Soap"}</constant>
+            <simple>{"id": "${header.id}","firstName": "Johnny", "lastName": "Thunder"}</simple>
         </transform>
         <setHeader name="content-type">
             <simple>application/json</simple>
         </setHeader>
+    </route>
+
+    <route id="api-post-employee">
+        <from uri="rest:post:employee/{id}"/>
+        <unmarshal>
+            <json library="Jackson" unmarshalType="com.caracal.camel.routes.models.Employee"/>
+        </unmarshal>
+        <setBody>
+            <groovy>
+                request.body.id = UUID.fromString(request.headers['id'])
+                return request.body
+            </groovy>
+        </setBody>
+        <process ref="#class:com.caracal.camel.processors.CustomerReferenceGeneratorProcessor" />
+        <setHeader name="CamelHttpMethod">
+            <simple>POST</simple>
+        </setHeader>
+        <setHeader name="content-type">
+            <simple>application/json</simple>
+        </setHeader>
+        <removeHeaders pattern="*" excludePattern="CamelHttpMethod|content-type"/>
+        <to uri="{{http.employee.url}}?bridgeEndpoint=true" />
     </route>
 </routes>

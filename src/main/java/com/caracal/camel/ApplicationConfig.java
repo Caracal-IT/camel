@@ -15,6 +15,7 @@ public class ApplicationConfig {
             public void beforeApplicationStart(CamelContext camelContext) {
                 var properties = new PropertiesComponent();
                 properties.addLocation("classpath:mqtt-properties.properties");
+                properties.addLocation("classpath:http-employee.properties");
 
                 camelContext.setPropertiesComponent(properties);
             }

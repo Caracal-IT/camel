@@ -30,7 +30,7 @@ public class RestProducerRouter extends RouteBuilder {
                     var mapper = new ObjectMapper();
                     var customer = mapper.readValue(stream.readAllBytes(), Customer.class);
                     var id = exchange.getIn().getHeader("id").toString();
-                    var message = "From Processor";
+                    var message = "From Inline Processor";
 
                     var response = new CustomerResponse(
                             UUID.fromString(id),

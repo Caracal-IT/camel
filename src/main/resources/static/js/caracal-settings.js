@@ -13,7 +13,7 @@ class CaracalSettings extends LitElement {
     async connectedCallback() {
         super.connectedCallback()
 
-        const settings = await get("/api/mqtt/settings")
+        const settings = await get("/api/mqtt/settings");
 
         this.cloudBrokerUrl = settings.cloudBrokerUrl;
         this.serverBrokerUrl = settings.serverBrokerUrl;

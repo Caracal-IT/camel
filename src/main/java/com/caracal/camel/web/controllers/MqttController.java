@@ -9,13 +9,12 @@ import com.caracal.camel.web.models.mqtt.MqttSettingsResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-
 @RestController
 @RequestMapping("/api/mqtt")
 public class MqttController {
+    private String currentRequestTopic = "";
     private final MqttSettings settings = new MqttSettings();
-    private static Mqtt5Service service = Mqtt5Service.Instance;
+    private static final Mqtt5Service service = Mqtt5Service.Instance;
 
     @GetMapping("/settings")
     @ResponseStatus(HttpStatus.OK)
@@ -43,7 +42,7 @@ public class MqttController {
         return response;
     }
 
-    public String currentRequestTopic = "";
+
 
     @PostMapping("/command")
     @ResponseStatus(HttpStatus.OK)

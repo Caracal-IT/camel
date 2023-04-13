@@ -16,6 +16,7 @@ import org.springframework.context.annotation.Import;
 @Import({
 		com.caracal.camel.web.controllers.HomeController.class,
 		com.caracal.camel.web.controllers.MqttController.class,
+		com.caracal.camel.web.controllers.ExternalEmployeeController.class,
 		ApplicationConfig.class})
 public class Application {
 	public static void main(String[] args) {
