@@ -20,7 +20,15 @@ public class Mqtt5Service {
     }
 
     public void publish(String topic, String message) throws Exception {
-        publish(topic, new MqttMessage(message.getBytes()));
+        publish(topic, message, false);
+    }
+
+    public void publish(String topic, String message, boolean retained) throws Exception {
+        var msg = new MqttMessage(message.getBytes());
+        msg.setQos(1);
+        msg.setRetained(retained);
+
+        publish(topic, msg);
     }
 
     public String lastMessage;
