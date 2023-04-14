@@ -17,6 +17,7 @@ import org.springframework.context.annotation.Import;
 		com.caracal.camel.web.controllers.HomeController.class,
 		com.caracal.camel.web.controllers.MqttController.class,
 		com.caracal.camel.web.controllers.ExternalEmployeeController.class,
+		com.caracal.camel.policies.InfiniteRedeliveryPolicy .class,
 		ApplicationConfig.class})
 public class Application {
 	public static void main(String[] args) {

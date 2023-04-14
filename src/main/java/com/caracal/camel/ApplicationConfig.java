@@ -6,6 +6,8 @@ import org.apache.camel.component.properties.PropertiesComponent;
 import org.apache.camel.spring.boot.CamelContextConfiguration;
 import org.springframework.context.annotation.Bean;
 
+import org.apache.camel.processor.errorhandler.RedeliveryPolicy;
+
 @Configuration
 public class ApplicationConfig {
     @Bean
@@ -27,3 +29,9 @@ public class ApplicationConfig {
         };
     }
 }
+
+/*
+<redeliveryPolicyProfile id="testRedeliveryPolicyProfile"
+			retryAttemptedLogLevel="WARN" maximumRedeliveries="5"
+			redeliveryDelay="5" />
+ */
