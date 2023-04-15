@@ -40,7 +40,7 @@
         <onException id="client-cloud-error-handler">
             <exception>java.lang.Exception</exception>
             <redeliveryPolicy
-                    retryAttemptedLogLevel="ERROR"
+                    retryAttemptedLogLevel="WARN"
                     maximumRedeliveries="-1"
                     redeliveryDelay="1000"
                     backOffMultiplier="0"
