@@ -7,7 +7,7 @@
             <redeliveryPolicy
                     retryAttemptedLogLevel="WARN"
                     maximumRedeliveries="-1"
-                    redeliveryDelay="1000"
+                    redeliveryDelay="200"
                     backOffMultiplier="2"
                     useCollisionAvoidance="true"
                     collisionAvoidanceFactor="0.05"
@@ -16,7 +16,7 @@
             <handled>
                 <constant>true</constant>
             </handled>
-            <to uri="seda:retry-cloud-client?pollTimeout=10000&amp;size=1000&amp;purgeWhenStopping=true&amp;blockWhenFull=true"/>
+            <to uri="seda:retry-cloud-client?pollTimeout=1000&amp;size=1000&amp;purgeWhenStopping=true&amp;blockWhenFull=true"/>
         </onException>
         <choice>
             <when>
@@ -42,7 +42,7 @@
             <redeliveryPolicy
                     retryAttemptedLogLevel="WARN"
                     maximumRedeliveries="-1"
-                    redeliveryDelay="1000"
+                    redeliveryDelay="200"
                     backOffMultiplier="2"
                     collisionAvoidanceFactor="0.05"
                     useCollisionAvoidance="true"
@@ -51,7 +51,7 @@
             <handled>
                 <constant>true</constant>
             </handled>
-            <to uri="seda:retry-client-cloud?pollTimeout=10000&amp;size=1000&amp;purgeWhenStopping=true&amp;timeout=1"/>
+            <to uri="seda:retry-client-cloud?pollTimeout=1000&amp;size=1000&amp;purgeWhenStopping=true&amp;timeout=1"/>
         </onException>
         <choice>
             <when>
