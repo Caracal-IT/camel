@@ -2,6 +2,7 @@ import {LitElement, html, css} from '../lit.js';
 
 class CaracalInput extends LitElement {
     static properties = {
+        type: {type: String},
         caption: {type: String},
         readonly: {type: String},
         value: {type:String}
@@ -41,14 +42,14 @@ class CaracalInput extends LitElement {
             return html`
                 <div class="form-data">
                     <label for="serverBrokerUrl">${this.caption}</label>
-                    <input id="serverBrokerUrl" value="${this.value}" readonly="${this.readonly}"  />
+                    <input type="${this.type}" id="serverBrokerUrl" value="${this.value}" readonly="${this.readonly}"  />
                 </div
             `;
         else {
             return html`
                 <div class="form-data">
                     <label for="serverBrokerUrl">${this.caption}</label>
-                    <input id="serverBrokerUrl" @input=${event => this.value = event.target.value} value="${this.value}" />
+                    <input id="serverBrokerUrl" type="${this.type}" @input=${event => this.value = event.target.value} value="${this.value}" />
                 </div
             `;
         }

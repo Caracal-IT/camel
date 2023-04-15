@@ -4,6 +4,7 @@ public class MqttPublishRequest {
     private String topic;
     private String message;
     private boolean retained;
+    private int iterations;
 
     public String getTopic() {
         return topic;
@@ -27,5 +28,13 @@ public class MqttPublishRequest {
 
     public void setRetained(boolean retained) {
         this.retained = retained;
+    }
+
+    public int getIterations() {
+        return iterations;
+    }
+
+    public void setIterations(int iterations) {
+        this.iterations = iterations;
     }
 }

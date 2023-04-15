@@ -18,7 +18,8 @@ class MqttPublish extends LitElement {
         const payload = {
             "topic": this.shadowRoot.getElementById("topic").value,
             "message": this.shadowRoot.getElementById("message").value,
-            "retained" : this.shadowRoot.getElementById("retained").value
+            "retained" : this.shadowRoot.getElementById("retained").value,
+            "iterations": this.shadowRoot.getElementById("iterations").value
         }
 
         const response = await post("/api/mqtt/publish", payload);
@@ -31,6 +32,7 @@ class MqttPublish extends LitElement {
                 <h1 slot="header">Mqtt Publish</h1>                
                 <caracal-input id="topic" caption="Topic" value="CUSTOMERS/5B4D8764-3EB1-4C65-A34B-00CFDCE6D77D"></caracal-input>
                 <caracal-input id="message" caption="Message" value="Custom Message"></caracal-input>
+                <caracal-input id="iterations" type="number" caption="Iterations" value="1"></caracal-input>
                 <caracal-checkbox id="retained" caption="Retained" value=${true}></caracal-checkbox>
                 <div id="response">${this.response}</div>
                 <div slot="buttons">

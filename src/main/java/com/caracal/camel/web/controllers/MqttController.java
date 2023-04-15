@@ -33,7 +33,14 @@ public class MqttController {
         response.setMessage("Successful");
 
         try {
-            service.publish(request.getTopic(), request.getMessage(), request.isRetained());
+            if(request.getIterations() <= 1) {
+                service.publish(request.getTopic(), request.getMessage(), request.isRetained());
+            } else {
+                for(var i = 0; i < request.getIterations(); i++) {
+                    service.publish(request.getTopic() + " " + i, request.getMessage() + " " + i, request.isRetained());
+                }
+            }
+
         }
         catch (Exception ex) {
             response.setMessage(ex.getMessage());
