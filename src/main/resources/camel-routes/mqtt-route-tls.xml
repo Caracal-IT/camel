@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <routes xmlns="http://camel.apache.org/schema/spring">
+    <!--
     <route id="cloud-client">
         <from uri="paho-mqtt5:{{cloud.rootTopic}}/#?brokerUrl={{cloud.brokerUrl}}&amp;qos=1&amp;userName={{cloud.username}}&amp;password={{cloud.password}}&amp;sslClientProps.com.ibm.ssl.keyStore={{cloud.keyStore}}&amp;sslClientProps.com.ibm.ssl.keyStorePassword={{cloud.keyStorePwd}}&amp;sslClientProps.com.ibm.ssl.trustStore={{cloud.trustStore}}&amp;sslClientProps.com.ibm.ssl.trustStorePassword={{cloud.trustStorePwd}}" />
         <onException id="cloud-client-error-handler">
@@ -34,13 +35,15 @@
             </when>
         </choice>
     </route>
+-->
 
     <route id="client-cloud">
         <from uri="paho-mqtt5:{{server.rootTopic}}/#?automaticReconnect=true&amp;maxReconnectDelay=1000&amp;brokerUrl={{server.brokerUrl}}&amp;qos=1&amp;userName={{server.username}}&amp;password={{server.password}}&amp;sslClientProps.com.ibm.ssl.keyStore={{server.keyStore}}&amp;sslClientProps.com.ibm.ssl.keyStorePassword={{server.keyStorePwd}}&amp;sslClientProps.com.ibm.ssl.trustStore={{server.trustStore}}&amp;sslClientProps.com.ibm.ssl.trustStorePassword={{server.trustStorePwd}}" />
+
         <onException id="client-cloud-error-handler">
             <exception>java.lang.Exception</exception>
             <redeliveryPolicy
-                    retryAttemptedLogLevel="WARN"
+                    retryAttemptedLogLevel="ERROR"
                     maximumRedeliveries="-1"
                     redeliveryDelay="200"
                     backOffMultiplier="2"
@@ -51,7 +54,9 @@
             <handled>
                 <constant>true</constant>
             </handled>
+            <!--
             <to uri="seda:retry-client-cloud?pollTimeout=1000&amp;size=1000&amp;purgeWhenStopping=true&amp;timeout=1"/>
+            -->
         </onException>
         <choice>
             <when>
@@ -66,6 +71,7 @@
     </route>
     <route>
         <from uri="seda:retry-client-cloud"/>
+        <log message="${headers}" />
         <choice>
             <when>
                 <simple>${header.CamelMqttTopic} !contains 'req' &amp;&amp; ${header.CamelMqttTopic} !contains 'rsp'</simple>
