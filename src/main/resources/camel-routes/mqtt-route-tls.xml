@@ -5,14 +5,14 @@
         <onException id="cloud-client-error-handler">
             <exception>java.lang.Exception</exception>
             <redeliveryPolicy
-                    retryAttemptedLogLevel="WARN"
-                    maximumRedeliveries="-1"
-                    redeliveryDelay="200"
-                    backOffMultiplier="2"
-                    useCollisionAvoidance="true"
-                    collisionAvoidanceFactor="0.05"
-                    useExponentialBackOff="true"
-                    maximumRedeliveryDelay="10000"/>
+                    retryAttemptedLogLevel="{{mqtt.retry.retryAttemptedLogLevel}}"
+                    maximumRedeliveries="{{mqtt.retry.maximumRedeliveries}}"
+                    redeliveryDelay="{{mqtt.retry.redeliveryDelay}}"
+                    backOffMultiplier="{{mqtt.retry.backOffMultiplier}}"
+                    useCollisionAvoidance="{{mqtt.retry.useCollisionAvoidance}}"
+                    collisionAvoidanceFactor="{{mqtt.retry.collisionAvoidanceFactor}}"
+                    useExponentialBackOff="{{mqtt.retry.useExponentialBackOff}}"
+                    maximumRedeliveryDelay="{{mqtt.retry.maximumRedeliveryDelay}}"/>
             <handled>
                 <constant>true</constant>
             </handled>
@@ -30,14 +30,14 @@
         <onException id="client-cloud-error-handler">
             <exception>java.lang.Exception</exception>
             <redeliveryPolicy
-                    retryAttemptedLogLevel="ERROR"
-                    maximumRedeliveries="-1"
-                    redeliveryDelay="200"
-                    backOffMultiplier="2"
-                    collisionAvoidanceFactor="0.15"
-                    useCollisionAvoidance="true"
-                    useExponentialBackOff="true"
-                    maximumRedeliveryDelay="10000"/>
+                    retryAttemptedLogLevel="{{mqtt.retry.retryAttemptedLogLevel}}"
+                    maximumRedeliveries="{{mqtt.retry.maximumRedeliveries}}"
+                    redeliveryDelay="{{mqtt.retry.redeliveryDelay}}"
+                    backOffMultiplier="{{mqtt.retry.backOffMultiplier}}"
+                    useCollisionAvoidance="{{mqtt.retry.useCollisionAvoidance}}"
+                    collisionAvoidanceFactor="{{mqtt.retry.collisionAvoidanceFactor}}"
+                    useExponentialBackOff="{{mqtt.retry.useExponentialBackOff}}"
+                    maximumRedeliveryDelay="{{mqtt.retry.maximumRedeliveryDelay}}"/>
             <handled>
                 <constant>true</constant>
             </handled>
