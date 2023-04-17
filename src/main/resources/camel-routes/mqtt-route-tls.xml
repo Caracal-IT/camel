@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <routes xmlns="http://camel.apache.org/schema/spring">
-    <!--
     <route id="cloud-client">
         <from uri="paho-mqtt5:{{cloud.rootTopic}}/#?brokerUrl={{cloud.brokerUrl}}&amp;qos=1&amp;userName={{cloud.username}}&amp;password={{cloud.password}}&amp;sslClientProps.com.ibm.ssl.keyStore={{cloud.keyStore}}&amp;sslClientProps.com.ibm.ssl.keyStorePassword={{cloud.keyStorePwd}}&amp;sslClientProps.com.ibm.ssl.trustStore={{cloud.trustStore}}&amp;sslClientProps.com.ibm.ssl.trustStorePassword={{cloud.trustStorePwd}}" />
         <onException id="cloud-client-error-handler">
@@ -17,7 +16,6 @@
             <handled>
                 <constant>true</constant>
             </handled>
-            <to uri="seda:retry-cloud-client?pollTimeout=1000&amp;size=1000&amp;purgeWhenStopping=true&amp;blockWhenFull=true"/>
         </onException>
         <choice>
             <when>
@@ -26,20 +24,9 @@
             </when>
         </choice>
     </route>
-    <route>
-        <from uri="seda:retry-cloud-client" />
-        <choice>
-            <when>
-                <simple>${header.CamelMqttTopic} contains 'req'</simple>
-                <toD uri="caracal-mqtt:${headers.CamelMqttTopic.substring({{cloud.rootTopicPrefixLength}})}?brokerUrl={{server.brokerUrl}}&amp;userName={{server.username}}&amp;password={{server.password}}&amp;qos=1&amp;keyStore={{server.keyStore}}&amp;keyStorePassword={{server.keyStorePwd}}&amp;trustStore={{server.trustStore}}&amp;trustStorePassword={{server.trustStorePwd}}" />
-            </when>
-        </choice>
-    </route>
--->
 
     <route id="client-cloud">
-        <from uri="paho-mqtt5:{{server.rootTopic}}/#?automaticReconnect=true&amp;maxReconnectDelay=1000&amp;brokerUrl={{server.brokerUrl}}&amp;qos=1&amp;userName={{server.username}}&amp;password={{server.password}}&amp;sslClientProps.com.ibm.ssl.keyStore={{server.keyStore}}&amp;sslClientProps.com.ibm.ssl.keyStorePassword={{server.keyStorePwd}}&amp;sslClientProps.com.ibm.ssl.trustStore={{server.trustStore}}&amp;sslClientProps.com.ibm.ssl.trustStorePassword={{server.trustStorePwd}}" />
-
+        <from uri="paho-mqtt5:{{server.rootTopic}}/#?brokerUrl={{server.brokerUrl}}&amp;qos=1&amp;userName={{server.username}}&amp;password={{server.password}}&amp;sslClientProps.com.ibm.ssl.keyStore={{server.keyStore}}&amp;sslClientProps.com.ibm.ssl.keyStorePassword={{server.keyStorePwd}}&amp;sslClientProps.com.ibm.ssl.trustStore={{server.trustStore}}&amp;sslClientProps.com.ibm.ssl.trustStorePassword={{server.trustStorePwd}}" />
         <onException id="client-cloud-error-handler">
             <exception>java.lang.Exception</exception>
             <redeliveryPolicy
@@ -47,16 +34,13 @@
                     maximumRedeliveries="-1"
                     redeliveryDelay="200"
                     backOffMultiplier="2"
-                    collisionAvoidanceFactor="0.05"
+                    collisionAvoidanceFactor="0.15"
                     useCollisionAvoidance="true"
                     useExponentialBackOff="true"
                     maximumRedeliveryDelay="10000"/>
             <handled>
                 <constant>true</constant>
             </handled>
-            <!--
-            <to uri="seda:retry-client-cloud?pollTimeout=1000&amp;size=1000&amp;purgeWhenStopping=true&amp;timeout=1"/>
-            -->
         </onException>
         <choice>
             <when>
@@ -66,20 +50,6 @@
             <when>
                 <simple>${header.CamelMqttTopic} !contains 'req'</simple>
                 <toD uri="paho-mqtt5:{{cloud.rootTopicPrefix}}${headers.CamelMqttTopic}?automaticReconnect=true&amp;maxReconnectDelay=1000&amp;brokerUrl={{cloud.brokerUrl}}&amp;qos=1&amp;userName={{cloud.username}}&amp;password={{cloud.password}}&amp;sslClientProps.com.ibm.ssl.keyStore={{cloud.keyStore}}&amp;sslClientProps.com.ibm.ssl.keyStorePassword={{cloud.keyStorePwd}}&amp;sslClientProps.com.ibm.ssl.trustStore={{cloud.trustStore}}&amp;sslClientProps.com.ibm.ssl.trustStorePassword={{cloud.trustStorePwd}}" />
-            </when>
-        </choice>
-    </route>
-    <route>
-        <from uri="seda:retry-client-cloud"/>
-        <log message="${headers}" />
-        <choice>
-            <when>
-                <simple>${header.CamelMqttTopic} !contains 'req' &amp;&amp; ${header.CamelMqttTopic} !contains 'rsp'</simple>
-                <toD uri="paho-mqtt5:{{cloud.rootTopicPrefix}}${headers.CamelMqttTopic}?automaticReconnect=true&amp;maxReconnectDelay=1000&amp;brokerUrl={{cloud.brokerUrl}}&amp;qos=2&amp;userName={{cloud.username}}&amp;password={{cloud.password}}&amp;retained=true&amp;sslClientProps.com.ibm.ssl.keyStore={{cloud.keyStore}}&amp;sslClientProps.com.ibm.ssl.keyStorePassword={{cloud.keyStorePwd}}&amp;sslClientProps.com.ibm.ssl.trustStore={{cloud.trustStore}}&amp;sslClientProps.com.ibm.ssl.trustStorePassword={{cloud.trustStorePwd}}" />
-            </when>
-            <when>
-                <simple>${header.CamelMqttTopic} !contains 'req'</simple>
-                <toD uri="paho-mqtt5:{{cloud.rootTopicPrefix}}${headers.CamelMqttTopic}?automaticReconnect=true&amp;maxReconnectDelay=1000&amp;brokerUrl={{cloud.brokerUrl}}&amp;qos=2&amp;userName={{cloud.username}}&amp;password={{cloud.password}}&amp;sslClientProps.com.ibm.ssl.keyStore={{cloud.keyStore}}&amp;sslClientProps.com.ibm.ssl.keyStorePassword={{cloud.keyStorePwd}}&amp;sslClientProps.com.ibm.ssl.trustStore={{cloud.trustStore}}&amp;sslClientProps.com.ibm.ssl.trustStorePassword={{cloud.trustStorePwd}}" />
             </when>
         </choice>
     </route>
