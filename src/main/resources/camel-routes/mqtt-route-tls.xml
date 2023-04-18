@@ -6,7 +6,7 @@
             <exception>java.lang.Exception</exception>
             <redeliveryPolicy
                     retryAttemptedLogLevel="{{mqtt.retry.retryAttemptedLogLevel}}"
-                    maximumRedeliveries="{{mqtt.retry.maximumRedeliveries}}"
+                    maximumRedeliveries="-1"
                     redeliveryDelay="{{mqtt.retry.redeliveryDelay}}"
                     backOffMultiplier="{{mqtt.retry.backOffMultiplier}}"
                     useCollisionAvoidance="{{mqtt.retry.useCollisionAvoidance}}"
@@ -16,7 +16,6 @@
             <handled>
                 <constant>true</constant>
             </handled>
-            <to uri="controlbus:route?routeId=xml-cloud-client&amp;action=restart" id="cloud-client-restart" />
         </onException>
         <choice>
             <when>
