@@ -30,9 +30,3 @@ public class ApplicationConfig {
         };
     }
 }
-
-/*
-<redeliveryPolicyProfile id="testRedeliveryPolicyProfile"
-			retryAttemptedLogLevel="WARN" maximumRedeliveries="5"
-			redeliveryDelay="5" />
- */
