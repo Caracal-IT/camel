@@ -5,6 +5,9 @@ public class MqttPublishRequest {
     private String message;
     private boolean retained;
     private int iterations;
+    private int delay;
+
+    private boolean randomAmountOfMessages;
 
     public String getTopic() {
         return topic;
@@ -36,5 +39,21 @@ public class MqttPublishRequest {
 
     public void setIterations(int iterations) {
         this.iterations = iterations;
+    }
+
+    public int getDelay() {
+        return delay;
+    }
+
+    public void setDelay(int delay) {
+        this.delay = delay;
+    }
+
+    public boolean isRandomAmountOfMessages() {
+        return randomAmountOfMessages;
+    }
+
+    public void setRandomAmountOfMessages(boolean randomAmountOfMessages) {
+        this.randomAmountOfMessages = randomAmountOfMessages;
     }
 }

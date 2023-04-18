@@ -9,6 +9,11 @@ import com.caracal.camel.web.models.mqtt.MqttSettingsResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Random;
+
 @RestController
 @RequestMapping("/api/mqtt")
 public class MqttController {
@@ -28,17 +33,17 @@ public class MqttController {
 
     @PostMapping("/publish")
     @ResponseStatus(HttpStatus.OK)
-    public Response publish(@RequestBody MqttPublishRequest request) {
+    public Response publish(@RequestBody MqttPublishRequest request) throws Exception {
         var response = new Response();
         response.setMessage("Successful");
+
+        if(request.getDelay() > 1) Thread.sleep(request.getDelay());
 
         try {
             if(request.getIterations() <= 1) {
                 service.publish(request.getTopic(), request.getMessage(), request.isRetained());
             } else {
-                for(var i = 0; i < request.getIterations(); i++) {
-                    service.publish(request.getTopic() + " " + i, request.getMessage() + " " + i, request.isRetained());
-                }
+                publishMessage(request);
             }
 
         }
@@ -49,7 +54,23 @@ public class MqttController {
         return response;
     }
 
+    private void publishMessage(MqttPublishRequest request) throws Exception {
+        var min = 1;
+        var max = 1;
+        var rnd = new Random();
 
+        for(var i = 0; i < request.getIterations(); i++) {
+            var topic = request.getTopic() + i;
+
+            var messageIterations = rnd.nextInt(max - min + 1) + min;
+            for (var j = 1; j <= messageIterations; j++) {
+                var message = request.getMessage() + " t: " + i + " m: " + j;
+                service.publish(topic, message, request.isRetained());
+
+                if (request.getDelay() > 1) Thread.sleep(request.getDelay());
+            }
+        }
+    }
 
     @PostMapping("/command")
     @ResponseStatus(HttpStatus.OK)

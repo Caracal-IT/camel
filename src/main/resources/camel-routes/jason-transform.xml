@@ -1,5 +1,5 @@
 <routes xmlns="http://camel.apache.org/schema/spring">
-    <route id="json-transform">
+    <route id="xml-json-transform">
         <from uri="file:./data/transform/xml"/>
         <unmarshal>
             <json library="Jackson" unmarshalType="com.caracal.camel.routes.models.Customer"/>

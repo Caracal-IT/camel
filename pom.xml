@@ -61,6 +61,12 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-resilience4j</artifactId>
+			<version>${camel.version}</version>
+		</dependency>
 		<!-- End Spring Boot -->
 
 		<!-- Camel -->

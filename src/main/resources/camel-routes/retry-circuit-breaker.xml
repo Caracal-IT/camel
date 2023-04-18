@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<routes xmlns="http://camel.apache.org/schema/spring">
+    <route id="xml-retry-1" autoStartup="false">
+        <from uri="timer://retry?fixedRate=true&amp;period=1000" />
+        <onException>
+            <exception>java.lang.Exception</exception>
+            <redeliveryPolicy
+                    retryAttemptedLogLevel="WARN"
+                    maximumRedeliveries="-1"
+                    redeliveryDelay="100"
+                    backOffMultiplier="2"
+                    useCollisionAvoidance="true"
+                    collisionAvoidanceFactor="0.15"
+                    useExponentialBackOff="true"
+                    maximumRedeliveryDelay="1000"/>
+            <handled>
+                <constant>true</constant>
+            </handled>
+        </onException>
+        <log message="Retry Start" />
+        <throwException exceptionType="java.lang.Exception" message="Error From Timer"/>
+        <log message="End Start" />
+    </route>
+
+    <route id="xml-retry-2" autoStartup="false">
+        <from uri="timer://retry2?fixedRate=true&amp;period=1000" />
+        <onException>
+            <exception>java.lang.Exception</exception>
+            <redeliveryPolicy
+                    retryAttemptedLogLevel="WARN"
+                    maximumRedeliveries="10"
+                    redeliveryDelay="100"
+                    backOffMultiplier="2"
+                    useCollisionAvoidance="true"
+                    collisionAvoidanceFactor="0.15"
+                    useExponentialBackOff="true"
+                    maximumRedeliveryDelay="2000"/>
+            <handled>
+                <constant>true</constant>
+            </handled>
+            <to uri="direct:errorQueue" />
+        </onException>
+
+        <throwException exceptionType="java.lang.Exception" message="Error From Timer"/>
+        <log message="ProcessQueue" />
+    </route>
+
+    <route id="xml-retry-2-restart" autoStartup="false">
+        <from uri="direct:errorQueue" />
+        <log message="ErrorQueue" />
+        <to uri="controlbus:route?routeId=xml-retry-2&amp;action=restart" />
+    </route>
+</routes>

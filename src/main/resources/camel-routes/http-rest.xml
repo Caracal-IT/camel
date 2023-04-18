@@ -1,5 +1,5 @@
 <routes xmlns="http://camel.apache.org/schema/spring">
-    <route id="api-get-employee">
+    <route id="xml-api-get-employee">
         <from uri="rest:get:employee/{id}"/>
         <transform>
             <simple>{"id": "${header.id}","firstName": "Johnny", "lastName": "Thunder"}</simple>
@@ -9,7 +9,7 @@
         </setHeader>
     </route>
 
-    <route id="api-post-employee">
+    <route id="xml-api-post-employee">
         <from uri="rest:post:employee/{id}"/>
         <unmarshal>
             <json library="Jackson" unmarshalType="com.caracal.camel.routes.models.Employee"/>

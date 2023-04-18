@@ -13,6 +13,7 @@ public class JsonTransformRoute extends RouteBuilder {
         JacksonDataFormat jacksonDataFormat = new JacksonDataFormat();
         jacksonDataFormat.setPrettyPrint(true);
                 from("file:./data/transform/java")
+                .routeId("java-json-transform")
                 .unmarshal().json(JsonLibrary.Jackson, JsonObject.class)
                 .process(exchange -> {
                     JsonObject inputObject = exchange.getMessage().getBody(JsonObject.class);

@@ -18,29 +18,30 @@ public class RestProducerRouter extends RouteBuilder {
         restConfiguration().component("servlet");
 
         rest("/customer/{id}")
-        .post()
-        .to("direct:update-customer");
+            .post()
+            .to("direct:update-customer");
 
         from("direct:update-customer")
-        .setHeader("content-type", constant("application/json"))
-                .process(exchange -> {
-                    var input = (HttpMessage) exchange.getIn();
+            .setHeader("content-type", constant("application/json"))
+            .routeId("java-rest")
+            .process(exchange -> {
+                var input = (HttpMessage) exchange.getIn();
 
-                    InputStreamCache stream = (InputStreamCache) input.getBody();
-                    var mapper = new ObjectMapper();
-                    var customer = mapper.readValue(stream.readAllBytes(), Customer.class);
-                    var id = exchange.getIn().getHeader("id").toString();
-                    var message = "From Inline Processor";
+                InputStreamCache stream = (InputStreamCache) input.getBody();
+                var mapper = new ObjectMapper();
+                var customer = mapper.readValue(stream.readAllBytes(), Customer.class);
+                var id = exchange.getIn().getHeader("id").toString();
+                var message = "From Inline Processor";
 
-                    var response = new CustomerResponse(
-                            UUID.fromString(id),
-                            customer.getName(),
-                            customer.getSurname(),
-                            message);
+                var response = new CustomerResponse(
+                        UUID.fromString(id),
+                        customer.getName(),
+                        customer.getSurname(),
+                        message);
 
-                    var json = mapper.writeValueAsString(response);
+                var json = mapper.writeValueAsString(response);
 
-                    exchange.getIn().setBody(json.getBytes());
-                });
+                exchange.getIn().setBody(json.getBytes());
+            });
     }
 }

@@ -1,5 +1,5 @@
 <routes xmlns="http://camel.apache.org/schema/spring">
-    <route id="json-transform2">
+    <route id="xml-json-transform2">
         <from uri="file:./data/transform/xml2"/>
         <setHeader name="name"   ><jsonpath suppressExceptions="true">$.name</jsonpath></setHeader>
         <setHeader name="surname"><jsonpath suppressExceptions="true">$.surname</jsonpath></setHeader>

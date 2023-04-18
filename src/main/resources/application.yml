@@ -17,5 +17,4 @@ camel:
     routes-reload-enabled: true
     routes-include-pattern: classpath:camel-routes/*
     routes-reload-directory: classpath:camel-routes
-
     route-controller-supervise-enabled: true
