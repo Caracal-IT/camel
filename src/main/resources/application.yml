@@ -18,3 +18,4 @@ camel:
     routes-include-pattern: classpath:camel-routes/*
     routes-reload-directory: classpath:camel-routes
     route-controller-supervise-enabled: true
+    route-shutdown-delay: 10
