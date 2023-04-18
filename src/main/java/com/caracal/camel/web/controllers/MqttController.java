@@ -9,9 +9,6 @@ import com.caracal.camel.web.models.mqtt.MqttSettingsResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Random;
 
 @RestController

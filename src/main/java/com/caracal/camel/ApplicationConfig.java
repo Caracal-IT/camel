@@ -20,7 +20,7 @@ public class ApplicationConfig {
                 properties.addLocation("classpath:http-employee.properties");
 
                 camelContext.setPropertiesComponent(properties);
-                camelContext.getShutdownStrategy().setTimeout(3);
+                camelContext.getShutdownStrategy().setTimeout(10);
             }
 
             @Override
