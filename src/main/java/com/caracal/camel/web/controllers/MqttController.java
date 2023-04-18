@@ -59,6 +59,9 @@ public class MqttController {
         var max = 1;
         var rnd = new Random();
 
+        if(request.isRandomAmountOfMessages())
+            max = 5;
+
         for(var i = 0; i < request.getIterations(); i++) {
             var topic = request.getTopic() + i;
 

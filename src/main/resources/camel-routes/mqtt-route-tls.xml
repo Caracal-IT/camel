@@ -41,6 +41,7 @@
             <handled>
                 <constant>true</constant>
             </handled>
+            <to uri="controlbus:route?routeId=xml-client-cloud&amp;action=restart" id="client-cloud-restart" />
         </onException>
         <choice>
             <when>
