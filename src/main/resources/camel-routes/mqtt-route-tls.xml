@@ -33,6 +33,7 @@
                     retryAttemptedLogLevel="{{mqtt.retry.retryAttemptedLogLevel}}"
                     maximumRedeliveries="{{mqtt.retry.maximumRedeliveries}}"
                     redeliveryDelay="{{mqtt.retry.redeliveryDelay}}"
+                    allowRedeliveryWhileStopping="false"
                     backOffMultiplier="{{mqtt.retry.backOffMultiplier}}"
                     useCollisionAvoidance="{{mqtt.retry.useCollisionAvoidance}}"
                     collisionAvoidanceFactor="{{mqtt.retry.collisionAvoidanceFactor}}"
@@ -41,7 +42,7 @@
             <handled>
                 <constant>true</constant>
             </handled>
-            <to uri="controlbus:route?routeId=xml-client-cloud&amp;action=restart" id="client-cloud-restart" />
+            <process ref="#class:com.caracal.camel.processors.StopRouteProcessor" />
         </onException>
         <choice>
             <when>
