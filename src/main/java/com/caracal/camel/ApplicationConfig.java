@@ -24,6 +24,11 @@ public class ApplicationConfig {
                 camelContext.setPropertiesComponent(properties);
             }
 
+            @Override
+            public void afterApplicationStart(CamelContext camelContext) {
+                setShutdownStrategy(camelContext);
+            }
+
             private void setShutdownStrategy(CamelContext camelContext) {
                 var shutdownStrategy = camelContext.getShutdownStrategy();
                 shutdownStrategy.setTimeout(1);
@@ -31,11 +36,6 @@ public class ApplicationConfig {
                 shutdownStrategy.setSuppressLoggingOnTimeout(true);
                 shutdownStrategy.setLogInflightExchangesOnTimeout(false);
                 shutdownStrategy.setSuppressLoggingOnTimeout(true);
-            }
-
-            @Override
-            public void afterApplicationStart(CamelContext camelContext) {
-                setShutdownStrategy(camelContext);
             }
         };
     }
