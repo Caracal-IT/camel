@@ -2,12 +2,8 @@ package com.caracal.camel.processors;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
-import org.apache.camel.spi.RouteController;
-import org.springframework.beans.factory.annotation.Value;
-
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
+import org.springframework.beans.factory.annotation.Value;
 
 public class StopRouteProcessor implements Processor {
     @Value("${camel.springboot.route-shutdown-delay}")
