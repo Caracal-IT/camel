@@ -20,6 +20,7 @@ public class ApplicationConfig {
                 var properties = new PropertiesComponent();
                 properties.addLocation("classpath:mqtt-properties.properties");
                 properties.addLocation("classpath:http-employee.properties");
+                properties.addLocation("classpath:mail.properties");
 
                 camelContext.setPropertiesComponent(properties);
             }

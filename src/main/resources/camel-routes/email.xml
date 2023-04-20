@@ -9,8 +9,5 @@
     <setHeader name="from">
         <constant>kameelapache@gmail.com</constant>
     </setHeader>
-    <setBody>
-        <constant>This is a test email sent using Camel and Gmail</constant>
-    </setBody>
-    <to uri="smtps://smtp.gmail.com:465?username=kameelapache@gmail.com&amp;password=" />
+    <to uri="smtps://{{mail.server}}?username={{mail.username}}&amp;password={{mail.password}}" />
 </route>
