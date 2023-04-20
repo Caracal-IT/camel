@@ -1,6 +1,10 @@
 server:
   port: 8070
-
+  ssl:
+    enabled: true
+    key-store-type: JKS
+    keystore: classpath:certs/hivemq.jks
+    key-store-password: E9uH8R48vrqZdCaf
 spring:
   application:
     name: Caracal Demo
