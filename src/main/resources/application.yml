@@ -23,3 +23,5 @@ camel:
     routes-reload-directory: classpath:camel-routes
     route-controller-supervise-enabled: true
     route-shutdown-delay: 5000
+
+# https://www.baeldung.com/spring-boot-https-self-signed-certificate
