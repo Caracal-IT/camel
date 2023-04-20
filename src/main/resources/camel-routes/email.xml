@@ -1,0 +1,16 @@
+<route id="xml-mail">
+    <from uri="file:./data/files/email" />
+    <setHeader name="subject">
+        <simple>Camel Mail</simple>
+    </setHeader>
+    <setHeader name="to">
+        <constant>ettienemare@gmail.com</constant>
+    </setHeader>
+    <setHeader name="from">
+        <constant>kameelapache@gmail.com</constant>
+    </setHeader>
+    <setBody>
+        <constant>This is a test email sent using Camel and Gmail</constant>
+    </setBody>
+    <to uri="smtps://smtp.gmail.com:465?username=kameelapache@gmail.com&amp;password=" />
+</route>

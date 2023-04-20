@@ -185,6 +185,19 @@
 		</dependency>
 		<!-- End Web UI -->
 
+		<!-- Mail -->
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-mail</artifactId>
+			<version>${camel.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel.springboot</groupId>
+			<artifactId>camel-google-mail-starter</artifactId>
+			<version>${camel.version}</version>
+		</dependency>
+		<!--End  Mail -->
+
 		<!-- Kotlin -->
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>

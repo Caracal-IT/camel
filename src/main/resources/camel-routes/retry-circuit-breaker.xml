@@ -50,4 +50,15 @@
         <log message="ErrorQueue" />
         <to uri="controlbus:route?routeId=xml-retry-2&amp;action=restart" />
     </route>
+
+
 </routes>
+        <!--
+
+                .doTry().setHeader("subject", simple("JavaInUse Invitation111"))
+                .setHeader("to", simple("javainuse@gmail.com,testouthworking@gmail.com"))
+                .to("smtps://smtp.gmail.com:465?username=testcamelsmtp@gmail.com&password=ABC@123");
+                }
+
+        kameelapache
+        -->
