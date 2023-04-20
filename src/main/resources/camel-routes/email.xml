@@ -1,13 +1,38 @@
 <route id="xml-mail">
-    <from uri="file:./data/files/email" />
+    <from uri="rest:post:mail"/>
+
+    <setHeader name="content-type">
+        <simple>text/html</simple>
+    </setHeader>
+
+    <setHeader name="from"><jsonpath suppressExceptions="true">$.mailFrom</jsonpath></setHeader>
+    <setHeader name="to"><jsonpath suppressExceptions="true">$.mailTo</jsonpath></setHeader>
+    <setHeader name="subject"><jsonpath suppressExceptions="true">$.mailSubject</jsonpath></setHeader>
+    <setBody><jsonpath suppressExceptions="true">$.mailBody</jsonpath></setBody>
+
+    <to uri="smtps://{{mail.server}}?username={{mail.username}}&amp;password={{mail.password}}" />
+
+    <setHeader name="content-type">
+        <simple>application/json</simple>
+    </setHeader>
+
+    <setBody>
+        <constant>
+            {
+                "message": "Email Send"
+            }
+        </constant>
+    </setBody>
+    <!--
     <setHeader name="subject">
         <simple>Camel Mail</simple>
     </setHeader>
     <setHeader name="to">
-        <constant>ettiene.mare@divigraph.com</constant>
+        <constant>ettienemare@gmail.com</constant>
     </setHeader>
     <setHeader name="from">
         <constant>kameelapache@gmail.com</constant>
     </setHeader>
     <to uri="smtps://{{mail.server}}?username={{mail.username}}&amp;password={{mail.password}}" />
+    -->
 </route>
