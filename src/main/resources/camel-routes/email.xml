@@ -4,7 +4,7 @@
         <simple>Camel Mail</simple>
     </setHeader>
     <setHeader name="to">
-        <constant>ettienemare@gmail.com</constant>
+        <constant>ettiene.mare@divigraph.com</constant>
     </setHeader>
     <setHeader name="from">
         <constant>kameelapache@gmail.com</constant>

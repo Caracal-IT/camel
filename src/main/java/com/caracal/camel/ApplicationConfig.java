@@ -14,6 +14,8 @@ public class ApplicationConfig {
             @Override
             public void beforeApplicationStart(CamelContext camelContext) {
                 createApplicationSettings(camelContext);
+
+
             }
 
             private void createApplicationSettings(CamelContext camelContext) {
