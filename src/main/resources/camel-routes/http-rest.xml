@@ -28,7 +28,7 @@
             <simple>application/json</simple>
         </setHeader>
         <removeHeaders pattern="*" excludePattern="CamelHttpMethod|content-type"/>
-        <to uri="{{http.employee.url}}?bridgeEndpoint=true" />
+        <to uri="{{http.employee.url}}?bridgeEndpoint=true&amp;throwExceptionOnFailure=false&amp;httpBinding=https" />
         <to uri="file:./data/http/processed?fileExist=Append&amp;fileName=employee.log&amp;appendChars=\n" />
         <log message="${body}" logName="com.caracal.camel.http.logger" inheritErrorHandler="false" loggingLevel="INFO"/>
     </route>

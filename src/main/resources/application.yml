@@ -5,6 +5,10 @@ server:
     key-store-type: JKS
     keystore: classpath:certs/hivemq.jks
     key-store-password: E9uH8R48vrqZdCaf
+    #trust-store-type: JKS
+    #trust-store: classpath:certs/hivemq-trust-store.jks
+    #trust-store-password: hgcmgThgYhVGz5bW
+
 spring:
   application:
     name: Caracal Demo
@@ -24,4 +28,9 @@ camel:
     route-controller-supervise-enabled: true
     route-shutdown-delay: 5000
 
+
+
+  component:
+    http:
+      use-global-ssl-context-parameters: true
 # https://www.baeldung.com/spring-boot-https-self-signed-certificate
