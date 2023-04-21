@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import org.springframework.context.annotation.Import;
 
 @SpringBootApplication(exclude = {
+		//SecurityAutoConfiguration.class,
 		DataSourceAutoConfiguration.class,
 		DataSourceTransactionManagerAutoConfiguration.class,
 		HibernateJpaAutoConfiguration.class})
@@ -16,8 +17,8 @@ import org.springframework.context.annotation.Import;
 		com.caracal.camel.web.controllers.HomeController.class,
 		com.caracal.camel.web.controllers.MqttController.class,
 		com.caracal.camel.web.controllers.ExternalEmployeeController.class,
-		ApplicationConfig.class,
-		SecurityConfig.class})
+		SecurityConfig.class,
+		ApplicationConfig.class})
 public class Application {
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);

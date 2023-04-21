@@ -2,12 +2,14 @@ server:
   port: 8070
   ssl:
     enabled: true
-    key-store-type: JKS
-    keystore: classpath:certs/hivemq.jks
-    key-store-password: E9uH8R48vrqZdCaf
-    #trust-store-type: JKS
-    #trust-store: classpath:certs/hivemq-trust-store.jks
-    #trust-store-password: hgcmgThgYhVGz5bW
+    #key-store-type: JKS
+    #keystore: classpath:certs/hivemq.jks
+    #key-store-password: E9uH8R48vrqZdCaf
+    #client-auth: need
+
+    certificate: certs/divigraph-dev.crt
+    certificate-private-key: certs/divigraph-dev.key
+
 
 spring:
   application:
@@ -28,9 +30,11 @@ camel:
     route-controller-supervise-enabled: true
     route-shutdown-delay: 5000
 
-
-
   component:
     http:
       use-global-ssl-context-parameters: true
 # https://www.baeldung.com/spring-boot-https-self-signed-certificate
+
+# run in admin mode https://www.tutorialworks.com/java-trust-ssl/
+#keytool -import -alias dev.divigraph.com -file certs/divigraph-dev.pem -keystore "C:\Program Files\Java\jdk-19\lib\security\cacerts"
+#keytool -import -alias dev.divigraph.com -file certs/divigraph-dev.pem -keystore "C:\Users\EttieneMare\.jdks\openjdk-19.0.2\lib\security\cacerts"
