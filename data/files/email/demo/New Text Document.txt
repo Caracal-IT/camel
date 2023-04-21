@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+<hivemq>
+
+    <listeners>
+        <tcp-listener>
+            <port>1883</port>
+            <bind-address>0.0.0.0</bind-address>
+        </tcp-listener>
+        <tls-tcp-listener>
+            <port>8883</port>
+            <bind-address>0.0.0.0</bind-address>
+            <proxy-protocol>true</proxy-protocol>
+            <tls>
+                <keystore>
+                    <path>certificates\hivemq.jks</path>
+                    <password>changeme</password>
+                    <private-key-password>changeme</private-key-password>
+                </keystore>
+                <client-authentication-mode>REQUIRED</client-authentication-mode>
+                <truststore>
+                    <path>certificates\hivemq-trust-store.jks</path>
+                    <password>changeme</password>
+                </truststore>
+            </tls>
+        </tls-tcp-listener>
+    </listeners>
+
+    <anonymous-usage-statistics>
+        <enabled>false</enabled>
+    </anonymous-usage-statistics>
+	
+	<control-center>
+        <enabled>true</enabled>
+        <listeners>
+            <http>
+                <port>8080</port>
+                <bind-address>localhost</bind-address>
+            </http>
+        </listeners>
+    </control-center>
+	
+	<restrictions>
+        <!-- Maximum simultaneous connections (-1 = unlimited) -->
+        <max-connections>-1</max-connections>
+
+        <!-- Maximum length of client identifier -->
+        <max-client-id-length>65535</max-client-id-length>
+
+        <!-- Incoming limit in bytes/second (0 = unlimited) -->
+        <incoming-bandwidth-throttling>0</incoming-bandwidth-throttling>
+    </restrictions>
+	
+	<mqtt>
+        <queued-messages>
+            <max-queue-size>2000</max-queue-size>
+            <strategy>discard-oldest</strategy>
+        </queued-messages>
+		
+		<message-expiry>
+            <max-interval>4294967296</max-interval>  <!-- this value means no message expiry -->
+        </message-expiry>
+
+        <session-expiry>
+            <max-interval>3888000</max-interval> <!-- 45 days -->
+        </session-expiry>
+
+        <keep-alive>
+            <allow-unlimited>true</allow-unlimited>
+            <max-keep-alive>65535</max-keep-alive>
+        </keep-alive>
+
+        <packets>
+            <max-packet-size>268435460</max-packet-size> <!-- 256 MB -->
+        </packets>
+
+        <receive-maximum>
+            <server-receive-maximum>10</server-receive-maximum>
+        </receive-maximum>
+		
+    </mqtt>
+	
+	<!-- persistence>
+        <publish-payloads>
+            <mode>in-memory</mode>
+        </publish-payloads>
+    </persistence -->
+	
+    <overload-protection>
+        <enabled>false</enabled>
+    </overload-protection>
+   
+   <client-event-history>
+		<enabled>true</enabled>
+		<lifetime>604800</lifetime> <!-- 7 days -->
+	</client-event-history>
+	
+	<mqtt-addons>
+        <dropped-messages-topic>
+            <enabled>true</enabled>
+        </dropped-messages-topic>
+    </mqtt-addons>
+
+</hivemq>
