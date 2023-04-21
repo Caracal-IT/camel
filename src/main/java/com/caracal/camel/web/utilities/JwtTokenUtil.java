@@ -65,8 +65,8 @@ public class JwtTokenUtil implements Serializable {
         try {
             return Jwts.builder()
                     .setIssuer("Caracal")
-                    .setSubject(subject)
                     .setClaims(claims)
+                    .setSubject(subject)
                     .setIssuedAt(new Date(System.currentTimeMillis()))
                     .setExpiration(Date.from(ZonedDateTime.now().plusMinutes(5).toInstant()))
                     .signWith(SignatureAlgorithm.HS256, secret)

@@ -27,6 +27,9 @@ public class JwtAuthenticationController {
         var user = users.loadUserByUsername(request.getUsername());
         var isValid = myPasswordEncoder.matches(request.getPassword(), user.getPassword());
         var token = jwtTokenUtil.generateToken(user);
+        var a = jwtTokenUtil.getUsernameFromToken(token);
+        var b = jwtTokenUtil.getExpirationDateFromToken(token);
+        var c = jwtTokenUtil.validateToken(token, user);
 
         return ResponseEntity.ok(new JwtResponse(token));
     }
