@@ -5,4 +5,17 @@ Content-Type: application/json
     "username": "admin",
     "password": "password"
 }
+> {%
+    client.global.set("token", response.body.token);
+%}
+###
+
+POST https://localhost:8070/api/auth/authenticate
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "username": "admin",
+    "password": "password"
+}
 ###
