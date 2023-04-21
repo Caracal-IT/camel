@@ -23,16 +23,4 @@
             }
         </constant>
     </setBody>
-    <!--
-    <setHeader name="subject">
-        <simple>Camel Mail</simple>
-    </setHeader>
-    <setHeader name="to">
-        <constant>ettienemare@gmail.com</constant>
-    </setHeader>
-    <setHeader name="from">
-        <constant>kameelapache@gmail.com</constant>
-    </setHeader>
-    <to uri="smtps://{{mail.server}}?username={{mail.username}}&amp;password={{mail.password}}" />
-    -->
 </route>
