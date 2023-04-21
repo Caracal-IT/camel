@@ -1,19 +1,9 @@
 package com.caracal.camel.web.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.DisabledException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
-import com.caracal.camel.web.services.JwtUserDetailsService;
-
-
-import com.caracal.camel.web.utilities.JwtTokenUtil;
 import com.caracal.camel.web.models.jwt.JwtRequest;
-import com.caracal.camel.web.models.jwt.JwtResponse;
+
 // /api/auth/login
 @RestController
 @RequestMapping("/api/auth")

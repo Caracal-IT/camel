@@ -40,3 +40,4 @@ camel:
 # run in admin mode https://www.tutorialworks.com/java-trust-ssl/
 #keytool -import -alias dev.divigraph.com -file certs/divigraph-dev.pem -keystore "C:\Program Files\Java\jdk-19\lib\security\cacerts"
 #keytool -import -alias dev.divigraph.com -file certs/divigraph-dev.pem -keystore "C:\Users\EttieneMare\.jdks\openjdk-19.0.2\lib\security\cacerts"
+#keytool -import -alias dev.divigraph.com -file certs/divigraph-dev.pem -keystore /Users/ettienemare/Library/Java/JavaVirtualMachines/openjdk-19.0.2/Contents/Home/lib/security/cacerts
