@@ -10,12 +10,8 @@ Content-Type: application/json
 %}
 ###
 
-POST https://localhost:8070/api/auth/authenticate
+GET https://localhost:8070/api/auth/user
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
-{
-    "username": "admin",
-    "password": "password"
-}
 ###

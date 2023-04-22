@@ -1,8 +1,8 @@
 package com.caracal.camel.web.controllers;
 
 import com.caracal.camel.web.models.jwt.JwtResponse;
+import com.caracal.camel.web.models.jwt.JwtUserResponse;
 import com.caracal.camel.web.utilities.JwtTokenUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -34,4 +34,10 @@ public class JwtAuthenticationController {
         return ResponseEntity.ok(new JwtResponse(token));
     }
 
+    @GetMapping("/user")
+    public ResponseEntity<?> createAuthenticationToken(@RequestHeader (name="Authorization") String token) throws Exception {
+        token = token.trim();
+        var username = jwtTokenUtil.getUsernameFromToken(token.substring(token.lastIndexOf(" ")));
+        return ResponseEntity.ok(new JwtUserResponse(username));
+    }
 }

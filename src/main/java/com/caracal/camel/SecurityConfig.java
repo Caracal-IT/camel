@@ -24,7 +24,7 @@ public class SecurityConfig {
         http.authorizeHttpRequests(requests -> requests
             .requestMatchers("/api/external/employee").permitAll()
             .requestMatchers("/api/demo/**").permitAll()
-            .requestMatchers("/api/auth/authenticate").permitAll()
+            .requestMatchers("/api/auth/authenticate", "/api/auth/user").permitAll()
             .requestMatchers("/js/**", "/css/**").permitAll()
             .anyRequest().authenticated()
         );
