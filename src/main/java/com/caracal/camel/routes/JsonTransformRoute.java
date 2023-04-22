@@ -12,28 +12,29 @@ public class JsonTransformRoute extends RouteBuilder {
     public void configure() throws Exception {
         JacksonDataFormat jacksonDataFormat = new JacksonDataFormat();
         jacksonDataFormat.setPrettyPrint(true);
-                from("file:./data/transform/java")
-                .routeId("java-json-transform")
-                .unmarshal().json(JsonLibrary.Jackson, JsonObject.class)
-                .process(exchange -> {
-                    JsonObject inputObject = exchange.getMessage().getBody(JsonObject.class);
-                    JsonObject hierarchicalObject = new JsonObject();
 
-                    hierarchicalObject.put("firstName", inputObject.getString("name"));
-                    hierarchicalObject.put("lastName", inputObject.getString("surname"));
+        from("file:./data/transform/java")
+        .routeId("java-json-transform")
+        .unmarshal().json(JsonLibrary.Jackson, JsonObject.class)
+        .process(exchange -> {
+            JsonObject inputObject = exchange.getMessage().getBody(JsonObject.class);
+            JsonObject hierarchicalObject = new JsonObject();
 
-                    var inputAddressObject = inputObject.getMap("address");
+            hierarchicalObject.put("firstName", inputObject.getString("name"));
+            hierarchicalObject.put("lastName", inputObject.getString("surname"));
 
-                    JsonObject addressObject = new JsonObject();
-                    addressObject.put("street", inputAddressObject.get("street"));
-                    addressObject.put("city", inputAddressObject.get("city"));
-                    addressObject.put("state", inputAddressObject.get("state"));
-                    addressObject.put("postal_code", inputAddressObject.get("zip"));
-                    hierarchicalObject.put("physical_address", addressObject);
+            var inputAddressObject = inputObject.getMap("address");
 
-                    exchange.getMessage().setBody(hierarchicalObject);
-                })
-                .marshal(jacksonDataFormat)
-                .to("file:./data/transform/java/processed");
+            JsonObject addressObject = new JsonObject();
+            addressObject.put("street", inputAddressObject.get("street"));
+            addressObject.put("city", inputAddressObject.get("city"));
+            addressObject.put("state", inputAddressObject.get("state"));
+            addressObject.put("postal_code", inputAddressObject.get("zip"));
+            hierarchicalObject.put("physical_address", addressObject);
+
+            exchange.getMessage().setBody(hierarchicalObject);
+        })
+        .marshal(jacksonDataFormat)
+        .to("file:./data/transform/java/processed");
     }
 }

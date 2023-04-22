@@ -19,11 +19,12 @@ public class RestProducerRouter extends RouteBuilder {
 
         rest("/customer/{id}")
             .post()
+            .routeId("java-rest-customer")
             .to("direct:update-customer");
 
         from("direct:update-customer")
-            .setHeader("content-type", constant("application/json"))
             .routeId("java-rest")
+            .setHeader("content-type", constant("application/json"))
             .process(exchange -> {
                 var input = (HttpMessage) exchange.getIn();
 
