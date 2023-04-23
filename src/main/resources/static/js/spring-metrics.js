@@ -97,7 +97,7 @@ class Metrics extends LitElement {
         this.info = {}
     }
 
-    _clickHandler(event) {
+    async _clickHandler(event) {
         event.preventDefault();
         this.shadowRoot.querySelector("a.active")?.classList?.remove('active');
 
@@ -107,6 +107,7 @@ class Metrics extends LitElement {
             menuItem = menuItem.parentElement.parentElement;
 
         menuItem.classList.add('active');
+        await this.connectedCallback();
     }
 
     async connectedCallback() {
