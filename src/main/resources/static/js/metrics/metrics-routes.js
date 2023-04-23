@@ -19,8 +19,13 @@ class MetricsRoutes extends LitElement {
 
       .buttons {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         justify-content: end;
+      }
+
+      caracal-checkbox {
+        width: 10rem;
+        padding-top: 10px;
       }
 
       caracal-button {
@@ -30,6 +35,7 @@ class MetricsRoutes extends LitElement {
       #routes {
         font-family: Arial, Helvetica, sans-serif;
         border-collapse: collapse;
+        table-layout: fixed;
         width: 100%;
       }
 
@@ -62,13 +68,15 @@ class MetricsRoutes extends LitElement {
 
     static properties = {
         response: {type: String},
-        info: {type: Object}
+        info: {type: Object},
+        autoRefreshEvent: {type: Object}
     };
 
     constructor() {
         super();
 
         this.info = [];
+        this.autoRefreshEvent = null;
     }
 
     async connectedCallback() {
@@ -82,17 +90,26 @@ class MetricsRoutes extends LitElement {
         await this.connectedCallback();
     }
 
+    _autoRefresh(event) {
+        if(this.autoRefreshEvent)
+            clearInterval(this.autoRefreshEvent);
+
+        if(event.target.value)
+            this.autoRefreshEvent = setInterval(async () => this.info = await get('/actuator/camelroutes'), 500);
+    }
+
     render(){
         return html`
             <content>
                 <section>
                     <table id="routes">
-                        <tr><th>Id</th><th>Uptime</th><th>Status</th></tr>
+                        <tr><th style="width: 200px">Id</th><th style="width: 100px">Uptime</th><th style="width: 60px">Status</th></tr>
                         ${this.info.map(i => html`<tr><td>${i.id}</td><td>${i.uptime}</td><td>${i.status}</td></tr>`)}
                     </table>
                 </section>
                 <section class="buttons">
                     <div id="response">${this.response}</div>
+                    <caracal-checkbox id="autoRefresh" @click=${this._autoRefresh} caption="Auto Refresh"></caracal-checkbox>
                     <caracal-button id="processButton" @click=${this._refresh}>Refresh</caracal-button>
                 </section>
             </content>
