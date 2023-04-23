@@ -14,7 +14,7 @@ class MetricsRoutes extends LitElement {
         background-color: #DDD;
         border-radius: 5px;
         padding: 5px;
-        height: 33rem;
+        height: 33.6rem;
       }
 
       .buttons {
