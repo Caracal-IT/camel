@@ -12,6 +12,8 @@ function changePage(){
         return;
     }
 
+    const container = document.querySelector(".container");
+
     const activeMenuItem = document.querySelector("a[href='" + window.location.hash + "']");
 
     if(activeMenuItem == null) {
@@ -25,9 +27,12 @@ function changePage(){
     items.forEach(i => i.classList.remove('active'))
     activeMenuItem?.classList.add('active');
 
-    const activeItem = document.querySelector('main div .active');
-    const newItem = document.querySelector(elm);
+    const activeItem = document.querySelector('.container').children[0];
+    const newItem = document.createElement(elm);
 
-    activeItem?.classList.remove('active')
-    newItem?.classList.add('active');
+    if(activeItem !== null)
+        container.removeChild(activeItem);
+
+    newItem.className = "action active"
+    container.append(newItem)
 }
