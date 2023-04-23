@@ -31,7 +31,7 @@ class CaracalInput extends LitElement {
 
       input[readonly],
       input[readonly]:focus {
-        background-color: whitesmoke;
+        background-color: transparent;
         border: 2px solid black;
         cursor: default;
       }
