@@ -76,7 +76,7 @@ class MetricsRoutes extends LitElement {
         super();
 
         this.info = [];
-        this.autoRefreshEvent = null;
+        this.autoRefreshEvent = setInterval(async () => this.info = await get('/actuator/camelroutes'), 1000);
     }
 
     async connectedCallback() {
@@ -86,16 +86,21 @@ class MetricsRoutes extends LitElement {
         this.response = '';
     }
 
+    disconnectedCallback() {
+        super.disconnectedCallback();
+
+        clearInterval(this.autoRefreshEvent);
+    }
+
     async _refresh() {
         await this.connectedCallback();
     }
 
     _autoRefresh(event) {
-        if(this.autoRefreshEvent)
-            clearInterval(this.autoRefreshEvent);
+        clearInterval(this.autoRefreshEvent);
 
         if(event.target.value)
-            this.autoRefreshEvent = setInterval(async () => this.info = await get('/actuator/camelroutes'), 500);
+            this.autoRefreshEvent = setInterval(async () => this.info = await get('/actuator/camelroutes'), 1000);
     }
 
     render(){
@@ -109,7 +114,7 @@ class MetricsRoutes extends LitElement {
                 </section>
                 <section class="buttons">
                     <div id="response">${this.response}</div>
-                    <caracal-checkbox id="autoRefresh" @click=${this._autoRefresh} caption="Auto Refresh"></caracal-checkbox>
+                    <caracal-checkbox id="autoRefresh" @click=${this._autoRefresh} caption="Auto Refresh" value=${true}></caracal-checkbox>
                     <caracal-button id="processButton" @click=${this._refresh}>Refresh</caracal-button>
                 </section>
             </content>
