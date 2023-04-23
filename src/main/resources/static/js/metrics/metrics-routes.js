@@ -14,8 +14,7 @@ class MetricsRoutes extends LitElement {
         background-color: #DDD;
         border-radius: 5px;
         padding: 5px;
-        width: 100%;
-        height: 100%;
+        height: 33rem;
       }
 
       .buttons {
@@ -27,6 +26,30 @@ class MetricsRoutes extends LitElement {
       caracal-button {
         align-self: flex-end;
       }
+
+      #routes {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      #routes td, #routes th {
+        border-bottom: 1px solid black;
+        padding: 8px;
+      }
+
+      #routes tr:nth-child(even){background-color: lightblue;}
+
+      #routes tr:hover {background-color: #ddd;}
+
+      #routes th {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 2px;
+        text-align: left;
+        background-color: #0083b0;
+        color: white;
+      }
     `;
 
     static properties = {
@@ -37,13 +60,15 @@ class MetricsRoutes extends LitElement {
     constructor() {
         super();
 
-        this.info = {}
+        this.info = [];
     }
 
     async connectedCallback() {
         super.connectedCallback()
         this.response = 'Loading ...';
-        this.info = await get('/actuator/info');
+        this.info = await get('/actuator/camelroutes');
+
+        console.log(this.info);
         this.response = '';
     }
 
@@ -55,7 +80,10 @@ class MetricsRoutes extends LitElement {
         return html`
             <content>
                 <section>
-                    Empty
+                    <table id="routes">
+                        <tr><th>Id</th><th>Uptime</th><th>Status</th></tr>
+                        ${this.info.map(i => html`<tr><td>${i.id}</td><td>${i.uptime}</td><td>${i.status}</td></tr>`)}
+                    </table>
                 </section>
                 <section class="buttons">
                     <div id="response">${this.response}</div>

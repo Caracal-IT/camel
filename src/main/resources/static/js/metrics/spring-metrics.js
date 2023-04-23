@@ -2,26 +2,27 @@ import {css, html, LitElement} from '../lit.js';
 
 class Metrics extends LitElement {
     static styles = css`
-      main {
+      
+      caracal-card div {
         display: flex;
-        flex: 1 1;
+        justify-content: space-between;
+        gap: 5px;
+        margin: 0 0 5px 0;
       }
-
+      
       .content {
         display: block;
-        width: 100%;
-        height: 27rem;
-        margin: 0 10px 27px 5px;
+        flex: 1 1;
       }
       
       menu {
         margin: 0;
-        padding: 0;
+        display: flex;
+        flex-direction: column;
+        padding: 0 0 5px 0;
         background-color: #444444;
-        display: inline-block;
         border-radius: 5px;
         width: 5rem;
-        height: 27.5rem;
       }
 
       menu a {
@@ -49,16 +50,7 @@ class Metrics extends LitElement {
       menu a:hover {
         //text-decoration: underline;
       }
-
-      action{
-        width: 33rem;
-        display: none;
-      }
-
-      .action.active {
-        display: inline-block;
-      }
-
+      
       span {
         font-family: inherit;
       }
@@ -81,7 +73,7 @@ class Metrics extends LitElement {
 
         const elm = menuItem.dataset.elm;
 
-        const main = this.shadowRoot.querySelector('main');
+        const main = this.shadowRoot.querySelector('caracal-card div');
         const current = this.shadowRoot.querySelector('.content');
         const newItem = document.createElement(elm);
         newItem.className = 'content';
@@ -94,7 +86,7 @@ class Metrics extends LitElement {
           <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
            <caracal-card>
                 <h1 slot="header">Metrics</h1>
-                <main>
+                <div>
                     <menu>
                         <a href="#" class="active" data-elm="metrics-info" @click=${this._clickHandler}>
                             <slot>
@@ -109,7 +101,7 @@ class Metrics extends LitElement {
                         </a>
                     </menu>
                     <metrics-info class="content"></metrics-info>
-                </main>
+                </div>
             </caracal-card>
         `;
     }
