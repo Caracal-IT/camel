@@ -1,36 +1,16 @@
-import {css, html, LitElement} from './lit.js';
-import {get} from "./components/caracal-utilities.js";
+import {css, html, LitElement} from '../lit.js';
 
 class Metrics extends LitElement {
     static styles = css`
-      #response {
-        height: 1.2rem;
-      }
-
       main {
         display: flex;
         flex: 1 1;
       }
 
-      content {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        margin: 0 0 5px 5px;
-        background-color: #DDD;
-        border-radius: 5px;
-        padding: 5px;
+      .content {
+        display: block;
+        margin: 0 10px 5px 5px;
         width: 100%;
-      }
-
-      .buttons {
-        display: flex;
-        flex-direction: column;
-        justify-content: end;
-      }
-
-      caracal-button {
-        align-self: flex-end;
       }
       
       menu {
@@ -86,17 +66,6 @@ class Metrics extends LitElement {
       }
     `;
 
-    static properties = {
-        response: {type: String},
-        info: {type: Object}
-    };
-
-    constructor() {
-        super();
-
-        this.info = {}
-    }
-
     async _clickHandler(event) {
         event.preventDefault();
         this.shadowRoot.querySelector("a.active")?.classList?.remove('active');
@@ -107,18 +76,6 @@ class Metrics extends LitElement {
             menuItem = menuItem.parentElement.parentElement;
 
         menuItem.classList.add('active');
-        await this.connectedCallback();
-    }
-
-    async connectedCallback() {
-        super.connectedCallback()
-        this.response = 'Loading ...';
-        this.info = await get('/actuator/info');
-        this.response = '';
-    }
-
-    async _refresh() {
-        await this.connectedCallback();
     }
 
     render(){
@@ -128,31 +85,19 @@ class Metrics extends LitElement {
                 <h1 slot="header">Metrics</h1>
                 <main>
                     <menu>
-                        <a href="#publish" class="active" data-elm="mqtt-publish" @click=${this._clickHandler}>
+                        <a href="#" class="active" data-elm="mqtt-publish" @click=${this._clickHandler}>
                             <slot>
                                 <span class="material-symbols-outlined">info</span>
                             </slot>
                             Info</a>
-                        <a href="#publish" data-elm="mqtt-publish" @click=${this._clickHandler}>
+                        <a href="#" data-elm="mqtt-publish" @click=${this._clickHandler}>
                             <slot>
                                 <span class="material-symbols-outlined">alt_route</span>
                             </slot>
                             Routs
                         </a>
                     </menu>
-                    <content>
-                        <section>
-                            <caracal-input caption="Name" readonly="readonly" value="${this.info["camel.name"]}"></caracal-input>
-                            <caracal-input caption="App Version" readonly="readonly" value="${this.info["version"]}"></caracal-input>
-                            <caracal-input caption="Camel Version" readonly="readonly" value="${this.info["camel.version"]}"></caracal-input>
-                            <caracal-input caption="Uptime" readonly="readonly" value="${this.info["camel.uptime"]}"></caracal-input>
-                            <caracal-input caption="Status" readonly="readonly" value="${this.info["camel.status"]}"></caracal-input>
-                        </section>
-                        <section class="buttons">
-                            <div id="response">${this.response}</div>
-                            <caracal-button id="processButton" @click=${this._refresh}>Refresh</caracal-button>
-                        </section>
-                    </content>
+                    <metrics-info class="content"></metrics-info>
                 </main>
             </caracal-card>
         `;
