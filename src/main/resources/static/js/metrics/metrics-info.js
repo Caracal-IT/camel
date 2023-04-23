@@ -13,7 +13,7 @@ class MetricsInfo extends LitElement {
         justify-content: space-between;
         background-color: #DDD;
         border-radius: 5px;
-        padding: 5px;
+        padding: 0 5px;
         height: 33.6rem;
       }
 

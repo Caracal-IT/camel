@@ -13,7 +13,6 @@ class MetricsRoutes extends LitElement {
         justify-content: space-between;
         background-color: #DDD;
         border-radius: 5px;
-        padding: 5px;
         height: 33.6rem;
       }
 
@@ -21,6 +20,7 @@ class MetricsRoutes extends LitElement {
         display: flex;
         flex-direction: row;
         justify-content: end;
+        padding: 0 5px;
       }
 
       caracal-checkbox {
@@ -113,7 +113,7 @@ class MetricsRoutes extends LitElement {
                 <section>
                     <table id="routes">
                         <tr><th style="width: 200px">Id</th><th style="width: 100px">Uptime</th><th style="width: 60px">Status</th></tr>
-                        ${this.info.map(i => html`<tr><td>${i.id}</td><td>${i.uptime}</td><td style="color:${i.uptimeMillis > 60000? 'green': 'red'}">${i.status}</td></tr>`)}
+                        ${this.info.map(i => html`<tr><td>${i.id}</td><td>${i.uptime}</td><td style="color:${i.uptimeMillis > 40000 ? 'green': i.uptimeMillis > 200 ? 'orange': 'red'}">${i.uptimeMillis > 40000 ? i.status: i.uptimeMillis > 200 ? 'Pending': i.status}</td></tr>`)}
                     </table>
                 </section>
                 <section class="buttons">
