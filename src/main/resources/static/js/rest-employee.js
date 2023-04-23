@@ -21,8 +21,8 @@ class RestEmployee extends LitElement {
 
     async connectedCallback() {
         super.connectedCallback()
-        this.response = "Loading ...";
-        this.employee = await get("/camel/employee/AA4D8764-3EB1-4C65-A34B-00CFDCE6D77D");
+        this.response = 'Loading ...';
+        this.employee = await get('/camel/employee/AA4D8764-3EB1-4C65-A34B-00CFDCE6D77D');
         this.response = this.employee.message;
     }
 
@@ -30,11 +30,11 @@ class RestEmployee extends LitElement {
         this.response = "Loading...";
 
         const payload = {
-            "firstName": this.shadowRoot.getElementById("employeeName").value,
-            "lastName": this.shadowRoot.getElementById("employeeSurname").value
+            "firstName": this.shadowRoot.getElementById('employeeName').value,
+            "lastName": this.shadowRoot.getElementById('employeeSurname').value
         }
 
-        this.employee = await post(`/camel/employee/${this.shadowRoot.getElementById("employeeId").value}`, payload);
+        this.employee = await post(`/camel/employee/${this.shadowRoot.getElementById('employeeId').value}`, payload);
         this.response = this.employee.message;
     }
 

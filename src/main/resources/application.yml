@@ -1,3 +1,6 @@
+app:
+  version: 0.0.1
+
 management:
   endpoints:
     enabled-by-default: true
@@ -28,6 +31,7 @@ spring:
 
 camel:
   springboot:
+    name: caracal-camel
     routes-reload-enabled: true
     routes-include-pattern: classpath:camel-routes/*
     routes-reload-directory: classpath:camel-routes

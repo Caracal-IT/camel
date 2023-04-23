@@ -9,9 +9,13 @@ class Metrics extends LitElement {
 
       main {
         display: flex;
+        flex: 1 1;
       }
 
       content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
         margin: 0 0 5px 5px;
         background-color: #DDD;
         border-radius: 5px;
@@ -19,10 +23,16 @@ class Metrics extends LitElement {
         width: 100%;
       }
 
-      caracal-input {
-        background-color: hotpink;
+      .buttons {
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
       }
 
+      caracal-button {
+        align-self: flex-end;
+      }
+      
       menu {
         margin: 0 0 5px 0;
         padding: 0;
@@ -30,7 +40,6 @@ class Metrics extends LitElement {
         display: inline-block;
         border-radius: 5px;
         width: 5rem;
-        height: 25rem;
       }
 
       menu a {
@@ -77,6 +86,17 @@ class Metrics extends LitElement {
       }
     `;
 
+    static properties = {
+        response: {type: String},
+        info: {type: Object}
+    };
+
+    constructor() {
+        super();
+
+        this.info = {}
+    }
+
     _clickHandler(event) {
         event.preventDefault();
         this.shadowRoot.querySelector("a.active")?.classList?.remove('active');
@@ -87,6 +107,17 @@ class Metrics extends LitElement {
             menuItem = menuItem.parentElement.parentElement;
 
         menuItem.classList.add('active');
+    }
+
+    async connectedCallback() {
+        super.connectedCallback()
+        this.response = 'Loading ...';
+        this.info = await get('/actuator/info');
+        this.response = '';
+    }
+
+    async _refresh() {
+        await this.connectedCallback();
     }
 
     render(){
@@ -109,8 +140,17 @@ class Metrics extends LitElement {
                         </a>
                     </menu>
                     <content>
-                        <caracal-input caption="Cloud Broker Url" readonly="readonly" value="rrvrvrv"></caracal-input>
-                        <caracal-input caption="Server Broker Url" readonly="readonly" value="rfvrvfrfvrv"></caracal-input>
+                        <section>
+                            <caracal-input caption="Name" readonly="readonly" value="${this.info["camel.name"]}"></caracal-input>
+                            <caracal-input caption="App Version" readonly="readonly" value="${this.info["version"]}"></caracal-input>
+                            <caracal-input caption="Camel Version" readonly="readonly" value="${this.info["camel.version"]}"></caracal-input>
+                            <caracal-input caption="Uptime" readonly="readonly" value="${this.info["camel.uptime"]}"></caracal-input>
+                            <caracal-input caption="Status" readonly="readonly" value="${this.info["camel.status"]}"></caracal-input>
+                        </section>
+                        <section class="buttons">
+                            <div id="response">${this.response}</div>
+                            <caracal-button id="processButton" @click=${this._refresh}>Refresh</caracal-button>
+                        </section>
                     </content>
                 </main>
             </caracal-card>
