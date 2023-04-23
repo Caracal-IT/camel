@@ -38,9 +38,17 @@ class MetricsRoutes extends LitElement {
         padding: 8px;
       }
 
+      #routes th:first-child {
+        border-top-left-radius: 5px;
+      }
+
+      #routes th:last-child {
+        border-top-right-radius: 5px;
+      }
+
       #routes tr:nth-child(even){background-color: lightblue;}
 
-      #routes tr:hover {background-color: #ddd;}
+      #routes tr:hover {background-color: #aaa;}
 
       #routes th {
         padding-top: 10px;
