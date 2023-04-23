@@ -12,7 +12,7 @@ class Metrics extends LitElement {
       }
 
       content {
-        margin: 0 5px 5px 5px;
+        margin: 0 0 5px 5px;
         background-color: #DDD;
         border-radius: 5px;
         padding: 5px;
