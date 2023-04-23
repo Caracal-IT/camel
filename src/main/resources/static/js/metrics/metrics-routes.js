@@ -1,7 +1,7 @@
 import {css, html, LitElement} from '../lit.js';
 import {get} from "../components/caracal-utilities.js";
 
-class MetricsInfo extends LitElement {
+class MetricsRoutes extends LitElement {
     static styles = css`
       #response {
         height: 1.2rem;
@@ -55,11 +55,7 @@ class MetricsInfo extends LitElement {
         return html`
             <content>
                 <section>
-                    <caracal-input caption="Name" readonly="readonly" value="${this.info["camel.name"]}"></caracal-input>
-                    <caracal-input caption="App Version" readonly="readonly" value="${this.info["version"]}"></caracal-input>
-                    <caracal-input caption="Camel Version" readonly="readonly" value="${this.info["camel.version"]}"></caracal-input>
-                    <caracal-input caption="Uptime" readonly="readonly" value="${this.info["camel.uptime"]}"></caracal-input>
-                    <caracal-input caption="Status" readonly="readonly" value="${this.info["camel.status"]}"></caracal-input>
+                    Empty
                 </section>
                 <section class="buttons">
                     <div id="response">${this.response}</div>
@@ -70,4 +66,4 @@ class MetricsInfo extends LitElement {
     }
 }
 
-customElements.define('metrics-info', MetricsInfo);
+customElements.define('metrics-routes', MetricsRoutes);

@@ -9,17 +9,19 @@ class Metrics extends LitElement {
 
       .content {
         display: block;
-        margin: 0 10px 5px 5px;
         width: 100%;
+        height: 27rem;
+        margin: 0 10px 27px 5px;
       }
       
       menu {
-        margin: 0 0 5px 0;
+        margin: 0;
         padding: 0;
         background-color: #444444;
         display: inline-block;
         border-radius: 5px;
         width: 5rem;
+        height: 27.5rem;
       }
 
       menu a {
@@ -76,6 +78,15 @@ class Metrics extends LitElement {
             menuItem = menuItem.parentElement.parentElement;
 
         menuItem.classList.add('active');
+
+        const elm = menuItem.dataset.elm;
+
+        const main = this.shadowRoot.querySelector('main');
+        const current = this.shadowRoot.querySelector('.content');
+        const newItem = document.createElement(elm);
+        newItem.className = 'content';
+
+        main.replaceChild(newItem, current);
     }
 
     render(){
@@ -85,12 +96,12 @@ class Metrics extends LitElement {
                 <h1 slot="header">Metrics</h1>
                 <main>
                     <menu>
-                        <a href="#" class="active" data-elm="mqtt-publish" @click=${this._clickHandler}>
+                        <a href="#" class="active" data-elm="metrics-info" @click=${this._clickHandler}>
                             <slot>
                                 <span class="material-symbols-outlined">info</span>
                             </slot>
                             Info</a>
-                        <a href="#" data-elm="mqtt-publish" @click=${this._clickHandler}>
+                        <a href="#" data-elm="metrics-routes" @click=${this._clickHandler}>
                             <slot>
                                 <span class="material-symbols-outlined">alt_route</span>
                             </slot>
