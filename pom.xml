@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.0.4</version>
+		<version>3.0.6</version>
 		<relativePath/>
 	</parent>
 	<groupId>com.caracal</groupId>
@@ -14,18 +14,11 @@
 	<name>camel</name>
 	<description>Camel Tutorial</description>
 	<properties>
-		<java.version>19</java.version>
-        <kotlin.version>1.8.20</kotlin.version>
+		<java.version>20</java.version>
 		<camel.version>4.0.0-M2</camel.version>
     </properties>
 
 	<repositories>
-		<repository>
-			<id>org.apache.camel</id>
-			<name>Apache Camel Paho</name>
-			<url>https://mvnrepository.com/artifact/org.apache.camel/camel-paho</url>
-		</repository>
-
 		<repository>
 			<id>org.apache.camel.mqtt-5</id>
 			<name>Apache Camel Paho MQTT-5</name>
@@ -44,22 +37,11 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>org.apache.logging</groupId>
-					<artifactId>log4j</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.slf4j</groupId>
-					<artifactId>jul-to-slf4j</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
+			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
 
 		<dependency>
@@ -197,42 +179,6 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
             <plugin>
-                <groupId>org.jetbrains.kotlin</groupId>
-                <artifactId>kotlin-maven-plugin</artifactId>
-                <version>${kotlin.version}</version>
-                <executions>
-                    <execution>
-                        <id>compile</id>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>compile</goal>
-                        </goals>
-                        <configuration>
-							<sourceDirs>
-								<source>src/main/java</source>
-								<source>target/generated-sources/annotations</source>
-							</sourceDirs>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>test-compile</id>
-                        <phase>test-compile</phase>
-                        <goals>
-                            <goal>test-compile</goal>
-                        </goals>
-                        <configuration>
-							<sourceDirs>
-								<source>src/test/java</source>
-								<source>target/generated-test-sources/test-annotations</source>
-							</sourceDirs>
-                        </configuration>
-                    </execution>
-                </executions>
-                <configuration>
-                    <jvmTarget>1.8</jvmTarget>
-                </configuration>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <executions>
@@ -241,13 +187,6 @@
                         <phase>compile</phase>
                         <goals>
                             <goal>compile</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>testCompile</id>
-                        <phase>test-compile</phase>
-                        <goals>
-                            <goal>testCompile</goal>
                         </goals>
                     </execution>
                 </executions>

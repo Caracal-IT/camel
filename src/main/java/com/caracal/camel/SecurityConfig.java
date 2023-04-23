@@ -1,3 +1,4 @@
+/*
 package com.caracal.camel;
 
 import org.springframework.context.annotation.Bean;
@@ -25,7 +26,8 @@ public class SecurityConfig {
             .requestMatchers("/api/external/employee").permitAll()
             .requestMatchers("/api/demo/**").permitAll()
             .requestMatchers("/api/auth/authenticate", "/api/auth/user").permitAll()
-            .requestMatchers("/js/**", "/css/**").permitAll()
+            .requestMatchers("/actuator/**", "/mgmt/**").permitAll()
+            .requestMatchers("/error", "/js/**", "/css/**").permitAll()
             .anyRequest().authenticated()
         );
         http.formLogin();
@@ -59,3 +61,5 @@ public class SecurityConfig {
         return new InMemoryUserDetailsManager(admin, sup);
     }
 }
+
+ */

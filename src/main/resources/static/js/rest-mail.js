@@ -1,5 +1,5 @@
 import {css, html, LitElement} from './lit.js';
-import {get, post} from "./components/caracal-utilities.js";
+import {post} from "./components/caracal-utilities.js";
 
 class Mail extends LitElement {
     static styles = css`

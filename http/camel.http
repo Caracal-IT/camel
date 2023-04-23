@@ -1,0 +1,10 @@
+GET https://localhost:8070/actuator/info
+Content-Type: application/json
+
+###
+GET https://localhost:8070/actuator/health
+Content-Type: application/json
+
+###
+GET https://localhost:8070/actuator/camelroutes
+Content-Type: application/json

@@ -1,12 +1,14 @@
+management:
+  endpoints:
+    enabled-by-default: true
+    web:
+      exposure:
+        include: "*"
+
 server:
   port: 8070
   ssl:
     enabled: true
-    #key-store-type: JKS
-    #keystore: classpath:certs/hivemq.jks
-    #key-store-password: E9uH8R48vrqZdCaf
-    #client-auth: need
-
     certificate: certs/divigraph-dev.crt
     certificate-private-key: certs/divigraph-dev.key
 
@@ -31,7 +33,6 @@ camel:
     routes-reload-directory: classpath:camel-routes
     route-controller-supervise-enabled: true
     route-shutdown-delay: 5000
-
   component:
     http:
       use-global-ssl-context-parameters: true

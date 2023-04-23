@@ -1,3 +1,4 @@
+/*
 package com.caracal.camel.web.controllers;
 
 import com.caracal.camel.web.models.jwt.JwtResponse;
@@ -41,3 +42,5 @@ public class JwtAuthenticationController {
         return ResponseEntity.ok(new JwtUserResponse(username));
     }
 }
+
+ */
