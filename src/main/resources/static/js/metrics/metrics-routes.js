@@ -67,8 +67,6 @@ class MetricsRoutes extends LitElement {
         super.connectedCallback()
         this.response = 'Loading ...';
         this.info = await get('/actuator/camelroutes');
-
-        console.log(this.info);
         this.response = '';
     }
 
