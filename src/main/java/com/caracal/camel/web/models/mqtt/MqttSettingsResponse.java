@@ -3,6 +3,7 @@ package com.caracal.camel.web.models.mqtt;
 public class MqttSettingsResponse {
     private String cloudBrokerUrl;
     private String serverBrokerUrl;
+    private String appVersion;
 
     public String getCloudBrokerUrl() {
         return cloudBrokerUrl;
@@ -18,5 +19,13 @@ public class MqttSettingsResponse {
 
     public void setServerBrokerUrl(String serverBrokerUrl) {
         this.serverBrokerUrl = serverBrokerUrl;
+    }
+
+    public String getAppVersion() {
+        return appVersion;
+    }
+
+    public void setAppVersion(String appVersion) {
+        this.appVersion = appVersion;
     }
 }

@@ -7,7 +7,8 @@ class CaracalSettings extends LitElement {
 
     static properties = {
         cloudBrokerUrl: {type: String},
-        serverBrokerUrl: {type: String}
+        serverBrokerUrl: {type: String},
+        appVersion: {type: String}
     };
 
     async connectedCallback() {
@@ -17,6 +18,7 @@ class CaracalSettings extends LitElement {
 
         this.cloudBrokerUrl = settings.cloudBrokerUrl;
         this.serverBrokerUrl = settings.serverBrokerUrl;
+        this.appVersion = settings.appVersion;
     }
 
     render() {
@@ -25,6 +27,7 @@ class CaracalSettings extends LitElement {
                 <h1 slot="header">Settings</h1>                
                 <caracal-input caption="Cloud Broker Url" readonly="readonly" value="${this.cloudBrokerUrl}"></caracal-input>
                 <caracal-input caption="Server Broker Url" readonly="readonly" value="${this.serverBrokerUrl}"></caracal-input>
+                <caracal-input caption="Version" readonly="readonly" value="${this.appVersion}"></caracal-input>
                 <div slot="buttons">&nbsp</div>
             </caracal-card>
         `;

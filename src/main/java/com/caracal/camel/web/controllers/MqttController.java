@@ -6,6 +6,7 @@ import com.caracal.camel.web.models.Response;
 import com.caracal.camel.web.models.mqtt.MqttCommand;
 import com.caracal.camel.web.models.mqtt.MqttPublishRequest;
 import com.caracal.camel.web.models.mqtt.MqttSettingsResponse;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,12 +19,16 @@ public class MqttController {
     private final MqttSettings settings = new MqttSettings();
     private static final Mqtt5Service service = Mqtt5Service.Instance;
 
+    @Value("${app.version}")
+    private String version;
+
     @GetMapping("/settings")
     @ResponseStatus(HttpStatus.OK)
     public MqttSettingsResponse getSettings(){
         var response = new MqttSettingsResponse();
         response.setCloudBrokerUrl(settings.getValue(MqttSettings.cloud + ".brokerUrl"));
         response.setServerBrokerUrl(settings.getValue(MqttSettings.server + ".brokerUrl"));
+        response.setAppVersion(version);
 
         return response;
     }
