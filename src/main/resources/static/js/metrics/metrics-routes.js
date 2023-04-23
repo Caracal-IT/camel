@@ -52,6 +52,10 @@ class MetricsRoutes extends LitElement {
         border-top-right-radius: 5px;
       }
 
+      #routes tr td:last-child {
+        font-weight: bolder;
+      }
+
       #routes tr:nth-child(even){background-color: lightblue;}
 
       #routes tr:hover {background-color: #aaa;}
@@ -109,7 +113,7 @@ class MetricsRoutes extends LitElement {
                 <section>
                     <table id="routes">
                         <tr><th style="width: 200px">Id</th><th style="width: 100px">Uptime</th><th style="width: 60px">Status</th></tr>
-                        ${this.info.map(i => html`<tr><td>${i.id}</td><td>${i.uptime}</td><td>${i.status}</td></tr>`)}
+                        ${this.info.map(i => html`<tr><td>${i.id}</td><td>${i.uptime}</td><td style="color:${i.uptimeMillis > 60000? 'green': 'red'}">${i.status}</td></tr>`)}
                     </table>
                 </section>
                 <section class="buttons">
