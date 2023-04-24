@@ -1,0 +1,71 @@
+version: "3.9"
+name: caracal-camel
+networks:
+  metrics:
+    name: metrics
+
+services:
+  caracal-camel:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    image: caracal/camel
+    ports:
+      - 8080:8080
+    volumes:
+      - ../data:/app/data
+    networks:
+      - metrics
+
+  prometheus:
+    container_name: prometheus
+    image: prom/prometheus
+    ports:
+      - 9090:9090
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.path=/prometheus
+      - --web.console.libraries=/usr/share/prometheus/console_libraries
+      - --web.console.templates=/usr/share/prometheus/consoles
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - metrics
+
+  grafana:
+    container_name: grafana
+    image: grafana/grafana
+    ports:
+    - 3000:3000
+    networks:
+      - metrics
+
+  hivemq-server:
+    image: hivemq/hivemq-ce:latest
+    mem_limit: 800M
+    mem_reservation: 800M
+    ports:
+      - 1883:1883
+      - 8081:8080
+      - 8883:8883
+    volumes:
+      - ./hivemq/server/conf:/opt/hivemq/conf
+    environment:
+      JAVA_OPTS: "-XX:+UnlockExperimentalVMOptions -XX:InitialRAMPercentage=30 -XX:MaxRAMPercentage=80 -XX:MinRAMPercentage=30"
+    networks:
+      - metrics
+
+  hivemq-cloud:
+    image: hivemq/hivemq-ce:latest
+    mem_limit: 800M
+    mem_reservation: 800M
+    ports:
+      - 1884:1883
+      - 8084:8080
+      - 2884:8883
+    volumes:
+      - ./hivemq/cloud/conf:/opt/hivemq/conf
+    environment:
+      JAVA_OPTS: "-XX:+UnlockExperimentalVMOptions -XX:InitialRAMPercentage=30 -XX:MaxRAMPercentage=80 -XX:MinRAMPercentage=30"
+    networks:
+      - metrics

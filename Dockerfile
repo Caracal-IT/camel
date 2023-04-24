@@ -1,4 +1,5 @@
-FROM openjdk:17
-ARG JAR_FILE=target/*.jar
-ADD ${JAR_FILE} app.jar
-ENTRYPOINT ["java", "-jar", "/app.jar"]
+FROM openjdk:20
+WORKDIR app
+COPY certs ./certs
+COPY target .
+ENTRYPOINT ["java", "-jar", "camel-0.0.2-SNAPSHOT.jar"]

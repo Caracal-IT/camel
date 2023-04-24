@@ -9,9 +9,9 @@ management:
         include: "*"
 
 server:
-  port: 8070
+  port: 8080
   ssl:
-    enabled: true
+    enabled: false
     certificate: certs/divigraph-dev.crt
     certificate-private-key: certs/divigraph-dev.key
 
