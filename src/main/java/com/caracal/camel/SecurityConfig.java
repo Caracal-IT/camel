@@ -36,7 +36,7 @@ public class SecurityConfig {
     @Bean(name="myPasswordEncoder")
     public PasswordEncoder getPasswordEncoder() {
         DelegatingPasswordEncoder delPasswordEncoder=  (DelegatingPasswordEncoder) PasswordEncoderFactories.createDelegatingPasswordEncoder();
-        BCryptPasswordEncoder bcryptPasswordEncoder =new BCryptPasswordEncoder();
+        BCryptPasswordEncoder bcryptPasswordEncoder = new BCryptPasswordEncoder();
         delPasswordEncoder.setDefaultPasswordEncoderForMatches(bcryptPasswordEncoder);
         return delPasswordEncoder;
     }
@@ -47,13 +47,13 @@ public class SecurityConfig {
 
         UserDetails admin = User.builder()
                 .username("admin")
-                .password(encoder.encode("password"))
+                .password(encoder.encode("Password@001"))
                 .roles("ADMIN")
                 .build();
 
         UserDetails sup = User.builder()
                 .username("user")
-                .password("password")
+                .password("a$2a$12$6J4EHG.zt1Y646cAOjAq0.fWhaC0/.NS2OzI.G02rnpZqD./jWZky")
                 .roles("ADMIN", "DBA")
                 .build();
 
