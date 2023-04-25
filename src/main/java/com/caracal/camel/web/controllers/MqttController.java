@@ -39,7 +39,14 @@ public class MqttController {
         var response = new Response();
         response.setMessage("Successful");
 
-        if(request.getDelay() > 1) Thread.sleep(request.getDelay());
+        if(request.getDelay() > 1) {
+            var rnd = new Random();
+            int low = 10;
+            int high = request.getDelay();
+            int delay = rnd.nextInt(high-low) + low;
+
+            Thread.sleep(delay);
+        }
 
         try {
             if(request.getIterations() <= 1) {
