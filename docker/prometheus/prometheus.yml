@@ -21,6 +21,10 @@ scrape_configs:
 
   - job_name: 'spring-actuator'
     metrics_path: '/actuator/prometheus'
+    scheme: https
+    tls_config:
+      cert_file: certs/divigraph-dev.crt
+      key_file: certs/divigraph-dev.key
     scrape_interval: 5s
     static_configs:
-      - targets: ['caracal-camel:8080']
+      - targets: ['caracal-camel:8070']
