@@ -1,8 +1,5 @@
 version: "3.9"
 name: caracal-camel
-networks:
-  metrics:
-    name: metrics
 
 services:
   caracal-camel:
@@ -14,16 +11,15 @@ services:
       - "8070:8070"
     volumes:
       - ../data:/app/data
+    networks:
+      - caracal-network
     depends_on:
       hivemq-server:
         condition: service_started
       hivemq-cloud:
         condition: service_started
-    networks:
-      - metrics
 
   prometheus:
-    container_name: prometheus
     image: prom/prometheus
     ports:
       - "9090:9090"
@@ -34,18 +30,18 @@ services:
       - --web.console.templates=/usr/share/prometheus/consoles
     volumes:
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus/certs:/certs
     networks:
-      - metrics
+      - caracal-network
 
   grafana:
-    container_name: grafana
     image: grafana/grafana
     ports:
     - 3000:3000
     volumes:
       - ./grafana-storage:/var/lib/grafana
     networks:
-      - metrics
+      - caracal-network
 
   hivemq-server:
     image: hivemq/hivemq-ce:latest
@@ -57,10 +53,10 @@ services:
       - "8883:8883"
     volumes:
       - ./hivemq/server/conf:/opt/hivemq/conf
+    networks:
+      - caracal-network
     environment:
       JAVA_OPTS: "-XX:+UnlockExperimentalVMOptions -XX:InitialRAMPercentage=30 -XX:MaxRAMPercentage=80 -XX:MinRAMPercentage=30"
-    networks:
-      - metrics
 
   hivemq-cloud:
     image: hivemq/hivemq-ce:latest
@@ -72,7 +68,11 @@ services:
       - "2884:8883"
     volumes:
       - ./hivemq/cloud/conf:/opt/hivemq/conf
+    networks:
+      - caracal-network
     environment:
       JAVA_OPTS: "-XX:+UnlockExperimentalVMOptions -XX:InitialRAMPercentage=30 -XX:MaxRAMPercentage=80 -XX:MinRAMPercentage=30"
-    networks:
-      - metrics
+
+networks:
+  caracal-network:
+    driver: bridge
