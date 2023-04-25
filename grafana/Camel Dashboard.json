@@ -1,0 +1,648 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 1,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "gxBnZjPVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "{camelContext=\"caracal-camel\", instance=\"caracal-camel:8080\", job=\"spring-actuator\", routeId=\"xml-client-cloud\", serviceName=\"MicrometerRoutePolicyService\"}"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 12,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "gxBnZjPVk"
+          },
+          "editorMode": "builder",
+          "expr": "rate(CamelExchangesFailed_total{routeId=\"xml-client-cloud\"}[1m])",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "MQTT Client to Cloud Failure",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "gxBnZjPVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "{camelContext=\"caracal-camel\", instance=\"caracal-camel:8080\", job=\"spring-actuator\", routeId=\"xml-client-cloud\", serviceName=\"MicrometerRoutePolicyService\"}"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "{camelContext=\"caracal-camel\", endpointName=\"paho-mqtt5://ELM_$%7Bheaders.CamelMqttTopic%7D?automaticReconnect=true&brokerUrl=tcp%3A%2F%2Fhivemq-cloud%3A1883&cleanStart=false&maxReconnectDelay=1000&password=testabc123&qos=1&retained=true&sslClientProps.com.ibm.ssl.keyStore=certs%2Fhivemq-trust-store.jks&sslClientProps.com.ibm.ssl.keyStorePassword=hgcmgThgYhVGz5bW&sslClientProps.com.ibm.ssl.trustStore=certs%2Fhivemq.jks&sslClientProps.com.ibm.ssl.trustStorePassword=E9uH8R48vrqZdCaf&userName=test\", eventType=\"ExchangeSentEvent\", failed=\"true\", instance=\"caracal-camel:8080\", job=\"spring-actuator\", serviceName=\"MicrometerEventNotifierService\"}"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "{camelContext=\"caracal-camel\", endpointName=\"caracal-mqtt://CUSTOMERS/5B4D8764-3EB1-4C65-A34B-00CFDCE6D77D/req?brokerUrl=tcp%3A%2F%2Fhivemq-server%3A1883&keyStore=certs%2Fhivemq-trust-store.jks&keyStorePassword=hgcmgThgYhVGz5bW&password=testabc123&qos=1&trustStore=certs%2Fhivemq.jks&trustStorePassword=E9uH8R48vrqZdCaf&userName=test\", eventType=\"ExchangeSentEvent\", failed=\"false\", instance=\"caracal-camel:8080\", job=\"spring-actuator\", serviceName=\"MicrometerEventNotifierService\"}",
+                  "{camelContext=\"caracal-camel\", endpointName=\"paho-mqtt5://CUSTOMERS/%23?brokerUrl=tcp%3A%2F%2Fhivemq-server%3A1883&cleanStart=false&password=testabc123&qos=1&sslClientProps.com.ibm.ssl.keyStore=certs%2Fhivemq-trust-store.jks&sslClientProps.com.ibm.ssl.keyStorePassword=hgcmgThgYhVGz5bW&sslClientProps.com.ibm.ssl.trustStore=certs%2Fhivemq.jks&sslClientProps.com.ibm.ssl.trustStorePassword=E9uH8R48vrqZdCaf&userName=test\", eventType=\"ExchangeCompletedEvent\", failed=\"false\", instance=\"caracal-camel:8080\", job=\"spring-actuator\", serviceName=\"MicrometerEventNotifierService\"}",
+                  "{camelContext=\"caracal-camel\", endpointName=\"paho-mqtt5://CUSTOMERS/%23?brokerUrl=tcp%3A%2F%2Fhivemq-server%3A1883&cleanStart=false&password=testabc123&qos=1&sslClientProps.com.ibm.ssl.keyStore=certs%2Fhivemq-trust-store.jks&sslClientProps.com.ibm.ssl.keyStorePassword=hgcmgThgYhVGz5bW&sslClientProps.com.ibm.ssl.trustStore=certs%2Fhivemq.jks&sslClientProps.com.ibm.ssl.trustStorePassword=E9uH8R48vrqZdCaf&userName=test\", eventType=\"ExchangeFailedEvent\", failed=\"true\", instance=\"caracal-camel:8080\", job=\"spring-actuator\", serviceName=\"MicrometerEventNotifierService\"}"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "{camelContext=\"caracal-camel\", endpointName=\"paho-mqtt5://CUSTOMERS/%23?brokerUrl=tcp%3A%2F%2Fhivemq-server%3A1883&cleanStart=false&password=testabc123&qos=1&sslClientProps.com.ibm.ssl.keyStore=certs%2Fhivemq-trust-store.jks&sslClientProps.com.ibm.ssl.keyStorePassword=hgcmgThgYhVGz5bW&sslClientProps.com.ibm.ssl.trustStore=certs%2Fhivemq.jks&sslClientProps.com.ibm.ssl.trustStorePassword=E9uH8R48vrqZdCaf&userName=test\", eventType=\"ExchangeFailedEvent\", failed=\"true\", instance=\"caracal-camel:8080\", job=\"spring-actuator\", serviceName=\"MicrometerEventNotifierService\"}"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "id": 8,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "gxBnZjPVk"
+          },
+          "editorMode": "builder",
+          "expr": "rate(CamelExchangeEventNotifier_seconds_count{eventType=\"ExchangeFailedEvent\"}[45s])",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Failures",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "gxBnZjPVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 8
+      },
+      "id": 4,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "gxBnZjPVk"
+          },
+          "editorMode": "builder",
+          "expr": "rate(CamelExchangesSucceeded_total{routeId=\"xml-client-cloud\"}[10s])",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "MQTT Client to Server",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "gxBnZjPVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 4,
+        "x": 12,
+        "y": 8
+      },
+      "id": 6,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "9.4.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "gxBnZjPVk"
+          },
+          "editorMode": "builder",
+          "expr": "rate(CamelExchangesSucceeded_total{routeId=\"xml-client-cloud\"}[10s])",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "MQTT Server to Cloud",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "gxBnZjPVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "{camelContext=\"caracal-camel\", instance=\"caracal-camel:8080\", job=\"spring-actuator\", routeId=\"xml-client-cloud\", serviceName=\"MicrometerRoutePolicyService\"}"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 4,
+        "x": 16,
+        "y": 8
+      },
+      "id": 14,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "9.4.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "gxBnZjPVk"
+          },
+          "editorMode": "builder",
+          "expr": "rate(CamelExchangesFailed_total{routeId=\"xml-client-cloud\"}[1m])",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "MQTT Server To Cloud (Failure)",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "gxBnZjPVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 16
+      },
+      "id": 10,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "gxBnZjPVk"
+          },
+          "editorMode": "builder",
+          "expr": "process_cpu_usage",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "CPU",
+      "type": "timeseries"
+    }
+  ],
+  "refresh": "",
+  "revision": 1,
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Camel dashboard",
+  "uid": "Ouu-WCE4z",
+  "version": 17,
+  "weekStart": ""
+}
