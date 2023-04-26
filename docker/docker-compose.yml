@@ -52,7 +52,10 @@ services:
 
   hivemq-server:
     image: hivemq/hivemq-ce:latest
-    mem_limit: 800M
+    deploy:
+      resources:
+        limits:
+          memory: 800M
     mem_reservation: 800M
     ports:
       - "1883:1883"
@@ -70,7 +73,10 @@ services:
   hivemq-cloud:
     container_name: hivemq-cloud
     image: hivemq/hivemq-ce:latest
-    mem_limit: 800M
+    deploy:
+      resources:
+        limits:
+          memory: 800M
     mem_reservation: 800M
     ports:
       - "1884:1883"
