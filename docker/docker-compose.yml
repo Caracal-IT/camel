@@ -3,6 +3,7 @@ name: caracal-camel
 
 services:
   caracal-camel:
+    container_name: caracal-camel
     build:
       context: ..
       dockerfile: Dockerfile
@@ -20,6 +21,7 @@ services:
         condition: service_started
 
   prometheus:
+    container_name: prometheus
     image: prom/prometheus
     ports:
       - "9090:9090"
@@ -30,11 +32,13 @@ services:
       - --web.console.templates=/usr/share/prometheus/consoles
     volumes:
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
-      - ./prometheus/certs:/certs
+      - ./prometheus/certs/divigraph-dev.crt:/certs/divigraph-dev.crt
+      - ./prometheus/certs/divigraph-dev.key:/certs/divigraph-dev.key
     networks:
       - caracal-network
 
   grafana:
+    container_name: grafana
     image: grafana/grafana
     ports:
     - 3000:3000
@@ -51,14 +55,17 @@ services:
       - "1883:1883"
       - "8081:8080"
       - "8883:8883"
+      - "9399:9399"
     volumes:
       - ./hivemq/server/conf:/opt/hivemq/conf
+      - ./hivemq/hivemq-prometheus-extension:/opt/hivemq/extensions/hivemq-prometheus-extension
     networks:
       - caracal-network
     environment:
       JAVA_OPTS: "-XX:+UnlockExperimentalVMOptions -XX:InitialRAMPercentage=30 -XX:MaxRAMPercentage=80 -XX:MinRAMPercentage=30"
 
   hivemq-cloud:
+    container_name: hivemq-cloud
     image: hivemq/hivemq-ce:latest
     mem_limit: 800M
     mem_reservation: 800M
@@ -68,6 +75,7 @@ services:
       - "2884:8883"
     volumes:
       - ./hivemq/cloud/conf:/opt/hivemq/conf
+      - ./hivemq/hivemq-prometheus-extension:/opt/hivemq/extensions/hivemq-prometheus-extension
     networks:
       - caracal-network
     environment:
