@@ -37,9 +37,12 @@ services:
   grafana:
     image: grafana/grafana
     ports:
-    - 3000:3000
+      - "3000:3000"
     volumes:
       - ./grafana-storage:/var/lib/grafana
+      - ./certs/grafana.crt:/etc/grafana/grafana.crt
+      - ./certs/grafana.key:/etc/grafana/grafana.key
+      - ./grafana/grafana.ini:/etc/grafana/grafana.ini
     networks:
       - caracal-network
 
