@@ -2,7 +2,7 @@ filebeat.inputs:
   - type: log
     enabled: true
     paths:
-      - /logs/*.log
+      - /logs/caracal/*.log
 
 output.logstash:
   hosts: ["logstash:5044"]
