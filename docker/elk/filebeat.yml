@@ -11,8 +11,10 @@ filebeat.inputs:
       - tcp://host.docker.internal:1883
     scan_frequency: 20s
     topics:
-      - elastic
+      - elastic/#
 
 
 output.logstash:
   hosts: ["logstash:5044"]
+
+# https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-input-mqtt.html
