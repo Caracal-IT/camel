@@ -3,6 +3,16 @@ filebeat.inputs:
     enabled: true
     paths:
       - /logs/caracal/*.log
+    scan_frequency: 20s
+    ignore_older: 5m
+
+  - type: mqtt
+    hosts:
+      - tcp://host.docker.internal:1883
+    scan_frequency: 20s
+    topics:
+      - elastic
+
 
 output.logstash:
   hosts: ["logstash:5044"]
