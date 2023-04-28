@@ -3,13 +3,13 @@ filebeat.inputs:
     enabled: true
     paths:
       - /logs/caracal/*.log
-    scan_frequency: 20s
+    scan_frequency: 5s
     ignore_older: 5m
 
   - type: mqtt
     tags: ["json"]
     fields:
-      app_version: 1.1.1.6
+      app_name: Caracal MQTT
     qos: 1
     retained: true
     hosts:
