@@ -92,13 +92,13 @@ class RestIndex extends LitElement {
                                 <span class="material-symbols-outlined">settings_accessibility</span>
                             </slot>
                             Cust.</a>
-                        <a href="#" data-elm="mqtt-publish" @click=${this._clickHandler}>
+                        <a href="#" data-elm="rest-employee" @click=${this._clickHandler}>
                             <slot>
                                 <span class="material-symbols-outlined">group</span>
                             </slot>
                             Empl.
                         </a>
-                        <a href="#" data-elm="mqtt-request-response" @click=${this._clickHandler}>
+                        <a href="#" data-elm="rest-mail" @click=${this._clickHandler}>
                             <slot>
                                 <span class="material-symbols-outlined">mail</span>
                             </slot>

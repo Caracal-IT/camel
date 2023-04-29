@@ -26,7 +26,7 @@ public class SecurityConfig {
             .requestMatchers("/api/demo/**").permitAll()
             .requestMatchers("/api/auth/authenticate", "/api/auth/user").permitAll()
             .requestMatchers("/actuator/**", "/mgmt/**").permitAll()
-            .requestMatchers("/error", "/js/**", "/css/**").permitAll()
+            .requestMatchers("/error", "/js/**", "/css/**", "/images/**").permitAll()
             .anyRequest().authenticated()
         );
         http.formLogin();
