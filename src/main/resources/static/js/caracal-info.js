@@ -68,7 +68,7 @@ class CaracalInfo extends LitElement {
                 <content>
                     <div>
                         <div class="fade-in">
-                            <img src="/images/camel.png">
+                            <img alt="logo" src="images/camel.png" />
                         </div>
                     </div>
                 </content>
