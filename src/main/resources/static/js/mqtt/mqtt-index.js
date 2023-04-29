@@ -98,6 +98,12 @@ class MqttIndex extends LitElement {
                             </slot>
                             Publish
                         </a>
+                        <a href="#" data-elm="mqtt-request-response" @click=${this._clickHandler}>
+                            <slot>
+                                <span class="material-symbols-outlined">rule_settings</span>
+                            </slot>
+                            Req-Resp
+                        </a>
                     </menu>
                     <mqtt-info class="content"></mqtt-info>
                 </div>
