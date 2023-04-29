@@ -37,21 +37,6 @@ export function Pager(tableName, itemsPerPage, parent) {
         let from = (pageNumber - 1) * itemsPerPage + 1;
         let to = from + itemsPerPage - 1;
         this.showRecords(from, to);
-
-        let pgNext = this.parent.querySelector('.pg-next'),
-            pgPrev = this.parent.querySelector('.pg-prev');
-
-        if (this.currentPage === this.pages) {
-            pgNext.style.display = 'none';
-        } else {
-            pgNext.style.display = '';
-        }
-
-        if (this.currentPage === 1) {
-            pgPrev.style.display = 'none';
-        } else {
-            pgPrev.style.display = '';
-        }
     };
 
     this.prev = function () {

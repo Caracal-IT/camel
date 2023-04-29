@@ -1,0 +1,20 @@
+<route id="xml-log-generator">
+    <from uri="rest:post:log-generator"/>
+
+    <setHeader name="logFile"><jsonpath suppressExceptions="true">$.logFile</jsonpath></setHeader>
+    <setHeader name="severity"><jsonpath suppressExceptions="true">$.severity</jsonpath></setHeader>
+    <setHeader name="message"><jsonpath suppressExceptions="true">$.message</jsonpath></setHeader>
+    <setHeader name="iterations"><jsonpath suppressExceptions="true">$.iterations</jsonpath></setHeader>
+
+    <setHeader name="content-type">
+        <simple>application/json</simple>
+    </setHeader>
+
+    <setBody>
+        <simple>
+            {
+                "message": "Logs generated ${headers.severity}"
+            }
+        </simple>
+    </setBody>
+</route>

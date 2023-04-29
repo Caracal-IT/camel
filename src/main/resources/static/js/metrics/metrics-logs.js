@@ -44,9 +44,8 @@ class MetricsLogs extends LitElement {
             "iterations": this.shadowRoot.getElementById('iterations').value
         }
 
-        console.dir(payload);
-        //const resp = await post('/camel/mail', payload);
-        this.response = '';//resp.message;
+        const resp = await post('/camel/log-generator', payload);
+        this.response = resp.message;
     }
 
     render(){
