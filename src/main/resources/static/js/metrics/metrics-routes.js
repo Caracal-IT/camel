@@ -1,74 +1,85 @@
 import {css, html, LitElement} from '../lit.js';
-import {get} from "../components/caracal-utilities.js";
+import {get} from '../components/caracal-utilities.js';
+import {Pager} from '../libs/pager.js';
+import {buttonStyles} from '../styles/pager.js';
 
 class MetricsRoutes extends LitElement {
-    static styles = css`
-      #response {
-        height: 1.2rem;
-      }
+    static styles = [
+        buttonStyles,
+        css`
+          #response {
+            height: 1.2rem;
+          }
+    
+          content {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background-color: #DDD;
+            border-radius: 5px;
+            height: 26.9rem;
+          }
 
-      content {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        background-color: #DDD;
-        border-radius: 5px;
-        height: 33.6rem;
-      }
-
-      .buttons {
-        display: flex;
-        flex-direction: row;
-        justify-content: end;
-        padding: 0 5px;
-      }
-
-      caracal-checkbox {
-        width: 10rem;
-        padding-top: 10px;
-      }
-
-      caracal-button {
-        align-self: flex-end;
-      }
-
-      #routes {
-        font-family: Arial, Helvetica, sans-serif;
-        border-collapse: collapse;
-        table-layout: fixed;
-        width: 100%;
-      }
-
-      #routes td, #routes th {
-        border-bottom: 1px solid black;
-        padding: 8px;
-      }
-
-      #routes th:first-child {
-        border-top-left-radius: 5px;
-      }
-
-      #routes th:last-child {
-        border-top-right-radius: 5px;
-      }
-
-      #routes tr td:last-child {
-        font-weight: bolder;
-      }
-
-      #routes tr:nth-child(even){background-color: lightblue;}
-
-      #routes tr:hover {background-color: #aaa;}
-
-      #routes th {
-        padding-top: 10px;
-        padding-bottom: 10px;
-        padding-left: 2px;
-        text-align: left;
-        background-color: #0083b0;
-        color: white;
-      }
-    `;
+          content section:first-child {
+            display: flex;
+            height: 100%;
+            flex-direction: column;
+            justify-content: space-between;
+          }
+    
+          .buttons {
+            display: flex;
+            flex-direction: row;
+            justify-content: end;
+            padding: 0 5px;
+          }
+    
+          caracal-checkbox {
+            width: 10rem;
+            padding-top: 10px;
+          }
+    
+          caracal-button {
+            align-self: flex-end;
+          }
+    
+          #routes {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            table-layout: fixed;
+            width: 100%;
+          }
+    
+          #routes td, #routes th {
+            border-bottom: 1px solid black;
+            padding: 8px;
+          }
+    
+          #routes th:first-child {
+            border-top-left-radius: 5px;
+          }
+    
+          #routes th:last-child {
+            border-top-right-radius: 5px;
+          }
+    
+          #routes tr td:last-child {
+            font-weight: bolder;
+          }
+    
+          #routes tr:nth-child(even){background-color: lightblue;}
+    
+          #routes tr:hover {background-color: #aaa;}
+    
+          #routes th {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            padding-left: 2px;
+            text-align: left;
+            background-color: #0083b0;
+            color: white;
+          }
+        `];
 
     static properties = {
         response: {type: String},
@@ -85,9 +96,17 @@ class MetricsRoutes extends LitElement {
 
     async connectedCallback() {
         super.connectedCallback()
+
         this.response = 'Loading ...';
         this.info = await get('/actuator/camelroutes');
         this.response = '';
+
+        setTimeout(() => {
+            let pager = new Pager('routes', 8, this.shadowRoot);
+            pager.init();
+            pager.showPageNav('pageNavPosition');
+            pager.showPage(1);
+        }, 0);
     }
 
     disconnectedCallback() {
@@ -107,14 +126,46 @@ class MetricsRoutes extends LitElement {
             this.autoRefreshEvent = setInterval(async () => this.info = await get('/actuator/camelroutes'), 1000);
     }
 
+    renderHeader() {
+        return html`
+            <tr>
+                <th style="width: 200px">Id</th>
+                <th style="width: 100px">Uptime</th>
+                <th style="width: 60px">Status</th>
+            </tr>
+        `;
+    }
+
+    renderRow(row) {
+        let color = '';
+        let status = row.status;
+
+        if(row.uptimeMillis > 40000) {
+            color = 'green';
+        } else if(row.uptimeMillis > 200) {
+            color = 'orange';
+            status = 'Pending';
+        } else {
+            color = 'red';
+        }
+
+        return html`
+            <tr>
+                <td>${row.id}</td>
+                <td>${row.uptime}</td>
+                <td style="color:${color}">${status}</td>
+            </tr>`
+    }
+
     render(){
         return html`
             <content>
                 <section>
-                    <table id="routes">
-                        <tr><th style="width: 200px">Id</th><th style="width: 100px">Uptime</th><th style="width: 60px">Status</th></tr>
-                        ${this.info.map(i => html`<tr><td>${i.id}</td><td>${i.uptime}</td><td style="color:${i.uptimeMillis > 40000 ? 'green': i.uptimeMillis > 200 ? 'orange': 'red'}">${i.uptimeMillis > 40000 ? i.status: i.uptimeMillis > 200 ? 'Pending': i.status}</td></tr>`)}
+                    <table id="routes" class="wp-list-table widefat striped posts">
+                        <thead>${this.renderHeader()}</thead>
+                        <tbody>${this.info.map(this.renderRow)}<tbody>
                     </table>
+                    <div id="pageNavPosition" class="pager-nav"></div>
                 </section>
                 <section class="buttons">
                     <div id="response">${this.response}</div>

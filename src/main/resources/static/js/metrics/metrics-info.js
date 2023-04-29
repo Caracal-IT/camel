@@ -14,7 +14,7 @@ class MetricsInfo extends LitElement {
         background-color: #DDD;
         border-radius: 5px;
         padding: 0 5px;
-        height: 33.6rem;
+        height: 26.9rem;
       }
 
       .buttons {
