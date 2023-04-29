@@ -6,10 +6,6 @@
     <setHeader name="message"><jsonpath suppressExceptions="true">$.message</jsonpath></setHeader>
     <setHeader name="iterations"><jsonpath suppressExceptions="true">$.iterations</jsonpath></setHeader>
 
-    <setHeader name="content-type">
-        <simple>application/json</simple>
-    </setHeader>
-
     <loop>
         <simple>${headers.iterations}</simple>
         <setBody>
@@ -24,6 +20,9 @@
         </setHeader>
     </loop>
 
+    <setHeader name="content-type">
+        <simple>application/json</simple>
+    </setHeader>
     <setBody>
         <simple>
             {
