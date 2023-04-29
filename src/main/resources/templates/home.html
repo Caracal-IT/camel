@@ -19,8 +19,6 @@
 
     <script type="module" src="/js/caracal-settings.js"></script>
 
-
-    <script type="module" src="/js/http-rest.js"></script>
     <script type="module" src="/js/rest-employee.js"></script>
     <script type="module" src="/js/rest-mail.js"></script>
 
@@ -29,6 +27,9 @@
     <script type="module" src="/js/mqtt/mqtt-info.js"></script>
     <script type="module" src="/js/mqtt/mqtt-publish.js"></script>
     <script type="module" src="/js/mqtt/mqtt-request-response.js"></script>
+
+    <script type="module" src="/js/rest/rest-index.js"></script>
+    <script type="module" src="/js/rest/rest-cust.js"></script>
 
     <script type="module" src="/js/metrics/metrics-index.js"></script>
     <script type="module" src="/js/metrics/metrics-info.js"></script>
@@ -39,10 +40,12 @@
     <h1 th:text="${appName}"></h1>
     <a href="#settings" class="active" data-elm="caracal-settings">Settings</a>
     |<a href="#mqtt-index" data-elm="mqtt-index">MQTT</a>
+    |<a href="#rest-index" data-elm="rest-index">REST</a>
+
     |<a href="#rest" data-elm="http-rest">Rest</a>
     |<a href="#rest-employee" data-elm="rest-employee">Rest Employee</a>
     |<a href="#rest-mail" data-elm="rest-mail">Mail</a>
-    |<a href="#metrics-index" data-elm="metrics-index">Metrics</a>
+    |<a href="#metrics-index" data-elm="metrics-index">METRICS</a>
 </header>
 <main>
     <div class="container">
