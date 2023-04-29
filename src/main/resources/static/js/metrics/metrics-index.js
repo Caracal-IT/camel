@@ -98,6 +98,12 @@ class MetricsIndex extends LitElement {
                             </slot>
                             Routs
                         </a>
+                        <a href="#" data-elm="metrics-logs" @click=${this._clickHandler}>
+                            <slot>
+                                <span class="material-symbols-outlined">factory</span>
+                            </slot>
+                            Logs
+                        </a>
                     </menu>
                     <metrics-info class="content"></metrics-info>
                 </div>
