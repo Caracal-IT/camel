@@ -54,7 +54,7 @@ class MetricsLogs extends LitElement {
                 <section>
                     <h1 slot="header">Fake Log Generator</h1>
                     <caracal-input id="logFile" caption="Logfile" value="caracal_demo_log.log"></caracal-input>
-                    <caracal-input id="severity" caption="Severity" value="Info"></caracal-input>
+                    <caracal-input id="severity" caption="Severity" value="INFO"></caracal-input>
                     <caracal-input id="message" caption="Message" value="A fake error message is not a genuine malware threat by itself."></caracal-input>
                     <caracal-input id="iterations" type="number" caption="Iterations" value="1"></caracal-input>
                  </section>

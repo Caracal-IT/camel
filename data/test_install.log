@@ -1,5 +1,0 @@
-2023-02-04 07:08:16+02 Ettienes-MBP softwareupdated[62347]: Initializing SoftwareUpdateMacController (SUMacControllerServer)
-2023-02-04 07:08:16+02 Ettienes-MBP softwareupdated[62347]: Initialized SoftwareUpdateMacController (SUMacControllerServer)
-2023-02-04 07:08:16+02 Ettienes-MBP softwareupdated[62347]: SUOSUAlarmObserver: Setting alarm event stream handler
-2023-02-04 07:08:16+02 Ettienes-MBP softwareupdated[62347]: SUOSUCustomTimeObserver: Setting alarm event stream handler
-2023-02-04 07:08:17+02 Ettienes-MBP softwareupdated[62347]: SUOSUServiceDaemon: Error reading /var/folders/zz/zyxvpxvq6csfxvn_n00000s0000068/C/

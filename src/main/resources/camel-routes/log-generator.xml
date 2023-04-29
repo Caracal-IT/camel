@@ -10,11 +10,26 @@
         <simple>application/json</simple>
     </setHeader>
 
+    <loop>
+        <simple>${headers.iterations}</simple>
+        <setBody>
+            <simple>${date:now:yyyy-MM-dd HH:mm:ss.SSSZ} ${headers.severity} Count-${headers.CamelLoopIndex} ${headers.message}\n</simple>
+        </setBody>
+        <toD uri="file:./data/logs?fileName=${headers.logFile}&amp;fileExist=Append" />
+        <delay>
+            <constant>100</constant>
+        </delay>
+        <setHeader name="loopCount">
+            <simple>${headers.CamelLoopIndex}</simple>
+        </setHeader>
+    </loop>
+
     <setBody>
         <simple>
             {
-                "message": "Logs generated ${headers.severity}"
+                "message": "Logs generated - ${headers.loopCount}"
             }
         </simple>
     </setBody>
+
 </route>
