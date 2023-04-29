@@ -1,6 +1,6 @@
 import {css, html, LitElement} from '../lit.js';
 
-class Metrics extends LitElement {
+class MqttIndex extends LitElement {
     static styles = css`
       
       caracal-card div {
@@ -41,7 +41,6 @@ class Metrics extends LitElement {
       }
 
       menu a.active {
-        //text-decoration: underline;
         color: whitesmoke;
         background-color: #00b4db;
         border-radius: 5px;
@@ -85,26 +84,26 @@ class Metrics extends LitElement {
         return html`
           <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
            <caracal-card>
-                <h1 slot="header">Metrics</h1>
+                <h1 slot="header">MQTT</h1>
                 <div>
                     <menu>
-                        <a href="#" class="active" data-elm="metrics-info" @click=${this._clickHandler}>
+                        <a href="#" class="active" data-elm="mqtt-info" @click=${this._clickHandler}>
                             <slot>
                                 <span class="material-symbols-outlined">info</span>
                             </slot>
                             Info</a>
-                        <a href="#" data-elm="metrics-routes" @click=${this._clickHandler}>
+                        <a href="#" data-elm="mqtt-publish" @click=${this._clickHandler}>
                             <slot>
-                                <span class="material-symbols-outlined">alt_route</span>
+                                <span class="material-symbols-outlined">whatshot</span>
                             </slot>
-                            Routs
+                            Publish
                         </a>
                     </menu>
-                    <metrics-info class="content"></metrics-info>
+                    <mqtt-info class="content"></mqtt-info>
                 </div>
             </caracal-card>
         `;
     }
 }
 
-customElements.define('spring-metrics', Metrics);
+customElements.define('mqtt-index', MqttIndex);

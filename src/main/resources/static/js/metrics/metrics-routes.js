@@ -14,15 +14,14 @@ class MetricsRoutes extends LitElement {
           content {
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
             background-color: #DDD;
             border-radius: 5px;
-            height: 26.9rem;
+            height: 31rem;
           }
 
-          content section:first-child {
+          .table {
             display: flex;
-            height: 100%;
+            height: 23.45rem;
             flex-direction: column;
             justify-content: space-between;
           }
@@ -31,6 +30,7 @@ class MetricsRoutes extends LitElement {
             display: flex;
             flex-direction: row;
             justify-content: end;
+            justify-items: end;
             padding: 0 5px;
           }
     
@@ -102,7 +102,7 @@ class MetricsRoutes extends LitElement {
         this.response = '';
 
         setTimeout(() => {
-            let pager = new Pager('routes', 8, this.shadowRoot);
+            let pager = new Pager('routes', 7, this.shadowRoot);
             pager.init();
             pager.showPageNav('pageNavPosition');
             pager.showPage(1);
@@ -161,11 +161,14 @@ class MetricsRoutes extends LitElement {
         return html`
             <content>
                 <section>
-                    <table id="routes" class="wp-list-table widefat striped posts">
-                        <thead>${this.renderHeader()}</thead>
-                        <tbody>${this.info.map(this.renderRow)}<tbody>
-                    </table>
-                    <div id="pageNavPosition" class="pager-nav"></div>
+                    <h1 slot="header">Routes</h1>
+                    <section class="table">
+                        <table id="routes" class="wp-list-table widefat striped posts">
+                            <thead>${this.renderHeader()}</thead>
+                            <tbody>${this.info.map(this.renderRow)}<tbody>
+                        </table>
+                        <div id="pageNavPosition" class="pager-nav"></div>
+                    </section>
                 </section>
                 <section class="buttons">
                     <div id="response">${this.response}</div>

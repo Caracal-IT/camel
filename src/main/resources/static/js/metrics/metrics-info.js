@@ -14,13 +14,14 @@ class MetricsInfo extends LitElement {
         background-color: #DDD;
         border-radius: 5px;
         padding: 0 5px;
-        height: 26.9rem;
+        height: 31rem;
       }
 
       .buttons {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         justify-content: end;
+        justify-items: end;
       }
 
       caracal-button {
@@ -54,6 +55,7 @@ class MetricsInfo extends LitElement {
         return html`
             <content>
                 <section>
+                    <h1 slot="header">Settings</h1>
                     <caracal-input caption="Name" readonly="readonly" value="${this.info["camel.name"]}"></caracal-input>
                     <caracal-input caption="App Version" readonly="readonly" value="${this.info["version"]}"></caracal-input>
                     <caracal-input caption="Camel Version" readonly="readonly" value="${this.info["camel.version"]}"></caracal-input>
