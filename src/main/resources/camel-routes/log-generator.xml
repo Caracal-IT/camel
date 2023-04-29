@@ -11,7 +11,7 @@
         <setBody>
             <simple>${date:now:yyyy-MM-dd HH:mm:ss.SSSZ} ${headers.severity} Count-${headers.CamelLoopIndex} ${headers.message}\n</simple>
         </setBody>
-        <toD uri="file:./data/logs?fileName=${headers.logFile}&amp;fileExist=Append" />
+        <toD uri="file:./data/logs/caracal?fileName=${headers.logFile}&amp;fileExist=Append" />
         <delay>
             <constant>100</constant>
         </delay>

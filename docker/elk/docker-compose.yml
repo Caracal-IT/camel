@@ -37,7 +37,7 @@ services:
     container_name: filebeat
     volumes:
       - ./filebeat.yml:/usr/share/filebeat/filebeat.yml
-      - ../../data/logs/:/logs/caracal/
+      - ../../data/logs/caracal/:/logs/caracal/
     environment:
       - LOGSTASH_HOST=logstash
       - LOGSTASH_PORT=5044
