@@ -77,8 +77,8 @@ Function GenerateAllCerts
     
     Test-ToolsExists
     
-    GenerateCert "" server.caracal.com hivemq.jks $serverKeyPwd hivemq-trust-store.jks $serverTrustPwd
-    GenerateCert "cloud" cloud.caracal.com cloud.hivemq.jks $cloudKeyPwd cloud.hivemq-trust-store.jks $cloudTrustPwd
+    GenerateCert "" "hivemq-server" hivemq.jks $serverKeyPwd hivemq-trust-store.jks $serverTrustPwd
+    GenerateCert "cloud" "hivemq-cloud" cloud.hivemq.jks $cloudKeyPwd cloud.hivemq-trust-store.jks $cloudTrustPwd
 }
 
 Function CopyCerts

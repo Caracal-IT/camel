@@ -12,6 +12,7 @@ services:
       - "8070:8070"
     volumes:
       - ../data:/app/data
+      - ../certs:/certs
     networks:
       - caracal-network
     depends_on:
@@ -44,8 +45,8 @@ services:
       - "3000:3000"
     volumes:
       - ./grafana-storage:/var/lib/grafana
-      - ./certs/grafana.crt:/etc/grafana/grafana.crt
-      - ./certs/grafana.key:/etc/grafana/grafana.key
+      - ../certs/site/master/caracal-dev.crt:/etc/grafana/grafana.crt
+      - ../certs/site/master/caracal-dev.key:/etc/grafana/grafana.key
       - ./grafana/grafana.ini:/etc/grafana/grafana.ini
     networks:
       - caracal-network
@@ -66,6 +67,8 @@ services:
     volumes:
       - ./hivemq/server/conf:/opt/hivemq/conf
       - ./hivemq/hivemq-prometheus-extension:/opt/hivemq/extensions/hivemq-prometheus-extension
+      - ../certs/hivemq/certs/default/hivemq.jks:/certs/hivemq.jks
+      - ../certs/hivemq/certs/default/hivemq-trust-store.jks:/certs/hivemq-trust-store.jks
     networks:
       - caracal-network
     environment:
@@ -86,6 +89,8 @@ services:
     volumes:
       - ./hivemq/cloud/conf:/opt/hivemq/conf
       - ./hivemq/hivemq-prometheus-extension:/opt/hivemq/extensions/hivemq-prometheus-extension
+      - ../certs/hivemq/certs/cloud/cloud.hivemq.jks:/certs/hivemq.jks
+      - ../certs/hivemq/certs/cloud/cloud.hivemq-trust-store.jks:/certs/hivemq-trust-store.jks
     networks:
       - caracal-network
     environment:
