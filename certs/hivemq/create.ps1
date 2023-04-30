@@ -9,26 +9,11 @@ Function Test-CommandExists
     }
     Catch
     {
-        Write-Host “$command does not exist”; RETURN $false
+        Write-Host "$command does not exist" RETURN $false
     }
     Finally
     {
         $ErrorActionPreference=$oldPreference
-    }
-}
-
-Function Test-FileExists
-{
-    Param ($file)
-    if(Test-Path -Path $file -PathType Leaf) 
-    {
-        Write-Host “$file exists”
-        RETURN $true
-    }
-    else
-    {
-        Write-Host “$file does not exist”
-        RETURN $false
     }
 }
 
@@ -58,45 +43,23 @@ Function Test-ToolsExists
 Function Delete-Files
 {
     Param ($files_to_delete)
-
-    $proceed = $true
-
+        
     foreach ($file_to_delete in $files_to_delete)
     {
-        if (Test-FileExists $file_to_delete)
+
+        $oldPreference = $ErrorActionPreference
+        $ErrorActionPreference = 'Stop'
+        try
         {
-            Write-Host "File $file_to_delete already exists."
-            $proceed = $false
+            Remove-Item -Path $file_to_delete
         }
-    }
-
-    if (-Not $proceed)
-    {
-        $proceed_choice = Read-Host -Prompt "Delete existing files? Type [Y] to proceed, anything else to abort>"
-
-        if ($proceed_choice -eq "Y")
+        Catch
         {
-            $proceed = $true
-            Write-Host "Deleting files before proceeding..."
-        
-            foreach ($file_to_delete in $files_to_delete)
-            {
-
-			    $oldPreference = $ErrorActionPreference
-			    $ErrorActionPreference = 'Stop'
-			    try
-			    {
-				    Remove-Item -Path $file_to_delete
-			    }
-			    Catch
-			    {
-				    Write-Host “$file_to_delete does not exist, no action taken”
-			    }
-			    Finally
-			    {
-				    $ErrorActionPreference=$oldPreference
-			    }
-            }
+            Write-Host “$file_to_delete does not exist, no action taken”
+        }
+        Finally
+        {
+            $ErrorActionPreference=$oldPreference
         }
     }
 }
@@ -114,8 +77,22 @@ Function GenerateAllCerts
     
     Test-ToolsExists
     
-    GenerateCert "" localhost hivemq.jks $serverKeyPwd hivemq-trust-store.jks $serverTrustPwd
-    GenerateCert "cloud" dev.divigraph.com cloud.hivemq.jks $cloudKeyPwd cloud.hivemq-trust-store.jks $cloudTrustPwd
+    GenerateCert "" server.caracal.net hivemq.jks $serverKeyPwd hivemq-trust-store.jks $serverTrustPwd
+    GenerateCert "cloud" cloud.caracal.net cloud.hivemq.jks $cloudKeyPwd cloud.hivemq-trust-store.jks $cloudTrustPwd
+}
+
+Function CopyCerts
+{
+    Param ($name)
+
+    if($name -ne "")
+    {
+        Move-Item -Path .\$name.*.jks -Destination .\certs\$name -Force
+    }
+    else
+    {
+        Move-Item -Path .\*.jks -Destination .\certs\default
+    }
 }
 
 Function GenerateCert
@@ -135,11 +112,11 @@ Function GenerateCert
     $client_key  =  $prefix + "mqtt-client-key.pem"
     $client_pem  =  $prefix + "mqtt-client-cert.pem"
     
-    $distinguished_name = "CN="+ $cn + ",OU=,O=DVG,L=CT,S=WC,C=ZA"
-    $subject = "/CN="+ $cn + "/OU=Unknown/O=DVG/L=CT/ST=WC/C=ZA"
+    $distinguished_name = "CN="+ $cn + ",OU=,O=CARACAL,L=CT,S=WC,C=ZA"
+    $subject = "/CN="+ $cn + "/OU=Unknown/O=CARACAL/L=CT/ST=WC/C=ZA"
     
     
-    $files_to_delete = $key_store, $trust_store, $client_cert, $server_cert
+    $files_to_delete = $key_store, $trust_store, $client_cert, $server_cert, $client_pem, $client_key
     Delete-Files $files_to_delete
         
         
@@ -164,8 +141,10 @@ Function GenerateCert
     Write-Host "Importing certificate HiveMQ client into trust store for HiveMQ broker."
     keytool -importkeystore `
         -srckeystore $client_cert -srcstoretype pkcs12 -srcstorepass $store_password `
-        -destkeystore $trust_store -deststoretype pkcs12 -deststorepass $trust_password         
-      
+        -destkeystore $trust_store -deststoretype pkcs12 -deststorepass $trust_password
+
+    CopyCerts $name
+    Delete-Files $files_to_delete
 }
 
 GenerateAllCerts
