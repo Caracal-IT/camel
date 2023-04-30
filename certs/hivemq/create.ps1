@@ -113,7 +113,7 @@ Function GenerateCert
     $client_pem  =  $prefix + "mqtt-client-cert.pem"
     
     $distinguished_name = "CN="+ $cn + ",OU=,O=CARACAL,L=CT,S=WC,C=ZA"
-    $subject = "/CN="+ $cn + "/OU=Unknown/O=CARACAL/L=CT/ST=WC/C=ZA"
+    $subject = "/CN="+ $cn + ",localhost,dev.caracal.com/OU=Unknown/O=CARACAL/L=CT/ST=WC/C=ZA"
     
     
     $files_to_delete = $key_store, $trust_store, $client_cert, $server_cert, $client_pem, $client_key
@@ -122,7 +122,7 @@ Function GenerateCert
         
     # From HiveMQ blog at https://www.hivemq.com/blog/end-to-end-encryption-in-the-cloud/
     Write-Host "Generating key store for HiveMQ broker, containing its certificate and private key."
-    keytool -genkey -keyalg RSA -alias $alias -keystore $key_store -storepass $store_password -validity 360 -keysize 2048 -dname $distinguished_name 
+    keytool -genkey -keyalg RSA -alias $alias -keystore $key_store -storepass $store_password -validity 360 -keysize 2048 -dname $distinguished_name
 
     # diverge from process outlined in blog, export to .crt for easier import into Windows cert store
     Write-Host "Exporting certificate from key store for HiveMQ, for import into SVC trust store."
