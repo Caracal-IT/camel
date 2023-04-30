@@ -13,19 +13,19 @@ stateOrProvinceName_default = Western Cape
 localityName = Locality Name (eg, city)
 localityName_default = Cape Town
 organizationName = Organization Name (eg, company)
-organizationName_default = Divigraph
+organizationName_default = Caracal
 commonName = Common Name (e.g. server FQDN or YOUR name)
-commonName_default = Divigraph
+commonName_default = Caracal
 commonName_max = 64
 
 [dn]
 C = ZA
 ST = Western Cape
 L = Cape Town
-O = Divigraph
+O = Caracal
 OU = Software
-emailAddress = info@divigraph.com
-CN = dev.divigraph.com
+emailAddress = info@caracal.com
+CN = dev.caracal.com
 
 [v3_req]
 keyUsage = critical, digitalSignature, keyAgreement
@@ -34,8 +34,5 @@ subjectAltName = @alt_names
 
 [alt_names]
 DNS.1 = localhost
-DNS.2 = dev.divigraph.com
-DNS.3 = qa.divigraph.com
-DNS.4 = device_api
-DNS.5 = portal_api
-DNS.6 = chronos_identity
+DNS.2 = dev.caracal.com
+DNS.3 = qa.caracal.com

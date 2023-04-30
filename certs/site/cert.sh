@@ -1,4 +1,4 @@
-name='divigraph-dev'
+name='caracal-dev'
 cnf='cert.cnf'
 PWD='password1'
 
