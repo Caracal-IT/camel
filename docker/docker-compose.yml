@@ -67,8 +67,7 @@ services:
     volumes:
       - ./hivemq/server/conf:/opt/hivemq/conf
       - ./hivemq/hivemq-prometheus-extension:/opt/hivemq/extensions/hivemq-prometheus-extension
-      - ../certs/hivemq/certs/default/hivemq.jks:/certs/hivemq.jks
-      - ../certs/hivemq/certs/default/hivemq-trust-store.jks:/certs/hivemq-trust-store.jks
+      - ../certs/hivemq/certs/default:/certs
     networks:
       - caracal-network
     environment:
@@ -89,8 +88,7 @@ services:
     volumes:
       - ./hivemq/cloud/conf:/opt/hivemq/conf
       - ./hivemq/hivemq-prometheus-extension:/opt/hivemq/extensions/hivemq-prometheus-extension
-      - ../certs/hivemq/certs/cloud/cloud.hivemq.jks:/certs/hivemq.jks
-      - ../certs/hivemq/certs/cloud/cloud.hivemq-trust-store.jks:/certs/hivemq-trust-store.jks
+      - ../certs/hivemq/certs/cloud:/certs
     networks:
       - caracal-network
     environment:
