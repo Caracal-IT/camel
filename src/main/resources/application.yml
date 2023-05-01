@@ -20,7 +20,7 @@ jwt:
 
 spring:
   application:
-    name: Caracal Demo
+    name: Apache Camel - Integration Framework
   main:
      allow-bean-definition-overriding: true
   thymeleaf:
