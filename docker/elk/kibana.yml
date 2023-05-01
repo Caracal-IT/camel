@@ -7,6 +7,7 @@ server.host: "0.0.0.0"
 server.shutdownTimeout: "5s"
 elasticsearch.hosts: [ "https://es1:9200" ]
 monitoring.ui.container.elasticsearch.enabled: true
+xpack.encryptedSavedObjects.encryptionKey: 578ba541dfsf2f8eda884ce8ba541dfs
 
 server.ssl.enabled: true
 server.ssl.certificate: /certs/caracal-dev.crt
