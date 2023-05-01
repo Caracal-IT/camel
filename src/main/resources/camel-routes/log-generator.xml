@@ -1,34 +1,140 @@
-<route id="xml-log-generator">
-    <from uri="rest:post:log-generator"/>
+<?xml version="1.0" encoding="utf-8" ?>
+<routes xmlns="http://camel.apache.org/schema/spring">
+    <route>
+        <from uri="rest:post:log-generator"/>
+        <setHeader name="logFile"><jsonpath suppressExceptions="true">$.logFile</jsonpath></setHeader>
+        <setHeader name="iterations"><jsonpath suppressExceptions="true">$.iterations</jsonpath></setHeader>
 
-    <setHeader name="logFile"><jsonpath suppressExceptions="true">$.logFile</jsonpath></setHeader>
-    <setHeader name="severity"><jsonpath suppressExceptions="true">$.severity</jsonpath></setHeader>
-    <setHeader name="message"><jsonpath suppressExceptions="true">$.message</jsonpath></setHeader>
-    <setHeader name="iterations"><jsonpath suppressExceptions="true">$.iterations</jsonpath></setHeader>
+        <loop>
+            <simple>${headers.iterations}</simple>
+            <to uri="direct:log-message" />
 
-    <loop>
-        <simple>${headers.iterations}</simple>
-        <setBody>
-            <simple>${date:now:yyyy-MM-dd HH:mm:ss.SSSZ} ${headers.severity} Count-${headers.CamelLoopIndex} ${headers.message}\n</simple>
-        </setBody>
-        <toD uri="file:./data/logs/caracal?fileName=${headers.logFile}&amp;fileExist=Append" />
-        <delay>
-            <constant>100</constant>
-        </delay>
-        <setHeader name="loopCount">
-            <simple>${headers.CamelLoopIndex}</simple>
+            <toD uri="file:./data/logs/caracal?fileName=${headers.logFile}&amp;fileExist=Append" />
+            <delay>
+                <constant>100</constant>
+            </delay>
+        </loop>
+
+        <setHeader name="content-type">
+            <simple>application/json</simple>
         </setHeader>
-    </loop>
+        <setBody>
+            <simple>
+                {
+                "message": "Logs generated - ${headers.iterations}"
+                }
+            </simple>
+        </setBody>
+    </route>
 
-    <setHeader name="content-type">
-        <simple>application/json</simple>
-    </setHeader>
-    <setBody>
-        <simple>
-            {
-                "message": "Logs generated - ${headers.loopCount}"
-            }
-        </simple>
-    </setBody>
+    <route>
+        <from uri="direct:log-message"/>
+        <setBody>
+            <simple>${random(1, 5)}</simple>
+        </setBody>
+        <choice>
+            <when>
+                <simple>${body} == 1</simple>
+                <to uri="direct:log-debug-message" />
+            </when>
+            <when>
+                <simple>${body} == 2</simple>
+                <to uri="direct:log-info-message" />
+            </when>
+            <when>
+                <simple>${body} == 3</simple>
+                <to uri="direct:log-warn-message" />
+            </when>
+            <when>
+                <simple>${body} == 4</simple>
+                <to uri="direct:log-error-message" />
+            </when>
+        </choice>
 
-</route>
+        <setBody>
+            <simple>${date:now:yyyy-MM-dd HH:mm:ss.SSSZ} ${headers.level} Count-${headers.CamelLoopIndex} ${headers.message}\n</simple>
+        </setBody>
+
+        <log message="${body}" />
+    </route>
+
+    <route>
+        <from uri="direct:log-debug-message"/>
+        <setHeader name="level"><constant>DEBUG</constant></setHeader>
+        <setBody><simple>${random(1, 3)}</simple></setBody>
+        <choice>
+            <when>
+                <simple>${body} == 1</simple>
+                <setHeader name="message"><constant>Processing request from client 123456: /api/v1/products</constant></setHeader>
+            </when>
+            <when>
+                <simple>${body} == 2</simple>
+                <setHeader name="message"><constant>Failed to connect to database at jdbc:mysql://localhost:3306/mydb, retrying in 5 seconds</constant></setHeader>
+            </when>
+            <when>
+                <simple>${body} == 3</simple>
+                <setHeader name="message"><constant>Received message with invalid format: {"username": "john.doe", "password": "**********"}</constant></setHeader>
+            </when>
+        </choice>
+    </route>
+
+    <route>
+        <from uri="direct:log-info-message"/>
+        <setHeader name="level"><constant>INFO</constant></setHeader>
+        <setBody><simple>${random(1, 3)}</simple></setBody>
+        <choice>
+            <when>
+                <simple>${body} == 1</simple>
+                <setHeader name="message"><constant>Starting route: FileToDatabase</constant></setHeader>
+            </when>
+            <when>
+                <simple>${body} == 2</simple>
+                <setHeader name="message"><constant>Processed 100 records in 10 seconds</constant></setHeader>
+            </when>
+            <when>
+                <simple>${body} == 3</simple>
+                <setHeader name="message"><constant>Sending email notification to user@example.com1</constant></setHeader>
+            </when>
+        </choice>
+    </route>
+
+    <route>
+        <from uri="direct:log-warn-message"/>
+        <setHeader name="level"><constant>WARN</constant></setHeader>
+        <setBody><simple>${random(1, 3)}</simple></setBody>
+        <choice>
+            <when>
+                <simple>${body} == 1</simple>
+                <setHeader name="message"><constant>Slow processing detected, consider optimizing route: TimeTaken=5000ms, ExchangeId=123456</constant></setHeader>
+            </when>
+            <when>
+                <simple>${body} == 2</simple>
+                <setHeader name="message"><constant>Failed to find configuration file at /opt/app/config/config.properties, using defaults</constant></setHeader>
+            </when>
+            <when>
+                <simple>${body} == 3</simple>
+                <setHeader name="message"><constant>Disk space low, unable to save file: /opt/data/output/file.txt</constant></setHeader>
+            </when>
+        </choice>
+    </route>
+
+    <route>
+        <from uri="direct:log-error-message"/>
+        <setHeader name="level"><constant>ERROR</constant></setHeader>
+        <setBody><simple>${random(1, 3)}</simple></setBody>
+        <choice>
+            <when>
+                <simple>${body} == 1</simple>
+                <setHeader name="message"><constant>Disk space low, unable to save file: /opt/data/output/file.txt</constant></setHeader>
+            </when>
+            <when>
+                <simple>${body} == 2</simple>
+                <setHeader name="message"><constant>Invalid request format: Missing required parameter 'id'</constant></setHeader>
+            </when>
+            <when>
+                <simple>${body} == 3</simple>
+                <setHeader name="message"><constant>Database error: Duplicate entry for key 'username'</constant></setHeader>
+            </when>
+        </choice>
+    </route>
+</routes>

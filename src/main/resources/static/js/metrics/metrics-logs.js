@@ -39,8 +39,6 @@ class MetricsLogs extends LitElement {
 
         const payload = {
             "logFile": this.shadowRoot.getElementById('logFile').value,
-            "severity": this.shadowRoot.getElementById('severity').value,
-            "message": this.shadowRoot.getElementById('message').value,
             "iterations": this.shadowRoot.getElementById('iterations').value
         }
 
@@ -54,8 +52,7 @@ class MetricsLogs extends LitElement {
                 <section>
                     <h1 slot="header">Fake Log Generator</h1>
                     <caracal-input id="logFile" caption="Logfile" value="caracal_demo_log.log"></caracal-input>
-                    <caracal-input id="severity" caption="Severity" value="INFO"></caracal-input>
-                    <caracal-input id="message" caption="Message" value="A fake error message is not a genuine malware threat by itself."></caracal-input>
+                    <caracal-input id="severity" caption="Severity" value="DEBUG, INFO, WARN, ERROR" readonly="readonly"></caracal-input>
                     <caracal-input id="iterations" type="number" caption="Iterations" value="1"></caracal-input>
                  </section>
                 <section class="buttons">
