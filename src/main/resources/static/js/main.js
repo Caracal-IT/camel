@@ -8,16 +8,16 @@ window.onload = () => {
 
 function changePage(){
     if(window.location.hash.length < 2) {
-        window.location.hash = "settings";
+        window.location.hash = "home";
         return;
     }
 
     const container = document.querySelector(".container");
 
-    const activeMenuItem = document.querySelector("a[href='" + window.location.hash + "']");
+    const activeMenuItem = document.querySelector("a[href='" + window.location.hash.split('|')[0] + "']");
 
     if(activeMenuItem == null) {
-        window.location.hash = "settings";
+        window.location.hash = "home";
         return;
     }
 
