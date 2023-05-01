@@ -137,6 +137,9 @@ class MetricsRoutes extends LitElement {
     }
 
     renderRow(row) {
+        if(!row.id.startsWith("java") && !row.id.startsWith("xml"))
+            return null;
+
         let color = '';
         let status = row.status;
 
