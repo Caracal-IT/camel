@@ -62,10 +62,10 @@ class MqttRequestResponse extends LitElement {
             <content>
                 <section>
                     <h1 slot="header">MQTT Request Response</h1>
-                    <caracal-input id="reqTopic" caption="Request Topic" value="ELM_CUSTOMERS/5B4D8764-3EB1-4C65-A34B-00CFDCE6D77D/req"></caracal-input>
+                    <caracal-input id="reqTopic" caption="Request Topic" value="CARACAL_CUSTOMERS/5B4D8764-3EB1-4C65-A34B-00CFDCE6D77D/req"></caracal-input>
                     <caracal-input id="reqMessage" caption="Request Message" value="Custom Request"></caracal-input>
 
-                    <caracal-input id="rspTopic" caption="Request Topic" value="ELM_CUSTOMERS/5B4D8764-3EB1-4C65-A34B-00CFDCE6D77D/rsp"></caracal-input>
+                    <caracal-input id="rspTopic" caption="Request Topic" value="CARACAL_CUSTOMERS/5B4D8764-3EB1-4C65-A34B-00CFDCE6D77D/rsp"></caracal-input>
                     <caracal-input id="rspMessage" caption="Request Message" value="Custom Response"></caracal-input>
                     <caracal-checkbox id="autoResponse" caption="Auto Response" value=${true}></caracal-checkbox>
                 </section>
