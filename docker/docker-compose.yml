@@ -52,7 +52,8 @@ services:
       - caracal-network
 
   hivemq-server:
-    image: hivemq/hivemq-ce:latest-arm64v8
+    #image: hivemq/hivemq-ce:latest-arm64v8
+    image: hivemq/hivemq-ce:latest
     container_name: hivemq-server
     deploy:
       resources:
@@ -75,7 +76,8 @@ services:
 
   hivemq-cloud:
     container_name: hivemq-cloud
-    image: hivemq/hivemq-ce:latest-arm64v8
+    #image: hivemq/hivemq-ce:latest-arm64v8
+    image: hivemq/hivemq-ce:latest
     deploy:
       resources:
         limits:
