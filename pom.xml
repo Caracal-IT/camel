@@ -190,6 +190,12 @@
 			<artifactId>camel-mybatis-starter</artifactId>
 			<version>${camel.version}</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>42.6.0</version>
+		</dependency>
 		<!-- Database -->
 	</dependencies>
 

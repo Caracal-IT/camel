@@ -75,7 +75,7 @@ services:
       JAVA_OPTS: "-XX:+UnlockExperimentalVMOptions -XX:InitialRAMPercentage=30 -XX:MaxRAMPercentage=80 -XX:MinRAMPercentage=30"
 
   hivemq-cloud:
-    #container_name: hivemq-cloud
+    container_name: hivemq-cloud
     image: hivemq/hivemq-ce:latest-arm64v8
     #image: hivemq/hivemq-ce:latest
     deploy:
@@ -96,8 +96,9 @@ services:
     environment:
       JAVA_OPTS: "-XX:+UnlockExperimentalVMOptions -XX:InitialRAMPercentage=30 -XX:MaxRAMPercentage=80 -XX:MinRAMPercentage=30"
 
-  db:
+  camel_db:
     image: postgres:15
+    container_name: camel_db
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
