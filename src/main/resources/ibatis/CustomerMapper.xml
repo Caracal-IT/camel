@@ -14,6 +14,10 @@
         SELECT * FROM camel.customers ORDER BY id limit 20;
     </select>
 
+    <select id="selectSingleCustomer" parameterType="hashmap" resultMap="messageMap">
+        SELECT * FROM camel.customers WHERE id = #{id} limit 1;
+    </select>
+
 
 </mapper>
 

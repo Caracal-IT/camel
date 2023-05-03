@@ -92,6 +92,11 @@ class DbIndex extends LitElement {
                                 <span class="material-symbols-outlined">group</span>
                             </slot>
                             Custs.</a>
+                        <a href="#" data-elm="db-edit-customer" @click=${this._clickHandler}>
+                        <slot>
+                            <span class="material-symbols-outlined">person</span>
+                        </slot>
+                        Cust.</a>
                     </menu>
                     <db-customers class="content"></db-customers>
                 </div>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <routes xmlns="http://camel.apache.org/schema/spring">
+    <!--
     <route id="xml-cloud-client">
         <from uri="paho-mqtt5:{{cloud.rootTopic}}/#?brokerUrl={{cloud.brokerUrl}}&amp;qos=1&amp;userName={{cloud.username}}&amp;password={{cloud.password}}&amp;sslClientProps.com.ibm.ssl.keyStore={{cloud.keyStore}}&amp;sslClientProps.com.ibm.ssl.keyStorePassword={{cloud.keyStorePwd}}&amp;sslClientProps.com.ibm.ssl.trustStore={{cloud.trustStore}}&amp;sslClientProps.com.ibm.ssl.trustStorePassword={{cloud.trustStorePwd}}" />
         <onException id="cloud-client-error-handler">
@@ -55,4 +56,5 @@
             </when>
         </choice>
     </route>
+    -->
 </routes>

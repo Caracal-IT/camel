@@ -1,6 +1,6 @@
 <routes xmlns="http://camel.apache.org/schema/spring">
 
-    <route id="xml-ibatis">
+    <route id="xml-ibatis-customers">
         <from uri="rest:get:customers"/>
         <to uri="mybatis:selectCustomers?statementType=SelectList"/>
         <split>
@@ -8,6 +8,23 @@
             <log message="${body[&quot;firstName&quot;]} - ${body[&quot;lastName&quot;]}" />
         </split>
 
+        <setHeader name="content-type">
+            <simple>application/json</simple>
+        </setHeader>
+        <marshal>
+            <json library="Jackson" prettyPrint="true"/>
+        </marshal>
+    </route>
+
+    <route id="xml-ibatis-single-customer">
+        <from uri="rest:get:customers/{id}"/>
+        <setBody>
+            <simple>{ "id": ${header.id} }</simple>
+        </setBody>
+        <unmarshal>
+            <json />
+        </unmarshal>
+        <to uri="mybatis:selectSingleCustomer?statementType=SelectOne"/>
         <setHeader name="content-type">
             <simple>application/json</simple>
         </setHeader>
