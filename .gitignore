@@ -5,7 +5,9 @@ target/
 !**/src/test/**/target/
 .camel
 logs/
+data/db/
 /src/main/resources/mail.properties
+
 
 ### STS ###
 .apt_generated

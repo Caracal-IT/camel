@@ -21,6 +21,11 @@ jwt:
 spring:
   application:
     name: Apache Camel - Integration Framework
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
   main:
      allow-bean-definition-overriding: true
   thymeleaf:
@@ -40,6 +45,16 @@ camel:
   component:
     http:
       use-global-ssl-context-parameters: true
+
+    mybatis:
+      config-location: classpath:ibatis/mybatis-config.xml
+      mapper-locations: classpath*:ibatis/mappers/*.xml
+      type-aliases-package: com.caracal.camel.routes.models
+
+
+
+
+
 # https://www.baeldung.com/spring-boot-https-self-signed-certificate
 # certs/site/master/
 # keytool -import -alias dev.divigraph.com -file certs/divigraph-dev.pem -keystore /usr/java/latest/lib/security/cacerts

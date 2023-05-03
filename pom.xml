@@ -183,6 +183,14 @@
 			<version>${camel.version}</version>
 		</dependency>
 		<!--End  Mail -->
+
+		<!-- Database -->
+		<dependency>
+			<groupId>org.apache.camel.springboot</groupId>
+			<artifactId>camel-mybatis-starter</artifactId>
+			<version>${camel.version}</version>
+		</dependency>
+		<!-- Database -->
 	</dependencies>
 
 	<build>

@@ -52,8 +52,8 @@ services:
       - caracal-network
 
   hivemq-server:
-    #image: hivemq/hivemq-ce:latest-arm64v8
-    image: hivemq/hivemq-ce:latest
+    image: hivemq/hivemq-ce:latest-arm64v8
+    #image: hivemq/hivemq-ce:latest
     container_name: hivemq-server
     deploy:
       resources:
@@ -75,9 +75,9 @@ services:
       JAVA_OPTS: "-XX:+UnlockExperimentalVMOptions -XX:InitialRAMPercentage=30 -XX:MaxRAMPercentage=80 -XX:MinRAMPercentage=30"
 
   hivemq-cloud:
-    container_name: hivemq-cloud
-    #image: hivemq/hivemq-ce:latest-arm64v8
-    image: hivemq/hivemq-ce:latest
+    #container_name: hivemq-cloud
+    image: hivemq/hivemq-ce:latest-arm64v8
+    #image: hivemq/hivemq-ce:latest
     deploy:
       resources:
         limits:
@@ -95,6 +95,19 @@ services:
       - caracal-network
     environment:
       JAVA_OPTS: "-XX:+UnlockExperimentalVMOptions -XX:InitialRAMPercentage=30 -XX:MaxRAMPercentage=80 -XX:MinRAMPercentage=30"
+
+  db:
+    image: postgres:15
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ../data/db:/var/lib/postgresql/data
+    networks:
+      - caracal-network
 
 networks:
   caracal-network:
