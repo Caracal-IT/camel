@@ -32,4 +32,57 @@
             <json library="Jackson" prettyPrint="true"/>
         </marshal>
     </route>
+
+    <route id="xml-ibatis-update-customer">
+        <from uri="rest:post:customers/{id}"/>
+        <setHeader name="firstName"><jsonpath suppressExceptions="true">$.firstName</jsonpath></setHeader>
+        <setHeader name="lastName"><jsonpath suppressExceptions="true">$.lastName</jsonpath></setHeader>
+        <setHeader name="balance"><jsonpath suppressExceptions="true">$.balance</jsonpath></setHeader>
+        <setBody>
+            <simple>
+                {
+                    "id": ${header.id},
+                    "firstName": "${header.firstName}",
+                    "lastName": "${header.lastName}",
+                    "balance": ${header.balance}
+                }
+            </simple>
+        </setBody>
+        <unmarshal>
+            <json />
+        </unmarshal>
+        <choice>
+            <when>
+                <simple>${header.id} &gt; 0</simple>
+                <to uri="mybatis:updateCustomer?statementType=Update"/>
+                <setBody>
+                    <simple>{ "id": ${header.id} }</simple>
+                </setBody>
+                <unmarshal>
+                    <json />
+                </unmarshal>
+                <to uri="mybatis:selectSingleCustomer?statementType=SelectOne"/>
+            </when>
+            <when>
+                <simple>${header.id} &lt; 1</simple>
+                <to uri="mybatis:insertCustomer?statementType=Insert"/>
+                <log message="${headers.id}" />
+                <setBody>
+                    <simple>{ "id": ${header.id} }</simple>
+                </setBody>
+                <unmarshal>
+                    <json />
+                </unmarshal>
+                <to uri="mybatis:selectLastCustomer?statementType=SelectOne"/>
+            </when>
+        </choice>
+
+        <log message="${headers}" />
+        <setHeader name="content-type">
+            <simple>application/json</simple>
+        </setHeader>
+        <marshal>
+            <json library="Jackson" prettyPrint="true"/>
+        </marshal>
+    </route>
 </routes>

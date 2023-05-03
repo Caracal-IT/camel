@@ -1,6 +1,5 @@
 import {css, html, LitElement} from '../lit.js';
-import {get} from '../components/caracal-utilities.js';
-import {Pager} from '../libs/pager.js';
+import {get, post} from '../components/caracal-utilities.js';
 import {buttonStyles} from '../styles/pager.js';
 
 class DbEDITCustomer extends LitElement {
@@ -50,31 +49,28 @@ class DbEDITCustomer extends LitElement {
         this.response = 'Loading ...';
         this.info = await get('/camel/customers/1');
         this.response = '';
-
-        setTimeout(() => {
-            let pager = new Pager('customers', 7, this.shadowRoot);
-            pager.init();
-            pager.showPageNav('pageNavPosition');
-            pager.showPage(1);
-        }, 0);
     }
 
     async _refresh() {
+        this.response = 'Loading ...';
         const id = this.shadowRoot.getElementById("id").value;
 
         this.info = await get(`/camel/customers/${id}`);
+        this.response = '';
     }
 
-    async _update() {
+    async _updateCustomer() {
+        this.response = 'Loading ...';
         const id = this.shadowRoot.getElementById("id").value;
 
         const payload = {
-            "firstName": this.shadowRoot.getElementById("firstName").value,
-            "lastName": this.shadowRoot.getElementById("lastName").value,
+            "firstName": `${this.shadowRoot.getElementById("firstName").value}`,
+            "lastName": `${this.shadowRoot.getElementById("lastName").value}`,
             "balance": this.shadowRoot.getElementById("balance").value
         }
 
         this.info = await post(`/camel/customers/${id}`, payload);
+        this.response = '';
     }
 
     render(){
@@ -84,14 +80,14 @@ class DbEDITCustomer extends LitElement {
                     <h1 slot="header">Customers</h1>
                     <section class="table">
                         <caracal-input caption="ID" id="id" type="number" value="${this.info.id}"></caracal-input>
-                        <caracal-input caption="First Name" value="${this.info.firstName}"></caracal-input>
-                        <caracal-input caption="Last Name" value="${this.info.lastName}"></caracal-input>
-                        <caracal-input caption="Balance" value="${this.info.balance}"></caracal-input>
+                        <caracal-input caption="First Name" id="firstName" value="${this.info.firstName}"></caracal-input>
+                        <caracal-input caption="Last Name" id="lastName" value="${this.info.lastName}"></caracal-input>
+                        <caracal-input caption="Balance" id="balance" value="${this.info.balance}"></caracal-input>
                     </section>
                 </section>
                 <section class="buttons">
                     <div id="response">${this.response}</div>
-                    <caracal-button id="processButton" @click=${this._refresh}>Update</caracal-button>
+                    <caracal-button id="updateButton" @click=${this._updateCustomer}>Update</caracal-button>
                     <caracal-button id="processButton" @click=${this._refresh}>Refresh</caracal-button>
                 </section>
             </content>

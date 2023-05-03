@@ -5,7 +5,11 @@ class CaracalInput extends LitElement {
         type: {type: String},
         caption: {type: String},
         readonly: {type: String},
-        value: {type:String}
+        value: {
+            type:String,
+            notify: true,
+            observer: '_valueChanged'
+        }
     };
 
     static styles = css`
@@ -37,6 +41,11 @@ class CaracalInput extends LitElement {
       }
     `;
 
+    constructor() {
+        super();
+        this.value = '';
+    }
+
     render() {
         if(this.readonly && this.readonly.length > 0)
             return html`
@@ -49,7 +58,7 @@ class CaracalInput extends LitElement {
             return html`
                 <div class="form-data">
                     <label for="serverBrokerUrl">${this.caption}</label>
-                    <input id="serverBrokerUrl" type="${this.type}" @input=${event => this.value = event.target.value} value="${this.value}" />
+                    <input id="serverBrokerUrl" type="${this.type}" @input=${event => this.value = event.target.value} .value="${this.value}" />
                 </div
             `;
         }

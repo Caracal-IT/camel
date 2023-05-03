@@ -18,7 +18,27 @@
         SELECT * FROM camel.customers WHERE id = #{id} limit 1;
     </select>
 
+    <select id="selectLastCustomer" parameterType="hashmap" resultMap="messageMap">
+        SELECT * FROM camel.customers ORDER BY id DESC limit 1;
+    </select>
 
+    <update id="updateCustomer" parameterType="hashmap">
+        UPDATE
+            camel.customers
+        SET
+            first_name = #{firstName},
+            last_name = #{lastName},
+            balance = #{balance}
+        WHERE
+            id = #{id};
+    </update>
+
+    <insert id="insertCustomer" parameterType="hashmap">
+        INSERT INTO camel.customers
+            (first_name, last_name, balance)
+        VALUES
+            (#{firstName}, #{lastName}, #{balance});
+    </insert>
 </mapper>
 
 <!--
