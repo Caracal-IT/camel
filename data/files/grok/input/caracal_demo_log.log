@@ -1,0 +1,4 @@
+2023-05-02 14:48:55.511+0000 ERROR Count-0 Disk space low, unable to save file: /opt/data/output/file.txt
+2023-05-02 14:48:56.608+0000 ERROR Count-0 Invalid request format: Missing required parameter 'id'
+2023-05-02 14:50:07.076+0000 DEBUG Count-0 Processing request from client 123456: /api/v1/products
+2023-05-02 14:50:07.617+0000 WARN Count-0 Failed to find configuration file at /opt/app/config/config.properties, using defaults

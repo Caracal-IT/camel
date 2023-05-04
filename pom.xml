@@ -46,6 +46,20 @@
 		</dependency>
 		<!-- End Spring Boot -->
 
+		<!-- String Transform -->
+		<dependency>
+			<groupId>org.apache.camel.springboot</groupId>
+			<artifactId>camel-grok-starter</artifactId>
+			<version>${camel.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-grok</artifactId>
+			<version>${camel.version}</version>
+		</dependency>
+		<!-- String Transform -->
+
 		<!-- Metrics -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

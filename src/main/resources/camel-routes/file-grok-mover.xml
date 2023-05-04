@@ -1,0 +1,39 @@
+<routes xmlns="http://camel.apache.org/schema/spring">
+    <route id="xml-file-grok-mover">
+        <from uri="file:./data/files/grok" />
+        <unmarshal>
+            <grok pattern="%{TIMESTAMP_ISO8601:timestamp}%{SPACE}%{LOGLEVEL:Severity}%{SPACE}(?&lt;cat&gt;[\w|\d|\-]*)%{SPACE}%{GREEDYDATA:body}"/>
+        </unmarshal>
+        <marshal>
+            <json library="Jackson" prettyPrint="true"/>
+        </marshal>
+        <split>
+            <jsonpath suppressExceptions="true">$</jsonpath>
+            <marshal>
+                <json library="Jackson" prettyPrint="true"/>
+            </marshal>
+            <setHeader name="timestamp"><jsonpath suppressExceptions="true">$.timestamp</jsonpath></setHeader>
+            <setHeader name="cat"><jsonpath suppressExceptions="true">$.cat</jsonpath></setHeader>
+            <setHeader name="severity"><jsonpath suppressExceptions="true">$.Severity</jsonpath></setHeader>
+            <setHeader name="body"><jsonpath suppressExceptions="true">$.body</jsonpath></setHeader>
+            <setBody>
+                <simple>
+                    "======================="
+                    {
+                        "timestamp": "${header.timestamp}",
+                        "cat": "${header.cat}",
+                        "severity": "${header.severity}",
+                        "body": "${header.body}"
+                    }
+                    "======================="
+                </simple>
+            </setBody>
+            <to uri="file:./data/files/grok/processed?fileName=target.txt&amp;fileExist=Append" />
+        </split>
+
+    </route>
+</routes>
+
+<!--
+%{TIMESTAMP_ISO8601:timestamp}%{SPACE}%{LOGLEVEL:Severity}%{SPACE}(?<cat>[\w|\d|\-]*)%{SPACE}%{GREEDYDATA:body}
+-->
