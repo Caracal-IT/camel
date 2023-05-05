@@ -17,6 +17,17 @@ filebeat.inputs:
     topics:
       - elastic/#
 
+  - type: mqtt
+    tags: [ "json", "services" ]
+    fields:
+      app_name: Caracal MQTT Services
+    qos: 1
+    retained: true
+    hosts:
+      - tcp://host.docker.internal:1884
+    topics:
+      - +/services/#
+
 
 output.logstash:
   hosts: ["logstash:5044"]

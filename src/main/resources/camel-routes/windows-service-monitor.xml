@@ -1,0 +1,27 @@
+<routes xmlns="http://camel.apache.org/schema/spring">
+    <route id="xml-windows-service-monitor">
+        <!--
+        <from uri="file:./data/files/metrics?noop=true" />
+        -->
+        <from uri="timer://retry?fixedRate=true&amp;period=30000" />
+        <to uri="http://host.docker.internal:9182/metrics" />
+        <unmarshal>
+            <grok pattern="windows_service_(?&lt;cat&gt;[a-z|A-Z]+)%{GREEDYDATA:body}%{SPACE}%{SPACE}(?&lt;flag&gt;\d+)"/>
+        </unmarshal>
+        <process ref="#class:com.caracal.camel.processors.WindowsMetricsProcessor" />
+        <setHeader name="content-type">
+            <simple>application/json</simple>
+        </setHeader>
+
+        <split>
+            <simple>${body}</simple>
+            <setHeader name="topic">
+                <simple>${body.displayName}</simple>
+            </setHeader>
+            <marshal>
+                <json library="Jackson" prettyPrint="true"/>
+            </marshal>
+            <toD uri="paho-mqtt5:{{server.rootTopic}}/services/${headers.topic}?brokerUrl={{server.brokerUrl}}&amp;qos=1&amp;retained=true&amp;userName={{server.username}}&amp;password={{server.password}}&amp;sslClientProps.com.ibm.ssl.keyStore={{server.keyStore}}&amp;sslClientProps.com.ibm.ssl.keyStorePassword={{server.keyStorePwd}}&amp;sslClientProps.com.ibm.ssl.trustStore={{server.trustStore}}&amp;sslClientProps.com.ibm.ssl.trustStorePassword={{server.trustStorePwd}}&amp;cleanStart=false" />
+        </split>
+    </route>
+</routes>

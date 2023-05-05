@@ -23,6 +23,7 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests(requests -> requests
             .requestMatchers("/api/external/employee").permitAll()
+            .requestMatchers("/camel/**").permitAll()
             .requestMatchers("/api/demo/**").permitAll()
             .requestMatchers("/api/auth/authenticate", "/api/auth/user").permitAll()
             .requestMatchers("/actuator/**", "/mgmt/**").permitAll()
