@@ -1,0 +1,4 @@
+<route>
+    <from uri="file:/inputFolder?noop=true&amp;idempotent=true&amp;idempotentKey=${file:name}-${file:modified}" />
+    <to uri="file:/outputFolder" />
+</route>
