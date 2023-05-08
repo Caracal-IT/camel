@@ -6,6 +6,7 @@ target/
 .camel
 logs/
 data/db/
+Docker/data/bonita/db
 /src/main/resources/mail.properties
 
 
